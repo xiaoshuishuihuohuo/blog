@@ -7,6 +7,7 @@ body,
 .head {
 	margin: 0;
 	height: 100%; /* 使背景图片高度自适应 */
+	width: 100%;
 }
 
 a {
@@ -92,15 +93,19 @@ a {
 .pic {
 	display: none;
 	width: 100%;
-	margin-top: 2%;
+	margin-top: 5%;
 	position: absolute;
 	text-align: center;
 }
 
 #q {
-	text-align: right;
-	margin-top: 12%;
-	margin-right: 20px;
+	position: absolute;
+	/* text-align: right;
+	margin-top: 6%;
+	margin-right: 20px; */
+	z-index: 9999;
+	right: 16px;
+	bottom: 0;
 }
 
 .container {
