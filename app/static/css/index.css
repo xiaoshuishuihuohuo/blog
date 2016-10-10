@@ -1,0 +1,112 @@
+* {
+	font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
+}
+
+html,
+body,
+.head {
+	margin: 0;
+	height: 100%; /* 使背景图片高度自适应 */
+}
+
+a {
+	text-decoration: none;
+}
+
+.background {
+	background: url(../img/bg_2.jpg) no-repeat;
+	background-size: cover;
+	float: left;
+	height: 100%;
+	width: 100%;
+}
+
+.float-div {
+	/* background: #011025; */
+	background: #000000;
+	height: 100%;
+	opacity: 0.7; /* 背景透明 */
+	width: 100%;
+	float: left;
+	position: absolute; /* 与.background重合 */
+}
+
+.top {
+	width: 100%;
+	position: absolute;
+	color: #ffffff;
+	height: 70px;
+	position: fixed;
+}
+
+#login {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: lighter;
+}
+
+#login a:link,
+#login a:visited {
+	color: #ffffff;
+}
+
+#login-underline {
+	margin-top: 4px;
+	height: 3px;
+	width: 0;
+	background: #D6AE8B;
+	position: absolute;
+}
+
+.slogan {
+	margin-top: 15%;
+	width: 100%;
+	position: absolute;
+	height: 100px;
+	text-align: center;
+}
+
+#slogan-1 {
+	color: #ffffff;
+	font-size: 80px;
+	font-family: Courier;
+}
+
+#slogan-2 {
+	color: #D6AE8B;
+	font-size: 80px;
+	font-family: Courier;
+	margin: 10px;
+}
+
+#slogan-3 {
+	color: #ffffff;
+	font-size: 30px;
+	font-family: Courier;
+	margin: 20px;
+}
+
+.pic {
+	display: none;
+	width: 100%;
+	margin-top: 5%;
+	position: absolute;
+	text-align: center;
+}
+
+#q {
+	text-align: right;
+	margin-top: 285px;
+	margin-right: 20px;
+}
+
+.container {
+	margin: 0 auto;
+	margin-top: 30px;
+	height: 1000px;
+	width: 800px;
+	background: red;
+}
