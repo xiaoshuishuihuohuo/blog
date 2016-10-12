@@ -23,7 +23,6 @@ a {
 }
 
 .float-div {
-	/* background: #011025; */
 	background: #000000;
 	height: 100%;
 	opacity: 0.7; /* 背景透明 */
@@ -93,16 +92,13 @@ a {
 .pic {
 	display: none;
 	width: 100%;
-	margin-top: 5%;
+	margin-top: 2%;
 	position: absolute;
 	text-align: center;
 }
 
 #q {
 	position: absolute;
-	/* text-align: right;
-	margin-top: 6%;
-	margin-right: 20px; */
 	z-index: 9999;
 	right: 16px;
 	bottom: 0;

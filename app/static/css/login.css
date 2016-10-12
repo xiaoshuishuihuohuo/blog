@@ -1,0 +1,102 @@
+* {
+	font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
+}
+
+html,
+body {
+	margin: 0;
+	width: 100%;
+	background: #F7F7F7;
+}
+
+.background {
+	background: url(../img/bg_1.jpg) no-repeat;
+	background-size: cover;
+	background-position: 0px -600px;
+	float: left;
+	height: 200px;
+	width: 100%;
+}
+
+.float-div {
+	background: #000000;
+	height: 200px;
+	opacity: 0.7; /* 背景透明 */
+	width: 100%;
+	float: left;
+	position: absolute; /* 与.background重合 */
+}
+
+.container {
+	margin: 0 auto;
+	height: 500px;
+	width: 300px;
+}
+
+.panel {
+	margin-top: 8%;
+	background: #ffffff;
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	text-align: center;
+	border-radius: 4px;
+	-webkit-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #666, /*右边阴影*/  
+    0 0 0 #000, /*顶部阴影 未设置*/  
+    0 0 0 #000; /*底边阴影 未设置*/
+    -moz-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #666, /*右边阴影*/  
+    0 0 0 #000, /*顶部阴影 未设置*/  
+    0 0 0 #000; /*底边阴影 未设置*/ 
+    box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #666, /*右边阴影*/  
+    0 0 0 #000, /*顶部阴影 未设置*/  
+    0 0 0 #000; /*底边阴影 未设置*/   
+}
+
+.title {
+	color: #606060;
+	font-size: 25px;
+	font-weight: lighter;
+	height: 30px;
+	padding: 20px;
+}
+
+.title span {
+	/* width: 100px; */
+	margin: 10px;
+}
+
+.login {
+	margin-top: 20px;
+}
+
+#username,
+#password,
+#login-btn {
+	margin: auto;
+	height: 50px;
+	width: 180px;
+}
+
+.login input[type="text"] {
+	border: 0;
+	outline: medium;
+}
+
+.login input[name="username"],
+.login input[name="password"] {
+	width: 180px;
+}
+
+.btn {
+	width: 180px;
+	height: 30px;
+	margin-top: 20px;
+	background: #75C658;
+	border: none;
+	color: #ffffff;
+	cursor: pointer;
+	border-radius: 1px;
+}
