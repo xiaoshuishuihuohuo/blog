@@ -24,6 +24,15 @@
 				<span>登录</span>
 				<span>注册</span>
 			</div>
+
+			<div class="underline">
+				<div id="ul-1"></div>
+				<div id="ul-2"></div>
+			</div>
+
+			<div class="message" style="display: none;">
+				<span>用户名或密码错误</span>
+			</div>
 			
 			<form action="" method="post">
 				<div class="login">
@@ -32,7 +41,7 @@
 						<hr>
 					</div>
 					<div id="password">
-						<input type="text" name="password" placeholder="密码">
+						<input type="password" name="password" placeholder="密码">
 						<hr>
 					</div>
 					<div id="login-btn">
@@ -41,16 +50,19 @@
 				</div>
 			</form>
 
-			<form action="" method="">
+			<form action="" method="post">
 				<div class="signup" style="display: none">
 					<div id="signup-username">
-						<input type="text" name="username" placeholder="用户名">
+						<input type="text" name="signup-username" placeholder="用户名">
+						<hr>
 					</div>
 					<div id="signup-password">
-						<input type="text" name="password" placeholder="密码">
+						<input type="password" name="signup-password" placeholder="密码">
+						<hr>
 					</div>
-					<div id="signup-comfirm">
-						<input type="text" name="password" placeholder="确认密码">
+					<div id="signup-confirm">
+						<input type="password" name="signup-confirm" placeholder="确认密码">
+						<hr>
 					</div>
 					<div id="signup-btn">
 						<input class="btn" type="submit" value="注　册">
