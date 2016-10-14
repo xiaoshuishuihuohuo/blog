@@ -20,9 +20,9 @@
 
 	<div class="container">
 		<div class="panel">
-			<div class="title">
-				<span>登录</span>
-				<span>注册</span>
+			<div id="title">
+				<span id="login-tag" class="active">登录</span>
+				<span id="signup-tag">注册</span>
 			</div>
 
 			<div class="underline">
@@ -44,8 +44,11 @@
 						<input type="password" name="password" placeholder="密码">
 						<hr>
 					</div>
-					<div id="login-btn">
-						<input class="btn" type="submit" value="登　录">
+					<div id="remember-me">
+						<input type="checkbox" name="remember-me" value="">记住我
+					</div>
+					<div id="login-btn-div">
+						<input class="btn" id="login-btn" type="submit" value="登　录">
 					</div>
 				</div>
 			</form>
@@ -64,8 +67,8 @@
 						<input type="password" name="signup-confirm" placeholder="确认密码">
 						<hr>
 					</div>
-					<div id="signup-btn">
-						<input class="btn" type="submit" value="注　册">
+					<div id="signup-btn-div">
+						<input class="btn" id="signup-btn" type="submit" value="注　册">
 					</div>
 				</div>
 			</form>
