@@ -21,7 +21,7 @@ body {
 .float-div {
 	background: #000000;
 	height: 200px;
-	opacity: 0.7; /* 背景透明 */
+	opacity: 0.5; /* 背景透明 */
 	width: 100%;
 	float: left;
 	position: absolute; /* 与.background重合 */
@@ -37,7 +37,7 @@ body {
 	margin-top: 8%;
 	background: #ffffff;
 	width: 300px;
-	height: 320px;
+	height: 340px;
 	position: absolute;
 	text-align: center;
 	border-radius: 4px;
@@ -69,7 +69,7 @@ body {
 
 .login,
 .signup {
-	margin-top: 20px;
+	margin-top: 5px;
 	font-size: 15px;
 }
 
@@ -82,7 +82,7 @@ body {
 	width: 100%;
 	height: 3px;
 	margin-top: 5px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 #ul-1 {
@@ -105,10 +105,10 @@ body {
 	margin: auto;
 	padding: 5px;
 	width: 170px;
-	height: 20px;
-	line-height: 20px;
+	height: 15px;
+	line-height: 15px;
 	text-align: left;
-	background: #FF6666;
+	background: #ffffff;
 	color: #ffffff;
 	font-size: 12px;
 	border-radius: 1px;
@@ -150,6 +150,7 @@ body {
 	margin-bottom: 10px;
 	margin-left: 56px;
 	font-size: 12px;
+	width: 180px;
 }
 
 .btn {
@@ -161,4 +162,17 @@ body {
 	color: #ffffff;
 	cursor: pointer;
 	border-radius: 1px;
+	outline: none;
+}
+
+.foot {
+	width: 50%;
+	margin-top: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #C3C3C3;
+}
+
+.foot hr {
+	border-top: 1px solid #C3C3C3;
 }

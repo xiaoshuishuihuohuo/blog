@@ -10,6 +10,21 @@ $(document).ready(function () {
 		$("#" + id).addClass("active");
 	}
 
+	// 设置提示信息
+	function setMessage(element, message) {
+		if ($("#" + element + " input").val() == "") {
+			console.log(element);
+			console.log(message);
+			$(".message span").text(message);
+			$(".message").css("background", "#ff6666");
+			$("#" + element + " input").focus();
+			return false;			
+		} else {
+			$(".message span").text("");
+			$(".message").css("background", "#ffffff");	
+		}
+	}
+
 	$("#login-tag").bind({
 		click: function () {
 			switchActive(this.id);
@@ -31,7 +46,7 @@ $(document).ready(function () {
 			if ($(this).attr("class") == "active") {
 				return;
 			}
-			$(this).css("color", "#979797");
+			$(this).css("color", "#D6AE8B");
 		}, 
 		mouseleave: function () {
 			$(this).css("color", "#606060");
@@ -59,7 +74,7 @@ $(document).ready(function () {
 			if ($(this).attr("class") == "active") {
 				return;
 			}
-			$(this).css("color", "#979797");
+			$(this).css("color", "#D6AE8B");
 		}, 
 		mouseleave: function () {
 			$(this).css("color", "#606060");
@@ -73,7 +88,7 @@ $(document).ready(function () {
 			"width": "190px",
 			"transition": "all .3s"
 		});
-	}, function () {console.log("a");
+	}, function () {
 		$(this).css({
 			"background": "#666666",
 			"width": "180px",
@@ -92,7 +107,7 @@ $(document).ready(function () {
 			"width": "190px",
 			"transition": "all .3s"
 		});
-	}, function () {console.log("a");
+	}, function () {
 		$(this).css({
 			"background": "#666666",
 			"width": "180px",
@@ -102,5 +117,28 @@ $(document).ready(function () {
 			"width": "180px",
 			"transition": "all .2s"
 		});
+	});
+
+	// 登录
+	$("#login-btn").click(function () {
+		if (!setMessage("username", "用户名不能为空")) {
+			return false;
+		}
+		
+		if (!setMessage("password", "密码不能为空")) {
+			return false;
+		}
+
+		return false;
+
+		/*$.post(
+			url,
+			value,
+			function (data) {
+				if (data) {
+					this.submit();
+				}
+			}
+		);*/
 	});
 });
