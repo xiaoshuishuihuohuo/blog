@@ -1,6 +1,5 @@
 from flask import (Flask, request, session, g, redirect, url_for, render_template,Blueprint)
-
-main = Blueprint('main', __name__)
+from . import main
 
 @main.route('/')
 def index():
