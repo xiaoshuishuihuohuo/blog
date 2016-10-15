@@ -1,6 +1,6 @@
-from flask import Flask, request, session, g, redirect, url_for, render_template
-from . import main
+from flask import (Flask, request, session, g, redirect, url_for, render_template,Blueprint)
 
+main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
