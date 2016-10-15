@@ -13,15 +13,17 @@ $(document).ready(function () {
 	// 设置提示信息
 	function setMessage(element, message) {
 		if ($("#" + element + " input").val() == "") {
-			console.log(element);
-			console.log(message);
 			$(".message span").text(message);
 			$(".message").css("background", "#ff6666");
 			$("#" + element + " input").focus();
 			return false;			
-		} else {
+		} else if ($("#" + element + " input").val() != "") {
 			$(".message span").text("");
-			$(".message").css("background", "#ffffff");	
+			$(".message").css("background", "#ffffff");
+			return true;	
+		} else if (message == "error") {
+			$(".message span").text("用户名或密码错误");
+			$(".message").css("background", "#ff6666");
 		}
 	}
 
@@ -129,16 +131,19 @@ $(document).ready(function () {
 			return false;
 		}
 
-		return false;
-
-		/*$.post(
+		$.post(
 			url,
-			value,
+			{
+				username: $("#username input").val(),
+				password: $("#password input").val(),
+				remember_me: $("#remember-me input").val()
+			},
 			function (data) {
-				if (data) {
-					this.submit();
+				if (!data) {
+					setMessage("", "error");
 				}
+				$("#login-form").submit();
 			}
-		);*/
+		);
 	});
 });
