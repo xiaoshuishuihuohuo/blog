@@ -12,7 +12,10 @@ $(document).ready(function () {
 
 	// 设置提示信息
 	function setMessage(element, message) {
-		if ($("#" + element + " input").val() == "") {
+		if (message == "error") {
+			$(".message span").text("用户名或密码错误");
+			$(".message").css("background", "#ff6666");
+		} else if ($("#" + element + " input").val() == "") {
 			$(".message span").text(message);
 			$(".message").css("background", "#ff6666");
 			$("#" + element + " input").focus();
@@ -21,9 +24,6 @@ $(document).ready(function () {
 			$(".message span").text("");
 			$(".message").css("background", "#ffffff");
 			return true;	
-		} else if (message == "error") {
-			$(".message span").text("用户名或密码错误");
-			$(".message").css("background", "#ff6666");
 		}
 	}
 
@@ -120,7 +120,7 @@ $(document).ready(function () {
 			"transition": "all .2s"
 		});
 	});
-
+	var csrftoken = $('meta[name=csrf-token]').attr('content')
 	// 登录
 	$("#login-btn").click(function () {
 		if (!setMessage("username", "用户名不能为空")) {
@@ -130,19 +130,28 @@ $(document).ready(function () {
 		if (!setMessage("password", "密码不能为空")) {
 			return false;
 		}
-
-		$.post(
-			url,
-			{
+		$.ajax({
+			type:'post',
+			beforeSend: function(xhr, settings) {
+		        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken)
+		        }
+		    },
+			url:'/auth/signin',
+			data:{
 				username: $("#username input").val(),
 				password: $("#password input").val(),
 				remember_me: $("#remember-me input").val()
 			},
-			function (data) {
-				if (!data) {
+			success:function (data) {
+				if (!data.result) {
 					setMessage("", "error");
+				}else{
+					alert()
+					window.location.href = '/mainpage'
 				}
-				$("#login-form").submit();
+			},
+			dataType:'json'
 			}
 		);
 	});

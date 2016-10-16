@@ -114,6 +114,19 @@ body {
 	border-radius: 1px;
 }
 
+.rendermessage {
+	margin: auto;
+	padding: 5px;
+	width: 170px;
+	height: 15px;
+	line-height: 15px;
+	text-align: left;
+	background: #ffffff;
+	color: #000000;
+	font-size: 12px;
+	border-radius: 1px;
+}
+
 #username,
 #password,
 #login-btn-div,

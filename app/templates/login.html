@@ -4,6 +4,7 @@
 	<title></title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="../static/css/login.css">
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/login.js"></script>
@@ -34,8 +35,9 @@
 				<span></span>
 			</div>
 			
-			<form action="" method="post" id="login-form">
+			<form action="/auth/signin" method="post" id="login-form">
 				<div class="login"> <!-- 登录 -->
+					{{ form.hidden_tag() }}
 					<div id="username">
 						<input type="text" name="username" placeholder="用户名">
 						<hr>
@@ -48,12 +50,12 @@
 						<input type="checkbox" name="remember-me" value="remember-me">记住我
 					</div>
 					<div id="login-btn-div">
-						<input class="btn" id="login-btn" type="submit" value="登　录">
+						<input class="btn" id="login-btn" value="登　录">
 					</div>
 				</div> <!-- /登录 -->
 			</form>
 
-			<form action="" method="post" id="signup-form">
+			<form action="/auth/regist" method="post" id="signup-form">
 				<div class="signup" style="display: none"> <!-- 注册 -->
 					<div id="signup-username">
 						<input type="text" name="signup-username" placeholder="用户名">
