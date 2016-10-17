@@ -7,12 +7,13 @@ def signin():
 	# username = request.form.get('username')
 	form = signinForm()
 	if form.validate_on_submit():
-		print form.username.data
-		if form.username.data == 'asd':
-			return json.dumps({'result':0,'message':'fuck'})
-		return json.dumps({'result':1})
-	print form.errors
-	return json.dumps({'result':0,'message':'fuck'})
+		if form.username.data == 'fuck':
+			flash('don\'t use fuck' )
+			return redirect(url_for('main.login'))
+		return redirect(url_for('main.mainpage'))
+	first_error = form.errors.values()[0][0]
+	flash(first_error)
+	return redirect(url_for('main.login'))
 	
 
 # @auth.route('/regist', methods=['POST'])
