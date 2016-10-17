@@ -111,7 +111,7 @@ $(document).ready(function () {
 	});
 
 	// 登录
-	$("#login-btn").click(function () {
+	/*$("#login-btn").click(function () {
 		if ($("#username input").val() == "") {
 			setMessage("用户名/邮箱不能为空", "#ff6666");
 			$("#username input").focus();
@@ -145,7 +145,7 @@ $(document).ready(function () {
 			}
 		);
 	});
-
+*/
 	// 验证用户名是否已存在
 	$("#signup-username input").focus(function () {
 		$("#signup-username input").blur(function () {
@@ -168,7 +168,7 @@ $(document).ready(function () {
 	});
 
 	// 注册
-	$("#signup-btn").click(function () {
+	/*$("#signup-btn").click(function () {
 		if ($("#signup-username input").val() == "") {
 			setMessage("用户名/邮箱不能为空", "#ff6666");
 			$("#signup-username input").focus();
@@ -176,22 +176,6 @@ $(document).ready(function () {
 		} else if ($("#signup-username input").val() != "") {
 			setMessage("", "#ffffff");
 		}
-
-		/*$.post(
-			url,
-			{
-				username: $("#signup-username input").val()
-			},
-			function (data) {
-				if (!data) {
-					setMessage("该用户名/邮箱已存在", "#ff6666");
-					$("#signup-username input").focus();
-					return false;
-				} else {
-					setMessage("可以使用", "#99CC66");
-				}
-			}
-		);*/
 		
 		if ($("#signup-password input").val() == "") {
 			setMessage("密码不能为空", "#ff6666");
@@ -218,5 +202,5 @@ $(document).ready(function () {
 		}
 
 		$("#signup-form").submit();
-	});
+	});*/
 });
