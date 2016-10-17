@@ -11,20 +11,9 @@ $(document).ready(function () {
 	}
 
 	// 设置提示信息
-	function setMessage(element, message) {
-		if (message == "error") {
-			$(".message span").text("用户名或密码错误");
-			$(".message").css("background", "#ff6666");
-		} else if ($("#" + element + " input").val() == "") {
-			$(".message span").text(message);
-			$(".message").css("background", "#ff6666");
-			$("#" + element + " input").focus();
-			return false;			
-		} else if ($("#" + element + " input").val() != "") {
-			$(".message span").text("");
-			$(".message").css("background", "#ffffff");
-			return true;	
-		}
+	function setMessage(message, background) {
+		$(".message span").text(message);
+		$(".message").css("background", background);
 	}
 
 	$("#login-tag").bind({
@@ -120,39 +109,98 @@ $(document).ready(function () {
 			"transition": "all .2s"
 		});
 	});
-	var csrftoken = $('meta[name=csrf-token]').attr('content')
+
 	// 登录
-	$("#login-btn").click(function () {
-		if (!setMessage("username", "用户名不能为空")) {
+	/*$("#login-btn").click(function () {
+		if ($("#username input").val() == "") {
+			setMessage("用户名/邮箱不能为空", "#ff6666");
+			$("#username input").focus();
 			return false;
+		} else if ($("#username input").val() != "") {
+			setMessage("", "#ffffff");
 		}
 		
-		if (!setMessage("password", "密码不能为空")) {
+		if ($("#password input").val() == "") {
+			setMessage("密码不能为空", "#ff6666");
+			$("#password input").focus();
 			return false;
+		} else if ($("#password input").val() != "") {
+			setMessage("", "#ffffff");
 		}
-		$.ajax({
-			type:'post',
-			beforeSend: function(xhr, settings) {
-		        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
-		            xhr.setRequestHeader("X-CSRFToken", csrftoken)
-		        }
-		    },
-			url:'/auth/signin',
-			data:{
+
+		$.post(
+			url,
+			{
 				username: $("#username input").val(),
 				password: $("#password input").val(),
 				remember_me: $("#remember-me input").val()
 			},
-			success:function (data) {
-				if (!data.result) {
-					setMessage("", "error");
-				}else{
-					alert()
-					window.location.href = '/mainpage'
+			function (data) {
+				if (!data) {
+					setMessage("用户名或密码错误", "#ff6666");
+					$("#password input").focus();
 				}
-			},
-			dataType:'json'
+
+				$("#login-form").submit();
 			}
 		);
 	});
+*/
+	// 验证用户名是否已存在
+	$("#signup-username input").focus(function () {
+		$("#signup-username input").blur(function () {
+			$.post(
+				url,
+				{
+					username: $("#signup-username input").val()
+				},
+				function (data) {
+					if (!data) {
+						setMessage("该用户名/邮箱已存在", "#ff6666");
+						$("#signup-username input").focus();
+						return false;
+					} else {
+						setMessage("可以使用", "#99CC66");
+					}
+				}
+			);
+		});
+	});
+
+	// 注册
+	/*$("#signup-btn").click(function () {
+		if ($("#signup-username input").val() == "") {
+			setMessage("用户名/邮箱不能为空", "#ff6666");
+			$("#signup-username input").focus();
+			return false;
+		} else if ($("#signup-username input").val() != "") {
+			setMessage("", "#ffffff");
+		}
+		
+		if ($("#signup-password input").val() == "") {
+			setMessage("密码不能为空", "#ff6666");
+			$("#signup-password input").focus();
+			return false;
+		} else if ($("#signup-password input").val() != "") {
+			setMessage("", "#ffffff");
+		}
+
+		if ($("#signup-confirm input").val() == "") {
+			setMessage("请再次确认密码", "#ff6666");
+			$("#signup-confirm input").focus();
+			return false;
+		} else if ($("#signup-confirm input").val() != "") {
+			setMessage("", "#ffffff");
+		}
+
+		if ($("#signup-password input").val() !== $("#signup-confirm input").val()) {
+			setMessage("两次输入的密码不相同", "#ff6666");
+			$("#signup-password input").focus();
+			return false;
+		} else if ($("#signup-password input").val() !== $("#signup-confirm input").val()) {
+			setMessage("", "#ffffff");
+		}
+
+		$("#signup-form").submit();
+	});*/
 });
