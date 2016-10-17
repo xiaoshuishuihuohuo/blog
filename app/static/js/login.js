@@ -111,9 +111,9 @@ $(document).ready(function () {
 	});
 
 	// 登录
-	/*$("#login-btn").click(function () {
+	$("#login-btn").click(function () {
 		if ($("#username input").val() == "") {
-			setMessage("用户名/邮箱不能为空", "#ff6666");
+			setMessage("用户名呢", "#ff6666");
 			$("#username input").focus();
 			return false;
 		} else if ($("#username input").val() != "") {
@@ -121,14 +121,14 @@ $(document).ready(function () {
 		}
 		
 		if ($("#password input").val() == "") {
-			setMessage("密码不能为空", "#ff6666");
+			setMessage("密码呢", "#ff6666");
 			$("#password input").focus();
 			return false;
 		} else if ($("#password input").val() != "") {
 			setMessage("", "#ffffff");
 		}
 
-		$.post(
+		/*$.post(
 			url,
 			{
 				username: $("#username input").val(),
@@ -143,9 +143,9 @@ $(document).ready(function () {
 
 				$("#login-form").submit();
 			}
-		);
+		);*/
 	});
-*/
+
 	// 验证用户名是否已存在
 	$("#signup-username input").focus(function () {
 		$("#signup-username input").blur(function () {
@@ -156,11 +156,11 @@ $(document).ready(function () {
 				},
 				function (data) {
 					if (!data) {
-						setMessage("该用户名/邮箱已存在", "#ff6666");
+						setMessage("注册过了", "#ff6666");
 						$("#signup-username input").focus();
 						return false;
 					} else {
-						setMessage("可以使用", "#99CC66");
+						setMessage("可以用", "#99CC66");
 					}
 				}
 			);
@@ -168,9 +168,9 @@ $(document).ready(function () {
 	});
 
 	// 注册
-	/*$("#signup-btn").click(function () {
+	$("#signup-btn").click(function () {
 		if ($("#signup-username input").val() == "") {
-			setMessage("用户名/邮箱不能为空", "#ff6666");
+			setMessage("填个名字", "#ff6666");
 			$("#signup-username input").focus();
 			return false;
 		} else if ($("#signup-username input").val() != "") {
@@ -178,7 +178,7 @@ $(document).ready(function () {
 		}
 		
 		if ($("#signup-password input").val() == "") {
-			setMessage("密码不能为空", "#ff6666");
+			setMessage("输个密码", "#ff6666");
 			$("#signup-password input").focus();
 			return false;
 		} else if ($("#signup-password input").val() != "") {
@@ -186,7 +186,7 @@ $(document).ready(function () {
 		}
 
 		if ($("#signup-confirm input").val() == "") {
-			setMessage("请再次确认密码", "#ff6666");
+			setMessage("再输一遍", "#ff6666");
 			$("#signup-confirm input").focus();
 			return false;
 		} else if ($("#signup-confirm input").val() != "") {
@@ -194,13 +194,17 @@ $(document).ready(function () {
 		}
 
 		if ($("#signup-password input").val() !== $("#signup-confirm input").val()) {
-			setMessage("两次输入的密码不相同", "#ff6666");
+			setMessage("两次不一样", "#ff6666");
 			$("#signup-password input").focus();
 			return false;
 		} else if ($("#signup-password input").val() !== $("#signup-confirm input").val()) {
 			setMessage("", "#ffffff");
 		}
 
-		$("#signup-form").submit();
-	});*/
+		//$("#signup-form").submit();
+	});
+
+	if ($(".message span").text() != "") { // 如有后台传到前端信息，显示
+		$(".message").css("background", "#ff6666");
+	}
 });

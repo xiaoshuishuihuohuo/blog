@@ -30,22 +30,10 @@
 				<div id="ul-2"></div>
 			</div>
 
-			<!-- <div class="message"> 错误提示
-				<span></span>
-			</div> -->
-
-			<div class="render">
-				{% with messages = get_flashed_messages() %}
-				  {% if messages %}
-				    <div>
-				    {% for message in messages %}
-				      <li>{{ message }}</li>
-				    {% endfor %}
-					</div>
-				  {% endif %}
-				{% endwith %}
+			<div class="message"> <!-- 错误提示 -->
+				<span>{{ message }}</span>
 			</div>
-			
+
 			<form action="/auth/signin" method="post" id="login-form">
 				<div class="login"> <!-- 登录 -->
 					{{ form.hidden_tag() }}

@@ -114,19 +114,6 @@ body {
 	border-radius: 1px;
 }
 
-.render {
-	margin: auto;
-	padding: 5px;
-	width: 170px;
-	height: 15px;
-	line-height: 15px;
-	text-align: left;
-	background: white;
-	color: red;
-	font-size: 12px;
-	border-radius: 1px;
-}
-
 #username,
 #password,
 #login-btn-div,
