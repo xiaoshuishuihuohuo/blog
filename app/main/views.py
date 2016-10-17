@@ -1,6 +1,7 @@
 from flask import (Flask, request, session, g, redirect, url_for, render_template,Blueprint)
-
-main = Blueprint('main', __name__)
+from . import main
+from ..auth.forms import signinForm
+from flask_login import login_required
 
 @main.route('/')
 def index():
@@ -9,5 +10,11 @@ def index():
 
 @main.route('/login')
 def login():
-    return render_template('login.html')
+	form = signinForm()
+    # return redirect('/auth/signin')
+	return render_template('login.html' ,form = form)
 
+@main.route('/mainpage')
+@login_required
+def mainpage():
+	return 'main page'

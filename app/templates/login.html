@@ -35,15 +35,22 @@
 			</div> -->
 
 			<div class="render">
-				<div>
-					{{message}}
-				</div>
+				{% with messages = get_flashed_messages() %}
+				  {% if messages %}
+				    <div>
+				    {% for message in messages %}
+				      <li>{{ message }}</li>
+				    {% endfor %}
+					</div>
+				  {% endif %}
+				{% endwith %}
 			</div>
-
-			<form action="" method="post" id="login-form">
+			
+			<form action="/auth/signin" method="post" id="login-form">
 				<div class="login"> <!-- 登录 -->
+					{{ form.hidden_tag() }}
 					<div id="username">
-						<input type="text" name="username" placeholder="用户名/邮箱">
+						<input type="text" name="username" placeholder="用户名">
 						<hr>
 					</div>
 					<div id="password">
@@ -59,10 +66,10 @@
 				</div> <!-- /登录 -->
 			</form>
 
-			<form action="" method="post" id="signup-form">
+			<form action="/auth/regist" method="post" id="signup-form">
 				<div class="signup" style="display: none"> <!-- 注册 -->
 					<div id="signup-username">
-						<input type="text" name="signup-username" placeholder="用户名/邮箱">
+						<input type="text" name="signup-username" placeholder="用户名">
 						<hr>
 					</div>
 					<div id="signup-password">
