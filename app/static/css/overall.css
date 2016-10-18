@@ -1,0 +1,38 @@
+* {
+	font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	background: #F7F7F7;
+}
+
+.container {
+	margin: 0 auto;
+	margin-top: 30px;
+	width: 60%;
+}
+
+.foot {
+	width: 50%;
+	margin-top: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #C3C3C3;
+}
+
+.foot hr {
+	border-top: 1px solid #C3C3C3;
+}
+
+
+.btn {
+	border: none;
+	color: #ffffff;
+	cursor: pointer;
+	border-radius: 1px;
+	outline: none;
+}

@@ -1,17 +1,9 @@
-* {
-	font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
-}
-
 html,
 body,
 .head {
 	margin: 0;
 	height: 100%; /* 使背景图片高度自适应 */
 	width: 100%;
-}
-
-a {
-	text-decoration: none;
 }
 
 .background {
@@ -102,12 +94,4 @@ a {
 	z-index: 9999;
 	right: 16px;
 	bottom: 0;
-}
-
-.container {
-	margin: 0 auto;
-	margin-top: 30px;
-	height: 1000px;
-	width: 800px;
-	background: blue;
 }

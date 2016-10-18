@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="../static/css/overall.css">
+	<link rel="stylesheet" href="../static/css/write.css">
+	<link rel="stylesheet" href="../static/lib/simditor-2.3.6/styles/simditor.css">
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/write.js"></script>
+	<script src="../static/lib/simditor-2.3.6/scripts/module.js"></script>
+	<script src="../static/lib/simditor-2.3.6/scripts/hotkeys.js"></script>
+	<script src="../static/lib/simditor-2.3.6/scripts/uploader.js"></script>
+	<script src="../static/lib/simditor-2.3.6/scripts/simditor.js"></script>
+</head>
+<body>
+	<div class="container">
+		<form action="" method="post"> 
+			<textarea id="txt-content" data-autosave="editor-content" autofocus required></textarea>
+			<div id="submit-div">
+				<input class="btn" id="submit" type="submit" value="发　布">
+			</div>
+		</form>
+	</div>
+
+	{% include 'footer.html' %}
+</body>
+</html>
