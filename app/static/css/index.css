@@ -1,17 +1,9 @@
-* {
-	font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
-}
-
 html,
 body,
 .head {
 	margin: 0;
 	height: 100%; /* 使背景图片高度自适应 */
 	width: 100%;
-}
-
-a {
-	text-decoration: none;
 }
 
 .background {
@@ -104,10 +96,30 @@ a {
 	bottom: 0;
 }
 
-.container {
-	margin: 0 auto;
+.article-container {
+	width: 100%;
+	height: 300px;
+	background: #fff;
+	border-top-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	-webkit-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #BDBDBD, /*右边阴影*/  
+    0 0 0 #000, /*顶部阴影 未设置*/  
+    0 0 0 #000; /*底边阴影 未设置*/
+	-moz-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #BDBDBD, /*右边阴影*/  
+    0 0 0 #000, /*顶部阴影 未设置*/  
+    0 0 0 #000; /*底边阴影 未设置*/
+	box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #BDBDBD, /*右边阴影*/  
+    0 0 0 #000, /*顶部阴影 未设置*/  
+    0 0 0 #000; /*底边阴影 未设置*/
+}
+
+.article-list {
+	margin: auto;
 	margin-top: 30px;
-	height: 1000px;
-	width: 800px;
-	background: blue;
+	width: 80%;
+	height: 80%;
+	background: red;
 }
