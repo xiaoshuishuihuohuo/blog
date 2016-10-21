@@ -204,7 +204,7 @@ $(document).ready(function () {
 		//$("#signup-form").submit();
 	});
 
-	if ($(".message span").text() != "") { // 如有后台传到前端信息，显示
+	if ($(".message span").text().trim() != "") { // 如有后台传到前端信息，显示
 		$(".message").css("background", "#ff6666");
 	}
 });

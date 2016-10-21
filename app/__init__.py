@@ -13,11 +13,12 @@ def create_app():
     
     app.config['SECRET_KEY']='fuck'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mysql:123@192.168.1.5/blog'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@127.0.0.1/blog'
     
     db.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = '/login'
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

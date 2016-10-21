@@ -34,14 +34,15 @@
 			<!-- <div class="message"> 错误提示
 				<span></span>
 			</div> -->
-			<div class="render">
+
+			<div class="message">
+				<span>
 				{% with messages = get_flashed_messages() %}
 				  {% if messages %}
-				    <div>
 				      {{ messages[0] }}
-					</div>
 				  {% endif %}
 				{% endwith %}
+				</span>
 			</div>
 
 			<form action="/auth/signin" method="post" id="login-form">

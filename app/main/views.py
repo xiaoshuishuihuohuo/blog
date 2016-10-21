@@ -19,4 +19,10 @@ def login():
 @main.route('/mainpage')
 @login_required
 def main_page():
-    return 'main page'
+    return render_template('mainpage.html')
+
+@main.route('/write')
+@login_required
+def write_page():
+    return render_template('write.html')
+

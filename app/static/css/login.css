@@ -138,9 +138,9 @@ body {
 
 .login input[name="username"],
 .login input[name="password"],
-.signup input[name="signup-username"],
-.signup input[name="signup-password"],
-.signup input[name="signup-confirm"] {
+.signup input[name="signup_username"],
+.signup input[name="signup_password"],
+.signup input[name="signup_confirm"] {
 	width: 180px;
 }
 
