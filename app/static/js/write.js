@@ -32,7 +32,7 @@ function saveDraft() {
 	count++;
 	if (count < saveTime) {
 		console.log(count);
-		$("#submit").val("发布");
+		$("#submit").val("发　布");
 		setTimeout("saveDraft()", 1000);
 	} else {
 		count = 0;

@@ -1,0 +1,14 @@
+.portrait-div {
+    width: 100%;
+    height: 200px;
+    background: blue;
+}
+
+#portrait-pic {
+    margin: auto;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffffff;
+}

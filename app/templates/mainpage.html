@@ -5,11 +5,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="../static/css/overall.css">
+	<link rel="stylesheet" href="../static/css/mainpage.css">
 	<script src="../static/js/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container">
-		<a href="/write">写文章</a>
+		<div class="portrait-div">
+			<div id="portrait-pic">
+				<img src="../static/img/default.png">
+			</div>
+		</div>
+
+		<div>
+			<a href="/write" target="_blank">写文章</a>
+		</div>
+		<hr>
+		<div>
+			我的文章
+		</div>
 	</div>
 	
 	{% include 'footer.html' %}
