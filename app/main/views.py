@@ -1,7 +1,8 @@
 from flask import (Flask, request, session, g, redirect, url_for, render_template,Blueprint)
 from . import main
-from ..auth.forms import signinForm
+from ..auth.forms import SigninForm
 from flask_login import login_required
+
 
 @main.route('/')
 def index():
@@ -10,11 +11,12 @@ def index():
 
 @main.route('/login')
 def login():
-	form = signinForm()
+    form = SigninForm()
     # return redirect('/auth/signin')
-	return render_template('login.html' ,form = form)
+    return render_template('login.html' ,form = form)
+
 
 @main.route('/mainpage')
 @login_required
-def mainpage():
-	return 'main page'
+def main_page():
+    return 'main page'
