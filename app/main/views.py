@@ -4,6 +4,7 @@ from ..auth.forms import SigninForm
 from flask_login import login_required
 import json
 from .. import logger
+import uuid
 
 
 @main.route('/')
@@ -37,9 +38,12 @@ def write_upload():
         f = request.files['picture']
         if f:
             img_path = current_app.config['IMG_SAVE_PATH']
+            get_path = current_app.config['GET_IMG_URL']
+            name = str(uuid.uuid1()) + '.' +f.filename.split(".")[-1]
             try:
-                f.save(img_path+f.filename)
-                json_result = {"success": True, "msg": "error message", "file_path": '/images/' + f.filename}
+
+                f.save(img_path + name)
+                json_result = {"success": True, "msg": "error message", "file_path": get_path + name}
             except Exception:
                 json_result = {"success": False, "msg": "error"}
     return json.dumps(json_result)
