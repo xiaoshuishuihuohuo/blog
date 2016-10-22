@@ -3,6 +3,7 @@ from . import main
 from ..auth.forms import SigninForm
 from flask_login import login_required
 import json
+from .. import logger
 
 
 @main.route('/')

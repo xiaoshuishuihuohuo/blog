@@ -4,10 +4,11 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 import os
 from config import Config
-
+from log import Logger
 db = SQLAlchemy()
 csrf = CsrfProtect()
 login_manager = LoginManager()
+logger = Logger()
 
 
 def create_app():
@@ -21,10 +22,12 @@ def create_app():
     if not os.path.exists(app.config['IMG_SAVE_PATH']):
         os.makedirs(app.config['IMG_SAVE_PATH'])
 
+    logger.init_app(app)
     db.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = '/login'
+
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
