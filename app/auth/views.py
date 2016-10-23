@@ -28,7 +28,6 @@ def signin():
 @auth.route('/regist', methods=['POST'])
 def regist():
     form = RegForm()
-    a = form.signup_password.data
     if form.validate_on_submit():
         user = User(passwd=form.signup_password.data)
         user.username = form.signup_username.data

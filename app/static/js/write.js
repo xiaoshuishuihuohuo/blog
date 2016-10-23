@@ -28,7 +28,7 @@ $(document).ready(function() {
 var time = new Date();
 var count = 0, saveTime = 5; 
 
-saveDraft();
+//saveDraft();
 
 function saveDraft() {
 	count++;

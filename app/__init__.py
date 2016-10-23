@@ -28,12 +28,14 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = '/login'
 
-
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    from .write import write as write_blueprint
+    app.register_blueprint(write_blueprint, url_prefix='/write')
     
     return app
 
