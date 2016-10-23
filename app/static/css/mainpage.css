@@ -2,6 +2,11 @@ body {
     margin: 0;
 }
 
+a:link,
+a:visited {
+	color: #ffffff;
+}
+
 .container {
     margin-top: 0;
 }
@@ -38,4 +43,18 @@ body {
     margin-top: 10px;
     text-align: center;
     color: #fff;
+}
+
+.write-btn-div {
+    margin-top: 10px;
+    text-align: left;
+}
+
+#write-btn {
+    height: 50px;
+    background: #33475F;
+}
+
+#write-btn {
+    line-height: 50px;
 }
