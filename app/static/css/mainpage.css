@@ -46,15 +46,27 @@ a:visited {
 }
 
 .write-btn-div {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     text-align: left;
 }
 
 #write-btn {
-    height: 50px;
-    background: #33475F;
+    height: 35px;
+    width: 90px;
+    background: #0080FF;
+    border-radius: 1px;
+    font-size: 16px;
+    text-align: right;   
 }
 
-#write-btn {
-    line-height: 50px;
+#write-btn img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: -29px;
+}
+
+#write-btn:hover {
+    background: #379BFF;
 }
