@@ -11,14 +11,20 @@
 <body>
 	<div class="container">
 		<div class="portrait-div">
-			<div style="height:30px;"></div>
+			<div id="portrait-empty"></div>
 			<div id="portrait-pic">
 				<img src="../static/img/default.png">
 			</div>
+			<div id="portrait-username">
+				<p>{{ username }}</p>
+			</div>
 		</div>
 
-		<div>
-			<a href="/write" target="_blank">写文章</a>
+		<div class="write-btn-div">
+			<button class="btn" id="write-btn">
+				<img src="../static/img/write-btn.png">
+				<a href="/write" target="_blank">写文章</a>
+			</button>
 		</div>
 		<hr>
 		<div>

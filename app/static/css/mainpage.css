@@ -2,16 +2,21 @@ body {
     margin: 0;
 }
 
+a:link,
+a:visited {
+	color: #ffffff;
+}
+
 .container {
     margin-top: 0;
 }
 
 .portrait-div {
     width: 100%;
-    height: 200px;
-    background: url(../img/MuseumClouds.jpg) no-repeat;
+    height: 260px;
+    background: url(../img/52624eca5.jpg) no-repeat;
     background-size: cover;
-    background-position: 0 -100px;
+    background-position: 0 -150px;
 }
 
 #portrait-pic {
@@ -21,10 +26,47 @@ body {
     border-radius: 50%;
     overflow: hidden;
     background: #ffffff;
-    box-shadow: 0 0 0 5px rgba(255, 255, 255, .7);
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, .5);
+}
+
+#portrait-empty {
+    height: 60px;
 }
 
 #portrait-pic img {
     width: 128px;
     height: 128px;
+}
+
+#portrait-username {
+    height: 50px;
+    margin-top: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.write-btn-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#write-btn {
+    height: 35px;
+    width: 90px;
+    background: #0080FF;
+    border-radius: 1px;
+    font-size: 16px;
+    text-align: right;   
+}
+
+#write-btn img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: -29px;
+}
+
+#write-btn:hover {
+    background: #379BFF;
 }

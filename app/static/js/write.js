@@ -22,7 +22,19 @@ $(document).ready(function() {
         }
 	});
 
-	
+	var tag_value = '';
+
+	$(".tag-btn").click(function () {
+		$(this).toggleClass('selected');
+		if ($(this).attr("class").indexOf("selected") > 0) {
+			tag_value += "" + $(this).attr("name") + ",";
+		} else {
+			tag_value = tag_value.replace($(this).attr("name") + ",", "");
+		}
+		console.log(tag_value);
+		$("#tag-value").val(tag_value);
+	});
+
 });
 
 var time = new Date();
