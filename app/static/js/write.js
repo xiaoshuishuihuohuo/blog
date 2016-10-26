@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	editor = new Simditor({
 		textarea: $('#txt-content'),
-		placeholder: 'write something',
+		placeholder: 'write something...',
 		toolbar: toolbar,
 		defaultImage: '/static/img/error.jpg',
 		pasteImage: true,
@@ -33,6 +33,10 @@ $(document).ready(function() {
 		}
 		console.log(tag_value);
 		$("#tag-value").val(tag_value);
+	});
+
+	$("#back-div img").click(function () {
+		window.location.href = "/mainpage";
 	});
 
 });
