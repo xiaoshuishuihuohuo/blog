@@ -7,8 +7,55 @@ a:visited {
 	color: #ffffff;
 }
 
+li {
+    list-style: none;
+}
+
+.top {
+    background: #000000;
+}
+
+.sidebar {
+    width: 150px;
+    position: fixed;
+    margin-top: 15%;
+    margin-left: 50px;
+    text-align: left;
+}
+
+#sidebar-active-div {
+    position: absolute;
+    width: 148px;
+    height: 30px;
+    background: #EAEAEA;
+    z-index: -1;
+    margin-top: 0;
+}
+
+#sidebar-active-slide {
+    margin-top: 0;
+    background: #0080FF;
+    width: 3px;
+    height: 30px;
+    position: absolute;
+}
+
+.sidebar ul {
+    margin-top: 0;
+    border-left: 2px solid #DDDDDD;
+    padding: 0;
+}
+
+.sidebar li {
+    padding-left: 38px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
 .container {
     margin-top: 0;
+    padding-top: 90px;
 }
 
 .portrait-div {

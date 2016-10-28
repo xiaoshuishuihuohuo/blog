@@ -23,7 +23,7 @@ body,
 	position: absolute; /* 与.background重合 */
 }
 
-.top {
+/*.top {
 	width: 100%;
 	position: absolute;
 	color: #ffffff;
@@ -51,7 +51,7 @@ body,
 	width: 0;
 	background: #D6AE8B;
 	position: absolute;
-}
+}*/
 
 .slogan {
 	margin-top: 15%;

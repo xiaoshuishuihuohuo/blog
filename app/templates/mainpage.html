@@ -7,8 +7,22 @@
 	<link rel="stylesheet" href="../static/css/overall.css">
 	<link rel="stylesheet" href="../static/css/mainpage.css">
 	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/header.js"></script>
+	<script src="../static/js/mainpage.js"></script>
 </head>
 <body>
+	{% include 'header.html' %}
+
+	<div class="sidebar">
+		<div id="sidebar-active-div"></div>
+		<div id="sidebar-active-slide"></div>
+		<ul onselectstart="return false;">
+			<li>写文章</li>
+			<li>我的文章</li>
+			<li>草稿</li>
+		</ul>
+	</div>
+
 	<div class="container">
 		<div class="portrait-div">
 			<div id="portrait-empty"></div>
