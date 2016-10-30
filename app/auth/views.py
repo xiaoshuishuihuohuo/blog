@@ -32,6 +32,7 @@ def regist():
     if form.validate_on_submit():
         user = User(passwd=form.signup_password.data)
         user.username = form.signup_username.data
+        user.nickname = form.signup_username.data
         user.email_addr = ''
         user.login_name = ''
         db.session.add(user)
