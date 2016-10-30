@@ -147,24 +147,25 @@ $(document).ready(function () {
 	});
 
 	// 验证用户名是否已存在
-	$("#signup-username input").focus(function () {
-		$("#signup-username input").blur(function () {
-			$.post(
-				url,
-				{
-					username: $("#signup-username input").val()
-				},
-				function (data) {
-					if (!data) {
-						setMessage("注册过了", "#ff6666");
-						$("#signup-username input").focus();
-						return false;
-					} else {
-						setMessage("可以用", "#99CC66");
-					}
+	$("#signup-username input").blur(function () {
+		csrftoken = $('meta[name=csrf-token]').attr('content')
+		$.post(
+			"/auth/regist/checkUser",
+			{
+				signup_username: $("#signup-username input").val(),
+				csrf_token: csrftoken
+			},
+			function (data) {
+				if (data.exist) {
+					setMessage("注册过了", "#ff6666");
+					$("#signup-username input").focus();
+					return false;
+				} else {
+					setMessage("", "#ffffff");
 				}
-			);
-		});
+			},
+			"json"
+		);
 	});
 
 	// 注册

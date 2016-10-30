@@ -14,3 +14,7 @@ class RegForm(FlaskForm):
     signup_password = PasswordField(validators=[DataRequired(),EqualTo('signup_confirm', message='Passwords must '
                                                                                                  'match')])
     signup_confirm = PasswordField(validators=[DataRequired()])
+
+
+class CheckForm(FlaskForm):
+    signup_username = StringField(validators=[DataRequired(message='You must have an name')])
