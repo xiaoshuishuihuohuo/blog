@@ -1,34 +1,61 @@
-from flask import (render_template,request,current_app)
-from flask_login import login_required
+from flask import (render_template,request,redirect, url_for,current_app)
+from flask_login import (login_required, current_user)
 import json
 from .. import logger
 import uuid
 from . import write
 from forms import ArticleForm
 from ..models import Article
+from .. import db
+from sqlalchemy.sql import exists, func
+
 
 @write.route('/')
 @login_required
 def write_page():
-    return render_template('write.html')
+    return render_template('write.html', id=str(uuid.uuid1()).replace('-', ''))
 
-
-@write.route('/submit')
+@write.route('/submit', methods=['POST'])
 @login_required
 def write_submit():
     form = ArticleForm()
-    if form.validate_on_submit():
-        article = Article()
-        article.article_id = form.article_id
-        # article.author =
-    return render_template('write.html')
+    if not form.validate_on_submit():
+        return '500'
+    article = Article()
+    article.id = form.id.data
+    article.author = current_user.nickname
+    article.title = form.title.data
+    article.ms_title = ''
+    article.classification = form.classification.data
+    article.content = form.content.data
+    article.manuscript = ''
+    article.visibility = 1
+
+    try:
+        db.session.merge(article)
+        db.session.commit()
+    except Exception,e:
+        return '500'
+    return redirect(url_for('main.main_page'))
 
 
-@write.route('/save')
+@write.route('/autoSave',methods=['POST'])
 @login_required
-def write_save():
-    return render_template('write.html')
-
+def write_auto_save():
+    form = ArticleForm()
+    if not form.validate_on_submit():
+        return json.dumps({'result':False})
+    article = Article()
+    article.id = form.id.data
+    article.ms_title = form.title.data
+    article.manuscript = form.content.data
+    try:
+        db.session.merge(article)
+        db.session.commit()
+    except Exception,e:
+        return json.dumps({'result':False})
+    return json.dumps({'result':True})
+    
 
 @write.route('/upload', methods=['POST'])
 @login_required
@@ -38,7 +65,7 @@ def write_upload():
         if f:
             img_path = current_app.config['IMG_SAVE_PATH']
             get_path = current_app.config['GET_IMG_URL']
-            name = str(uuid.uuid1()) + '.' +f.filename.split(".")[-1]
+            name = str(uuid.uuid1()) + '.' + f.filename.split(".")[-1]
             try:
                 f.save(img_path + name)
                 json_result = {"success": True, "msg": "error message", "file_path": get_path + name}

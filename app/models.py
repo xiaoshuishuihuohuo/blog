@@ -29,19 +29,19 @@ class User(UserMixin, db.Model):
 
 class Article(UserMixin, db.Model):
     __tablename__ = 't_articles'
-    id = db.Column(db.Integer, primary_key=True)
-    article_id = db.Column(db.String(35), primary_key=True)
-    author = db.Column(db.String(50))
+    id = db.Column(db.String(35), primary_key=True)
+    author = db.Column(db.String(50), server_default='')
     title = db.Column(db.String(100))
+    ms_title = db.Column(db.String(100))
     classification = db.Column(db.String(20))
     manuscript = db.Column(db.Text)
     content = db.Column(db.Text)
     create_time = db.Column(db.DateTime)
     last_modified_time = db.Column(db.DateTime)
-    like_count = db.Column(db.Integer)
-    pageviews = db.Column(db.Integer)
+    like_count = db.Column(db.Integer, server_default='0')
+    pageviews = db.Column(db.Integer, server_default='0')
     key_word = db.Column(db.String(50))
-    visibility = db.Column(db.Integer)
+    visibility = db.Column(db.Integer,server_default='0')
 
 
 @login_manager.user_loader
