@@ -16,22 +16,26 @@
 	<script src="../static/lib/simditor-2.3.6/scripts/simditor.js"></script>
 </head>
 <body>
+  <div id="back-div">
+    <img src="../static/img/back.png">
+  </div>
+    
 	<div class="container">
 		<form action="/write/submit" method="post">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input type="hidden" name="id" value="{{ id }}" />			
       <div id="title-div">
-        <input type="text" name="title" placeholder="输入标题">
-        <hr> 
+        <input type="text" name="title" placeholder="输入标题" autofocus>
       </div>
-			<textarea id="txt-content" name="content" data-autosave="editor-content" autofocus required></textarea>
+			<textarea id="txt-content" data-autosave=false required></textarea>
       <input type="hidden" id="tag-value" name="classification">
 			<div id="article-tag-div">
-				<span class="tag-btn" name="tech">技术</span>
-				<span class="tag-btn" name="understanding">心得</span>
-				<span class="tag-btn" name="notes">笔记</span>
+				<img src="../static/img/tag.png">
+        <span class="tag-btn" name="tech" onselectstart="return false;">技术</span>
+				<span class="tag-btn" name="understanding" onselectstart="return false;">心得</span>
+				<span class="tag-btn" name="notes" onselectstart="return false;">笔记</span>
         {% if tag %}
-        <span class="tag-btn" name="{{ tag }}">{{ tag }}</span>
+        <span class="tag-btn" name="{{ tag }}" onselectstart="return false;">{{ tag }}</span>
         {% endif %}
 			</div>
 			<div id="submit-div">

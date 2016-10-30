@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 	editor = new Simditor({
 		textarea: $('#txt-content'),
-		placeholder: 'write something',
+		placeholder: '<span style="font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;">输入正文</span>',
 		toolbar: toolbar,
 		defaultImage: '/static/img/error.jpg',
 		pasteImage: true,
@@ -34,6 +34,17 @@ $(document).ready(function() {
 		}
 		console.log(tag_value);
 		$("#tag-value").val(tag_value);
+	});
+
+	$("#back-div img").click(function () {
+		window.location.href = "/mainpage";
+	});
+
+	$("#submit").click(function() {
+		if ($("#title-div input").val() == "") {
+			$("#title-div input").focus();
+			return false;
+		}
 	});
 
 });

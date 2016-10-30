@@ -10,6 +10,35 @@ body {
 	background: #F7F7F7;
 }
 
+.top {
+	width: 100%;
+	color: #ffffff;
+	height: 70px;
+	position: fixed;
+}
+
+#login {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: lighter;
+}
+
+#login a:link,
+#login a:visited {
+	color: #ffffff;
+}
+
+#login-underline {
+	margin-top: 4px;
+	height: 3px;
+	width: 0;
+	background: #D6AE8B;
+	position: absolute;
+}
+
 .container {
 	margin: 0 auto;
 	margin-top: 30px;
