@@ -44,6 +44,13 @@ class Article(UserMixin, db.Model):
     visibility = db.Column(db.Integer,server_default='0')
 
 
+class Article_Classification(UserMixin, db.Model):
+    __tablename__ = 't_article_classifications'
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(20), server_default='')
+    name = db.Column(db.String(50))
+    parent_code = db.Column(db.String(200))
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))

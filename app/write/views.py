@@ -5,7 +5,7 @@ from .. import logger
 import uuid
 from . import write
 from forms import ArticleForm
-from ..models import Article
+from ..models import Article,Article_Classification
 from .. import db
 from sqlalchemy.sql import exists, func
 
@@ -13,7 +13,8 @@ from sqlalchemy.sql import exists, func
 @write.route('/')
 @login_required
 def write_page():
-    return render_template('write.html', id=str(uuid.uuid1()).replace('-', ''))
+    classifications = db.session.query(Article_Classification).all()
+    return render_template('write.html', id=str(uuid.uuid1()).replace('-', ''), classifications=classifications)
 
 @write.route('/submit', methods=['POST'])
 @login_required
@@ -30,7 +31,6 @@ def write_submit():
     article.content = form.content.data
     article.manuscript = ''
     article.visibility = 1
-
     try:
         db.session.merge(article)
         db.session.commit()
