@@ -1,6 +1,6 @@
 from flask import Blueprint
 
 
-auth = Blueprint('auth', __name__)
+write = Blueprint('write', __name__)
 
 from . import views

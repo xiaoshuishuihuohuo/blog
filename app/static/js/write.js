@@ -1,3 +1,5 @@
+csrftoken = $('meta[name=csrf-token]').attr('content')
+
 $(document).ready(function() {
 	var editor, mobileToolbar, toolbar, csrftoken;
 
@@ -5,7 +7,6 @@ $(document).ready(function() {
 
 	mobileToolbar = ["bold", "underline", "strikethrough", "color", "ul", "ol"];
 
-	csrftoken = $('meta[name=csrf-token]').attr('content')
 
 	editor = new Simditor({
 		textarea: $('#txt-content'),
@@ -51,19 +52,32 @@ $(document).ready(function() {
 var time = new Date();
 var count = 0, saveTime = 5; 
 
-//saveDraft();
+saveDraft();
 
 function saveDraft() {
 	count++;
 	if (count < saveTime) {
 		console.log(count);
-		$("#submit").val("发　布");
-		setTimeout("saveDraft()", 1000);
+		setTimeout("saveDraft()", saveTime*1000);
 	} else {
 		count = 0;
 		// 保存操作
 
 		$("#submit").val("保存草稿中...");
-		setTimeout("saveDraft()", 1000);
+		$.post(
+			'/write/autoSave',
+			{
+				id: $('input[name="id"]').val(),
+				title: $('input[name="title"]').val(),
+				classification: $('input[name="classification"]').val(),
+				content: $('#txt-content').val(),
+				'csrf_token' : csrftoken
+			},
+			function(data,status){
+				$("#submit").val("发　布");
+			}
+		);
+		setTimeout("saveDraft()", saveTime*1000);
 	}
+
 }

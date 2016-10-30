@@ -21,19 +21,20 @@
   </div>
     
 	<div class="container">
-		<form action="" method="post">
+		<form action="/write/submit" method="post">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input type="hidden" name="id" value="{{ id }}" />			
       <div id="title-div">
         <input type="text" name="title" placeholder="输入标题" autofocus>
       </div>
-			<textarea id="txt-content" data-autosave="editor-content" required></textarea>
-      <input type="hidden" id="tag-value" name="tag_value">
+			<textarea id="txt-content" name="content" data-autosave=false required></textarea>
+      <input type="hidden" id="tag-value" name="classification">
 			<div id="article-tag-div">
 				<img src="../static/img/tag.png">
-        <span class="tag-btn" name="tech" onselectstart="return false;">技术</span>
-				<span class="tag-btn" name="understanding" onselectstart="return false;">心得</span>
-				<span class="tag-btn" name="notes" onselectstart="return false;">笔记</span>
-        {% if tag %}
-        <span class="tag-btn" name="{{ tag }}" onselectstart="return false;">{{ tag }}</span>
+        {% if classifications %}
+					{% for tag in classifications %}
+        		<span class="tag-btn" name="{{ tag.code }}" onselectstart="return false;">{{ tag.name }}</span>
+					{% endfor %}
         {% endif %}
 			</div>
 			<div id="submit-div">
