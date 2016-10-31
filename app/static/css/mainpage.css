@@ -53,12 +53,16 @@ li {
     cursor: pointer;
 }
 
+.sidebar a {
+    color: #000000;
+}
+
 .container {
     margin-top: 0;
     padding-top: 90px;
 }
 
-.portrait-div {
+#portrait-div {
     width: 100%;
     height: 260px;
     background: url(../img/52624eca5.jpg) no-repeat;
@@ -92,7 +96,7 @@ li {
     color: #fff;
 }
 
-.write-btn-div {
+#write-btn-div {
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: left;
@@ -116,4 +120,9 @@ li {
 
 #write-btn:hover {
     background: #379BFF;
+}
+ 
+#my-article,
+#draft {
+    height: 500px;
 }
