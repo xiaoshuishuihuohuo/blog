@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired
 
 
 class ArticleForm(FlaskForm):
-    id = StringField('id', validators=[DataRequired(message='You must have an id')])
-    title = StringField('title', validators=[DataRequired(message='You must have an title')])
+    id = StringField('id', validators=[DataRequired()])
+    title = StringField('title', validators=[DataRequired()])
     classification = StringField('classification')
-    content = StringField('content', validators=[DataRequired(message='You must have a content')])
+    content = StringField('content', validators=[DataRequired()])
     # key_word = StringField('key word', validators=[DataRequired(message='You must have a key word')])
