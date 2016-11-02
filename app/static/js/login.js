@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+	csrftoken = $('meta[name=csrf-token]').attr('content')
+
 	// 转换选中状态
 	function switchActive(id) {
 		var spans = document.getElementById("title").getElementsByTagName("span");
@@ -129,11 +132,12 @@ $(document).ready(function () {
 		}
 
 		$.post(
-			url,
+			'/auth/signin',
 			{
 				username: $("#username input").val(),
 				password: $("#password input").val(),
-				remember_me: $("#remember-me input").val()
+				remember_me: $("#remember-me input").val(),
+				csrf_token: csrftoken
 			},
 			function (data) {
 				if (data.success) {
@@ -157,10 +161,11 @@ $(document).ready(function () {
 				} else if (data.message == 'need') {
 					//失败
 					//需要验证码
+					$(".login").find("#password").after("");
 					$(".login").find("#password").after(
 						'<div id="verify" style="width:180px;height:40px;margin:auto;">'+
-						'<input type="text" name="verify" placeholder="验证码" style="width:80px;">'+
-						'<img src="" style="width:100px;height:30px;vertical-align:bottom;">'+
+						'<input type="text" name="verify" placeholder="验证码" style="width:75px;">'+
+						'<img src="/auth/captcha" style="width:100px;height:30px;vertical-align:bottom;">'+
 						'</div>'
 					);
 					setMessage("", "#ffffff");
@@ -176,7 +181,6 @@ $(document).ready(function () {
 
 	// 验证用户名是否已存在
 	$("#signup-username input").blur(function () {
-		csrftoken = $('meta[name=csrf-token]').attr('content')
 		$.post(
 			"/auth/regist/checkUser",
 			{
