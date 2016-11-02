@@ -24,23 +24,30 @@ def signin():
     if (session['need_captcha'] and (not cap_form.validate_on_submit())) or (not form.validate_on_submit()):
         abort(500)
 
+    result={'success':False}
     if session['need_captcha']:
         if not session['captcha_code']  == cap_form.captcha:
-            return json.dumps({'success':False,'message':'cap'})
+            result['message'] = 'cap'
+            return json.dumps(result)
 
     user = User.query.filter_by(username=form.username.data).first()
     if user is not None and user.verify_password(form.password.data):
-
         login_user(user, form.remember_me.data)
-        return json.dumps({'success':True,'url':url_for('main.main_page')})
+        #TODO
+        session.pop()
+        result['success'] = True
+        result['url'] = url_for('main.main_page')
+        return json.dumps(result)
     else:
         error_time = session['error_times']
         if error_time < 3:
             session['error_times'] = error_time + 1
+            result['message'] = 'wrong'
         else:
             if not session['need_captcha']:
                 session['need_captcha'] = True
-        return json.dumps({'success':False,'message':'wrong'})
+                result['message'] = 'need'
+        return json.dumps(result)
 
 
 @auth.route('/regist', methods=['POST'])
