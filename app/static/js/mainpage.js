@@ -1,5 +1,7 @@
 $(document).ready(function () {
     $(".sidebar li").click(function () {
+        $(window).off('scroll');
+
         $("#sidebar-active-div, #sidebar-active-slide").css({
             "margin-top": ($(this).index() * 30) + "px",
             "transition": "all .2s"
@@ -11,7 +13,7 @@ $(document).ready(function () {
                     scrollTop: $("#write-btn-div").offset().top - 85 // div顶部位置 
                 }, 
                 300 // 页面移动速度
-            ); 
+            );
         } else if ($(this).index() === 1) {
             $('html, body').animate(
                 {  
@@ -27,19 +29,12 @@ $(document).ready(function () {
                 300
             );
         }
+        
+        $(window).on('scroll');
     });
 
-    var write_btn_div_marginTop = $("#write-btn-div").height() + $("#write-btn-div").offset().top - 70;
-    var my_article_marginTop = $("#my-article").height() + $("#my-article").offset().top - 70
-    var draft_marginTop = $("#draft").height() + $("#draft").offset().top - 70
-
-    /*console.log(write_btn_div_marginTop);
-    console.log(my_article_marginTop);
-    console.log(draft_marginTop);*/
-
     $(window).scroll(function () {
-        //console.log($(window).scrollTop());
-        if ($(window).scrollTop() <= write_btn_div_marginTop) {
+        if ($(window).scrollTop() < 358) {
             //console.log("I belong to #write-btn-div");
             $("#sidebar-active-div, #sidebar-active-slide").css({ // sidebar背景移动
                 "margin-top": (0 * 30) + "px",
@@ -47,7 +42,7 @@ $(document).ready(function () {
             });
         }
 
-        if ($(window).scrollTop() > write_btn_div_marginTop && $(window).scrollTop() <= my_article_marginTop) {
+        if ($(window).scrollTop() >= 358 && $(window).scrollTop() < 884) {
             //console.log('I belong to #my-article');
             $("#sidebar-active-div, #sidebar-active-slide").css({
                 "margin-top": (1 * 30) + "px",
@@ -55,7 +50,7 @@ $(document).ready(function () {
             });
         }
 
-        if ($(window).scrollTop() > my_article_marginTop) {
+        if ($(window).scrollTop() >= 884) {
             //console.log("I belong to #draft");
             $("#sidebar-active-div, #sidebar-active-slide").css({
                 "margin-top": (2 * 30) + "px",
