@@ -17,6 +17,16 @@ def login():
     return render_template('login.html' ,form = form)
 
 
+@main.route('/view/<user>/<article>')
+def view_article(user, article):
+    return user+','+article
+        
+    
+@main.route('/user/<user>')
+def view_user(user):
+    return user
+
+
 @main.route('/mainpage')
 @login_required
 def main_page():
