@@ -1,6 +1,6 @@
 from flask import (Flask, request, make_response, session, g, redirect, url_for, abort, render_template,Blueprint,flash)
 from . import auth
-from .forms import SigninForm, RegForm, CheckForm, CaptchaForm
+from .forms import SigninForm, RegForm, CheckForm
 import json
 from ..models import User
 from .. import db
@@ -19,22 +19,19 @@ def signin():
     if not session.has_key('need_captcha'):
         session['need_captcha'] = False
 
-    cap_form = CaptchaForm()
     form = SigninForm()
 
     if not form.validate_on_submit():
         abort(500)
         
     result={'success':False}
-
-    if (session['need_captcha'] and (not cap_form.validate_on_submit())):
-        if not session['need_captcha']:
-            session['need_captcha'] = True
+    logger.debug(form.captcha.data in (None,''))
+    if (session['need_captcha'] and (form.captcha.data in (None,''))):
         result['message'] = 'need'
         return json.dumps(result)
                 
     if session['need_captcha']:
-        if session.has_key('captcha_code') and (not session['captcha_code']  == cap_form.captcha):
+        if session.has_key('captcha_code') and (not session['captcha_code']  == form.captcha.data):
             result['message'] = 'cap'
             return json.dumps(result)
 

@@ -137,6 +137,7 @@ $(document).ready(function () {
 				username: $("#username input").val(),
 				password: $("#password input").val(),
 				remember_me: $("#remember-me input").val(),
+				verify: $("#verify input").val(),
 				csrf_token: csrftoken
 			},
 			function (data) {
@@ -151,25 +152,21 @@ $(document).ready(function () {
 					setMessage("账号或密码错误", "#ff6666");
 					$("#username input").focus();
 					return false;
-				} else if (data.message == 'cap') {
-					//失败
-					//验证码错误
-					setMessage("", "#ffffff");
-					setMessage("验证码错误", "#ff6666");
-					$("#verify input").focus();
-					return false;
 				} else if (data.message == 'need') {
 					//失败
 					//需要验证码
-					$(".login").find("#password").after("");
-					$(".login").find("#password").after(
-						'<div id="verify" style="width:180px;height:40px;margin:auto;">'+
-						'<input type="text" name="verify" placeholder="验证码" style="width:75px;">'+
-						'<img src="/auth/captcha" style="width:100px;height:30px;vertical-align:bottom;">'+
-						'</div>'
-					);
+					$("#verify").show();
+					$("#verify img").attr("src", "/auth/captcha?random=" + Math.random());
 					setMessage("", "#ffffff");
-					$("#verify input").focus()
+					$("#verify input").focus();
+					return false;
+				} else if (data.message == 'cap') {
+					//失败
+					//验证码错误
+					$("#vefify img").attr("src", "/auth/captcha?random=" + Math.random());
+					setMessage("", "#ffffff");
+					setMessage("验证码错误", "#ff6666");
+					$("#verify input").focus();
 					return false;
 				} else {
 					return false;

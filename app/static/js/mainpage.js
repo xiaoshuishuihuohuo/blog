@@ -1,13 +1,12 @@
 $(document).ready(function () {
-    $(".sidebar li").click(function () {
-        $(window).off('scroll');
-
+    $(".sidebar .sidebar-list").click(function () {
+        console.log($(this).index());
         $("#sidebar-active-div, #sidebar-active-slide").css({
             "margin-top": ($(this).index() * 30) + "px",
             "transition": "all .2s"
         });
 
-        if ($(this).index() === 0) { // 如果点击sidebar第一项
+        /*if ($(this).index() === 0) { // 如果点击sidebar第一项
             $('html, body').animate(
                 {  
                     scrollTop: $("#write-btn-div").offset().top - 85 // div顶部位置 
@@ -28,9 +27,7 @@ $(document).ready(function () {
                 }, 
                 300
             );
-        }
-        
-        $(window).on('scroll');
+        }*/
     });
 
     $(window).scroll(function () {
