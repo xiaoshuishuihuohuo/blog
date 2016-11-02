@@ -1,16 +1,27 @@
+#back-div {
+	height: 40px;
+	padding: 10px;
+	position: fixed;
+	top: 20px;
+}
+
+#back-div img:hover {
+	background: #ffffff;
+}
+
 #title-div {
-	height: 70px;
+	height: 60px;
 }
 
 #title-div input {
 	border: none;
-	border-radius: 2px;
+	border-left: 4px solid #DDDDDD;
 	background: #F7F7F7;
-	height: 25px;
+	height: 20px;
 	width: 98%;
 	padding: 5px;
 	outline: medium;
-	font-size: 25px;
+	font-size: 23px;
 }
 
 #title-div hr {
@@ -24,6 +35,11 @@
 	height: 50px;
 }
 
+#article-tag-div img {
+	height: 20px;
+	vertical-align: bottom;
+}
+
 .tag-btn {
 	background: #DDDDDD;
 	font-size: 12px;
@@ -35,12 +51,8 @@
 	outline: none;
 }
 
-.tag-btn:hover {
-	/*background: #90823D;*/
-}
-
 .selected {
-	background: #69B94C;
+	background: #11cd6e;
 }
 
 #submit-div {
@@ -57,4 +69,8 @@
 
 #submit:hover {
 	background: #379BFF;
+}
+
+.foot {
+	margin-top: 100px;
 }

@@ -133,7 +133,9 @@ body {
 .signup input[type="text"],
 .signup input[type="password"] {
 	border: 0;
+	border-bottom: 1px solid #666666;
 	outline: medium;
+	height: 30px;
 }
 
 .login input[name="username"],

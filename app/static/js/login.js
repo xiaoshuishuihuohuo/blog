@@ -128,7 +128,7 @@ $(document).ready(function () {
 			setMessage("", "#ffffff");
 		}
 
-		/*$.post(
+		$.post(
 			url,
 			{
 				username: $("#username input").val(),
@@ -136,14 +136,42 @@ $(document).ready(function () {
 				remember_me: $("#remember-me input").val()
 			},
 			function (data) {
-				if (!data) {
-					setMessage("用户名或密码错误", "#ff6666");
-					$("#password input").focus();
+				if (data.success) {
+					//成功
+					window.location.href = data.url;
+					return false;
+				} else if (data.message == 'wrong') {
+					//失败
+					//账号密码错误
+					setMessage("", "#ffffff");
+					setMessage("账号或密码错误", "#ff6666");
+					$("#username input").focus();
+					return false;
+				} else if (data.message == 'cap') {
+					//失败
+					//验证码错误
+					setMessage("", "#ffffff");
+					setMessage("验证码错误", "#ff6666");
+					$("#verify input").focus();
+					return false;
+				} else if (data.message == 'need') {
+					//失败
+					//需要验证码
+					$(".login").find("#password").after(
+						'<div id="verify" style="width:180px;height:40px;margin:auto;">'+
+						'<input type="text" name="verify" placeholder="验证码" style="width:80px;">'+
+						'<img src="" style="width:100px;height:30px;vertical-align:bottom;">'+
+						'</div>'
+					);
+					setMessage("", "#ffffff");
+					$("#verify input").focus()
+					return false;
+				} else {
+					return false;
 				}
-
-				$("#login-form").submit();
-			}
-		);*/
+			},
+			'json'
+		);
 	});
 
 	// 验证用户名是否已存在

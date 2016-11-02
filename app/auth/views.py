@@ -53,6 +53,7 @@ def signin():
 @auth.route('/regist', methods=['POST'])
 def regist():
     form = RegForm()
+<<<<<<< HEAD
     if not form.validate_on_submit():
         abort(500)
     user = User(passwd=form.signup_password.data)
