@@ -42,7 +42,7 @@ def signin():
     if user is not None and user.verify_password(form.password.data):
         login_user(user, form.remember_me.data)
         #TODO
-        session.pop()
+        # session.pop()
         result['success'] = True
         result['url'] = url_for('main.main_page')
         return json.dumps(result)
