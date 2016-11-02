@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
 	csrftoken = $('meta[name=csrf-token]').attr('content')
-
 	// 转换选中状态
 	function switchActive(id) {
 		var spans = document.getElementById("title").getElementsByTagName("span");
@@ -131,13 +130,17 @@ $(document).ready(function () {
 			setMessage("", "#ffffff");
 		}
 
+		if($("#verify").css("display") == "none"){
+			$("#verify input").val("")
+		}
+
 		$.post(
 			'/auth/signin',
 			{
 				username: $("#username input").val(),
 				password: $("#password input").val(),
 				remember_me: $("#remember-me input").val(),
-				verify: $("#verify input").val(),
+				captcha: $("#verify input").val(),
 				csrf_token: csrftoken
 			},
 			function (data) {
@@ -154,11 +157,14 @@ $(document).ready(function () {
 					return false;
 				} else if (data.message == 'need') {
 					//失败
+					//账号密码错误
+					setMessage("", "#ffffff");
+					setMessage("账号或密码错误", "#ff6666");
+					$("#username input").focus();
 					//需要验证码
 					$("#verify").show();
+					$("#verify input").val("");
 					$("#verify img").attr("src", "/auth/captcha?random=" + Math.random());
-					setMessage("", "#ffffff");
-					$("#verify input").focus();
 					return false;
 				} else if (data.message == 'cap') {
 					//失败
@@ -166,6 +172,7 @@ $(document).ready(function () {
 					$("#vefify img").attr("src", "/auth/captcha?random=" + Math.random());
 					setMessage("", "#ffffff");
 					setMessage("验证码错误", "#ff6666");
+					$("#verify input").val("");
 					$("#verify input").focus();
 					return false;
 				} else {

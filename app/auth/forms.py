@@ -7,8 +7,7 @@ class SigninForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(message='name')])
     password = PasswordField('password', validators=[DataRequired(message='pwd')])
     remember_me = BooleanField('remember_me', default=False)
-    captcha = StringField()
-
+    
 
 class RegForm(FlaskForm):
     signup_username = StringField(validators=[DataRequired(message='name')])
@@ -18,3 +17,7 @@ class RegForm(FlaskForm):
 
 class CheckForm(FlaskForm):
     signup_username = StringField(validators=[DataRequired()])
+
+
+class CaptchaForm(FlaskForm):
+    captcha = StringField('captcha', validators=[DataRequired(message='cap')])
