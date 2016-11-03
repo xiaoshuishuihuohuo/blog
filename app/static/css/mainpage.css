@@ -11,45 +11,44 @@ li {
     list-style: none;
 }
 
+/* 设置锚点距页顶距离 http://stackoverflow.com/questions/4086107/html-positionfixed-page-header-and-in-page-anchors */
+.jumptarget::before {
+  content: "";
+  display: block;
+  height: 90px; /* fixed header height*/
+  margin: -90px 0 0; /* negative fixed header height */
+}
+
 .top {
     background: #000000;
-    position: absolute;
+}
+
+.wrapper {
+	position: relative;
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 90px 20px 800px 20px;
 }
 
 .sidebar {
     width: 150px;
     position: fixed;
-    margin-top: 15%;
-    margin-left: 50px;
+    margin-top: 90px;
+    margin-left: 20px;
     text-align: left;
-}
-
-#sidebar-active-div {
-    position: absolute;
-    width: 148px;
-    height: 30px;
-    background: #EAEAEA;
-    z-index: -1;
-    margin-top: 0;
-}
-
-#sidebar-active-slide {
-    margin-top: 0;
-    background: #0080FF;
-    width: 3px;
-    height: 30px;
-    position: absolute;
 }
 
 .sidebar ul {
     margin-top: 0;
-    border-left: 2px solid #DDDDDD;
     padding: 0;
+    z-index: -1;
 }
 
 .sidebar li {
     padding-left: 38px;
     height: 30px;
+    width: 100%;
     line-height: 30px;
     cursor: pointer;
 }
@@ -58,9 +57,22 @@ li {
     color: #000000;
 }
 
-.container {
-    margin-top: 0;
-    padding-top: 90px;
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+a:target {
+    padding-top: 100px;
+    background: red;
+}
+
+.nav {
+	position: fixed;
+}
+
+.active {
+    background: #EAEAEA;
+    border-left: 3px solid #0080FF;
 }
 
 #portrait-div {

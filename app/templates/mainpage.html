@@ -8,22 +8,26 @@
 	<link rel="stylesheet" href="../static/css/mainpage.css">
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/header.js"></script>
-	<script src="../static/js/mainpage.js"></script>
+	<script src="../static/lib/scrollspy.js"></script>
 </head>
 <body>
 	{% include 'header.html' %}
 
-	<div class="sidebar">
-		<div id="sidebar-active-div"></div>
-		<div id="sidebar-active-slide"></div>
-		<ul onselectstart="return false;">
-			<li class="sidebar-list"><a href="#write-btn-div">写文章</a></li>
-			<li class="sidebar-list"><a href="#my-article">我的文章</a></li>
-			<li class="sidebar-list"><a href="#draft">草稿</a></li>
+	<div class="sidebar" id="sidebar">
+		<ul class="nav">
+			<li class="active">
+				<a href="#write-btn-div">写文章</a>
+			</li>
+			<li>
+				<a href="#my-article">我的文章</a>
+			</li>
+			<li>
+				<a href="#draft">草稿</a>
+			</li>
 		</ul>
 	</div>
 
-	<div class="container">
+	<div class="wrapper">
 		<div id="portrait-div">
 			<div id="portrait-empty"></div>
 			<div id="portrait-pic">
@@ -34,7 +38,7 @@
 			</div>
 		</div>
 
-		<div id="write-btn-div">
+		<div id="write-btn-div" class="jumptarget">
 			<a href="/write">
 			<button class="btn" id="write-btn">
 				<img src="../static/img/write-btn.png">
@@ -42,36 +46,20 @@
 			</button>
 			</a>
 		</div>
-		<hr>
-		<div id="my-article">
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
-			<p>我的文章</p>
+
+		<div id="my-article" class="jumptarget">
+			我的文章
 		</div>
-		<hr>
-		<div id="draft">
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
-			<p>草稿</p>
+
+		<div id="draft" class="jumptarget">
+			草稿
 		</div>
 	</div>
-	
+
+	<script type="text/javascript" class="anchor">
+	$('body').scrollspy({ target: '#sidebar', offset: 10 });
+	</script>
+
 	{% include 'footer.html' %}
 </body>
 </html>
