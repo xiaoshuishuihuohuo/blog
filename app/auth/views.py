@@ -1,6 +1,6 @@
 from flask import (Flask, request, make_response, session, g, redirect, url_for, abort, render_template,Blueprint,flash)
 from . import auth
-from .forms import SigninForm, RegForm, CheckForm
+from .forms import SigninForm, RegForm, CheckForm, CaptchaForm
 import json
 from ..models import User
 from .. import db
@@ -20,18 +20,18 @@ def signin():
         session['need_captcha'] = False
 
     form = SigninForm()
-
+    cap_form = CaptchaForm()
+    
     if not form.validate_on_submit():
         abort(500)
         
     result={'success':False}
-    logger.debug(form.captcha.data in (None,''))
-    if (session['need_captcha'] and (form.captcha.data in (None,''))):
+    if (session['need_captcha'] and (not cap_form.validate_on_submit())):
         result['message'] = 'need'
         return json.dumps(result)
-                
+
     if session['need_captcha']:
-        if session.has_key('captcha_code') and (not session['captcha_code']  == form.captcha.data):
+        if session.has_key('captcha_code') and (session['captcha_code'].lower()  != cap_form.captcha.data.lower()):
             result['message'] = 'cap'
             return json.dumps(result)
 
@@ -51,7 +51,7 @@ def signin():
         else:
             if not session['need_captcha']:
                 session['need_captcha'] = True
-                result['message'] = 'need'
+            result['message'] = 'need'
         return json.dumps(result)
 
 
@@ -90,4 +90,5 @@ def get_captcha():
     buf_str = buf.getvalue()
     response = make_response(buf_str)
     response.headers['Content-Type'] = 'image/jpeg'
+    response.headers['Pragma'] = 'no-cache'
     return response
