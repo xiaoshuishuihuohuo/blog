@@ -38,8 +38,11 @@ def signin():
     user = User.query.filter_by(username=form.username.data).first()
     if user is not None and user.verify_password(form.password.data):
         login_user(user, form.remember_me.data)
-        #TODO
-        # session.pop()
+
+        session.pop('need_captcha')
+        session.pop('error_times')
+        session.pop('captcha_code')
+        
         result['success'] = True
         result['url'] = url_for('main.main_page')
         return json.dumps(result)
