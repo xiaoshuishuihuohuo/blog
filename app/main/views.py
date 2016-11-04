@@ -1,8 +1,10 @@
 from flask import (Flask, request, session, g, redirect, url_for, render_template,Blueprint,send_from_directory,current_app)
 from . import main
 from ..auth.forms import SigninForm
-from flask_login import login_required
-from .. import logger
+from flask_login import login_required, current_user
+from .. import logger, db
+from ..models import Article
+from sqlalchemy import and_, func
 
 
 @main.route('/')
@@ -17,9 +19,10 @@ def login():
     return render_template('login.html' ,form = form)
 
 
-@main.route('/view/<user>/<article>')
-def view_article(user, article):
-    return user+','+article
+@main.route('/view/<article_id>')
+def view_article(article_id):
+    article = db.session.query(Article).filter(Article.id==article_id).scalar()
+    return render_template('article.html',article=article)
         
     
 @main.route('/user/<user>')
@@ -30,7 +33,12 @@ def view_user(user):
 @main.route('/mainpage')
 @login_required
 def main_page():
-    return render_template('mainpage.html')
+    nickname = current_user.nickname
+
+    counts = db.session.query(func.count(Article.id)).filter(and_(Article.author == current_user.nickname, Article.visibility == 1)).scalar()
+    articles = db.session.query(Article.id,Article.title,Article.last_modified_time)\
+        .filter(and_(Article.author == current_user.nickname, Article.visibility == 1)).order_by(Article.last_modified_time.desc()).slice(0,10)
+    return render_template('mainpage.html', nickname=nickname, articles=articles, counts=counts)
 
 
 @main.route('/images/<name>')

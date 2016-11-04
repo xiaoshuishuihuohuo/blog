@@ -39,9 +39,12 @@ def signin():
     if user is not None and user.verify_password(form.password.data):
         login_user(user, form.remember_me.data)
 
-        session.pop('need_captcha')
-        session.pop('error_times')
-        session.pop('captcha_code')
+        if session.has_key('need_captcha'):
+            session.pop('need_captcha')
+        if session.has_key('error_times'):
+            session.pop('error_times')
+        if session.has_key('captcha_code'):
+            session.pop('captcha_code')
         
         result['success'] = True
         result['url'] = url_for('main.main_page')

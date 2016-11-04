@@ -33,7 +33,7 @@
 			<img src="../static/img/default.png">
 		</div>
 		<div id="portrait-username">
-			<p>{{ username }}</p>
+			<p>{{ nickname }}</p>
 		</div>
 	</div>
 
@@ -49,43 +49,23 @@
 
 		<div id="my-article" class="jumptarget">
 			<div class="title">
-				<span>我的文章</span>
+				<span>我的文章（共{{ counts }}篇）</span>
 			</div>
 			<div class="content">
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
-				<p>
-					<a href="">fuck</a>
-				</p>
+				{% if articles %}
+				  {% for article in articles %}
+					<p>
+						<a href="/view/{{ article.id }}">{{ article.title }}</a>
+						<label>更新时间：{{ article.last_modified_time }}</label>
+					</p>
+				  {% endfor %}
+				{% endif %}
 			</div>
+			{% if counts>10 %}
 			<div class="view-all">
 				<a href="">查看全部</a>
 			</div>
+			{% endif %}
 		</div>
 
 		<div id="draft" class="jumptarget">
