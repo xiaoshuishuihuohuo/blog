@@ -27,17 +27,17 @@
 		</ul>
 	</div>
 
-	<div class="wrapper">
-		<div id="portrait-div">
-			<div id="portrait-empty"></div>
-			<div id="portrait-pic">
-				<img src="../static/img/default.png">
-			</div>
-			<div id="portrait-username">
-				<p>{{ username }}</p>
-			</div>
+	<div id="portrait-div">
+		<div id="portrait-empty"></div>
+		<div id="portrait-pic">
+			<img src="../static/img/default.png">
 		</div>
+		<div id="portrait-username">
+			<p>{{ username }}</p>
+		</div>
+	</div>
 
+	<div class="wrapper">
 		<div id="write-btn-div" class="jumptarget">
 			<a href="/write">
 			<button class="btn" id="write-btn">
@@ -48,16 +48,90 @@
 		</div>
 
 		<div id="my-article" class="jumptarget">
-			我的文章
+			<div class="title">
+				<span>我的文章</span>
+			</div>
+			<div class="content">
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+				<p>
+					<a href="">fuck</a>
+				</p>
+			</div>
+			<div class="view-all">
+				<a href="">查看全部</a>
+			</div>
 		</div>
 
 		<div id="draft" class="jumptarget">
-			草稿
+			<div class="title">
+				<span>草稿</span>
+			</div>
+			<div class="content">
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+				<p>
+					<a href="">you</a>
+				</p>
+			</div>
+			<div class="view-all">
+				<a href="">查看全部</a>
+			</div>
 		</div>
 	</div>
 
-	<script type="text/javascript" class="anchor">
-	$('body').scrollspy({ target: '#sidebar', offset: 10 });
+	<script class="anchor">
+		$('body').scrollspy({ target: '#sidebar', offset: 10 });
 	</script>
 
 	{% include 'footer.html' %}
