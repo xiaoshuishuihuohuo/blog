@@ -12,45 +12,17 @@
 	{% include 'header.html' %}
 
     <div class="container">
-        <div id="title">标题</div>
-        <div id="article-tag-div">
-            <img src="../static/img/tag.png">
-            <span class="tag">文章标签</span>
-        </div>
+        <div id="title">{{article.title}}</div>
+        {% if article.classification %}
+            <div id="article-tag-div">
+                <img src="../static/img/tag.png">
+                {% for tag in article.classification %}
+                    <span class="tag">{{tag}}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div id="content">
-            由于这个取得下一条和取得上一条的记录其实在日常的开发当中还是会经常遇到，最常见的场景可能就是取得一篇文章的上一篇文章和下一篇文章了。其实这个在Laravel的Eloquent中实现还是挺容易的，不过由于Laravel并没有直接提供给我们相应的方法，我们得使用一个小小的技巧：
-
-            取得上一篇的文章id
-            protected function getPrevArticleId($id)
-                {
-                    return Article::where('id', '<', $id)->max('id');
-                }
-            $id就是当前文章的id，我们通过max()来取得比当前id小的最大值，也就是当前id的前一篇文章的id。
-
-            取得下一篇的文章id
-            protected function getNextArticleId($id)
-                {
-                    return Article::where('id', '>', $id)->min('id');
-                }
-            基本上可以说是：同理可得。这个取得下一篇文章的id其实就是一个相反的过程，理解万岁。
-
-            一旦我们取得上一篇和下一篇的文章id之后，我们就可以随心所欲了，比如：
-
-            $next_article = Article::find($this->getNextArticleId($article->id));
-            多说两句
-            那如果是对于一个文章的管理来说，我们其实可以这么做：
-
-            给articles表中增加一个published_at的字段，这里可以将published_at字段设置为一个Carbon对象，然后我们在前端展示的时候就可以根据published_at来判读是否将文章展示出来。
-
-            比如说查询语句：
-
-            public function scopePublished($query)
-                {
-                    $query->where('published_at','<=',Carbon::now());
-                }
-            //以上方法位于Article中，下面的查询我放在了ArticleController中
-
-            $articles = Article::latest('published_at')->published()...
+                {{article.content|safe}}
         </div>
         <div id="comment">评论区</div>
     </div>
