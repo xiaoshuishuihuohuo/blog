@@ -1,0 +1,32 @@
+#title {
+    border-left: 4px solid #DDDDDD;
+    font-size: 23px;
+    height: 30px;
+    width: 100%;
+    padding: 5px;
+}
+
+#article-tag-div {
+	margin-top: 10px;
+	width: 100%;
+	height: 30px;
+}
+
+#article-tag-div img {
+	height: 20px;
+	vertical-align: bottom;
+}
+
+.tag {
+	background: #11CD6E;
+	font-size: 12px;
+	padding: 3px;
+	color: #ffffff;
+	border-radius: 1px;
+}
+
+#content {
+    margin-top: 20px;
+    width: 100%;
+    color: #6E6E6E;
+}
