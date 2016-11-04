@@ -130,6 +130,8 @@ $(document).ready(function () {
 			setMessage("", "#ffffff");
 		}
 
+		$("#login-btn").val("正在登录...")
+
 		if($("#verify").css("display") == "none"){
 			$("#verify input").val("")
 		}
@@ -238,7 +240,8 @@ $(document).ready(function () {
 			setMessage("", "#ffffff");
 		}
 
-		//$("#signup-form").submit();
+		$("#signup-btn").val("正在注册...")
+		$("#signup-form").submit();
 	});
 
 	if ($(".message span").text().trim() != "") { // 如有后台传到前端信息，显示
