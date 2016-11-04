@@ -31,7 +31,7 @@ def generate_captcha(text):
     font_width, font_height = font.getsize(text)
     draw.text(((width - font_width) / number, (height - font_height) / number),text,\
             font= font,fill=rnd_color())
-    for i in range(20):
+    for i in range(10):
         generate_line(draw,width,height)
     return image
 
