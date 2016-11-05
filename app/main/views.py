@@ -18,12 +18,6 @@ def login():
     # return redirect('/auth/signin')
     return render_template('login.html' ,form = form)
 
-
-@main.route('/view/<article_id>')
-def view_article(article_id):
-    article = db.session.query(Article).filter(Article.id==article_id).scalar()
-    return render_template('article.html',article=article)
-        
     
 @main.route('/user/<user>')
 def view_user(user):
