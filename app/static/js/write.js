@@ -71,7 +71,7 @@ function saveDraft() {
 				title: $('input[name="title"]').val(),
 				classification: $('input[name="classification"]').val(),
 				content: $('#txt-content').val(),
-				'csrf_token' : csrftoken
+				csrf_token : csrftoken
 			},
 			function(data,status){
 				$("#submit").val("发　布");

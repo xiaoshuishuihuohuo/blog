@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
 class Article(UserMixin, db.Model):
     __tablename__ = 't_articles'
     id = db.Column(db.String(35), primary_key=True)
-    author = db.Column(db.String(50), server_default='')
+    author = db.Column(db.String(50))
     title = db.Column(db.String(100))
     ms_title = db.Column(db.String(100))
     classification = db.Column(db.String(20))
@@ -50,6 +50,19 @@ class Article_Classification(UserMixin, db.Model):
     code = db.Column(db.String(20), server_default='')
     name = db.Column(db.String(50))
     parent_code = db.Column(db.String(200))
+
+
+class Article_Comment(UserMixin, db.Model):
+    __tablename__ = 't_article_comments'
+    id = db.Column(db.String(35), primary_key=True)
+    author = db.Column(db.String(50))
+    content = db.Column(db.String(1000))
+    article_id = db.Column(db.String(35))
+    is_reply = db.Column(db.Integer,server_default='0')
+    reply_to = db.Column(db.String(35), server_default='')
+    like_count = db.Column(db.Integer,server_default='0')
+    create_time = db.Column(db.DateTime)
+    is_del = db.Column(db.Integer,server_default='0')
 
 @login_manager.user_loader
 def load_user(user_id):

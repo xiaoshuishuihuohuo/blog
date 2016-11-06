@@ -55,7 +55,7 @@
 				{% if articles %}
 				  {% for article in articles %}
 					<p>
-						<a href="/view/{{ article.id }}">{{ article.title }}</a>
+						<a href="/article/{{ article.id }}">{{ article.title }}</a>
 						<label>更新时间：{{ article.last_modified_time }}</label>
 					</p>
 				  {% endfor %}
