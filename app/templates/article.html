@@ -8,9 +8,9 @@
 	<link rel="stylesheet" href="../static/css/overall.css">
 	<link rel="stylesheet" href="../static/css/article.css">
 	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/header.js"></script>
     <script>
         function go(){
-            
             var content = $("#commentArea").val()
             var csrftoken = $('meta[name=csrf-token]').attr('content')
             $.post('/article/comment',
@@ -47,57 +47,60 @@
         <div id="content">
                 {{article.content|safe}}
         </div>
-        <div>
-            <div id="comment">评论区</div>
+
+        <div id="comment">
             <!--<div id="commentPool">
-                {% for c in comments %}
-                    一级评论
-                    <li>
-                        <div id="comment-header">{{ c.name }}</div>
-                        <div id="comment-body">{{ c.comment }}</div>
-                        <ul>
-                            {% for r in reply%}
-                            回复一级评论，二级评论
-                            <li>
-                                <div id="comment-header">{{ r.name }}</div>
-                                <div id="comment-body">{{ r.comment }}</div>
-                                <li>
-                                    <button id="all">查看对话</button>
-                                    <button id="reply">回复</button> 
-                                </li>
-                            </li>
-                            {% endfor %}
-                        </ul>
+            {% for c in comments %}
+                一级评论
+                <li>
+                    <div id="comment-header">{{ c.name }}</div>
+                    <div id="comment-body">{{ c.comment }}</div>
+                    <ul>
+                        {% for r in reply%}
+                        回复一级评论，二级评论
                         <li>
-                            <button id="reply">回复</button> 
+                            <div id="comment-header">{{ r.name }}</div>
+                            <div id="comment-body">{{ r.comment }}</div>
+                            <li>
+                                <button id="all">查看对话</button>
+                                <button id="reply">回复</button> 
+                            </li>
                         </li>
+                        {% endfor %}
+                    </ul>
+                    <li>
+                        <button id="reply">回复</button> 
                     </li>
-                {% endfor %}
+                </li>
+            {% endfor %}
             </div>-->
+
             <div id="commentPool">
                     <li>
                         <div id="comment-header"><label>asdasd</label></div>
                         <div id="comment-body"><label>asdasd</label></div>
                         <ul>
                             <li>
+                                <hr>    
                                 <div id="comment-header"><label>asdasd</label></div>
                                 <div id="comment-body"><label>asdasd</label></div>
                                 <li>
-                                    <button id="reply">回复</button> 
+                                    <button id="reply" class="btn">回复</button> 
                                 </li>
                             </li>
                         </ul>
                         <li>
-                            <button id="reply">回复</button> 
+                            <button id="reply" class="btn">回复</button> 
                         </li>
                     </li>
             </div>
+
             <div id="postComment">
                 <textarea id="commentArea"></textarea>
-                <button id="postButton" onclick="go()">post</button>
+                <button id="postButton" onclick="go()" class="btn">评论</button>
             </div>
-        </div>
-    </div>
+
+        </div> <!-- /comment -->
 	
 	{% include 'footer.html' %}
 </body>

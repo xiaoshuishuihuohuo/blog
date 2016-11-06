@@ -2,7 +2,7 @@ $(document).ready(function () {
     $(window).scroll(function () {
         $(".top").css({
             "z-index": "9999",
-            "background": "rgba(0, 0, 0, 0.9)",
+            "background": "rgba(0, 0, 0, 0.8)",
             "transition": "background .3s"
         });
 
