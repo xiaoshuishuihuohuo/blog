@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../static/css/article.css">
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/header.js"></script>
+	<script src="../static/js/article.js"></script>
     <script>
         function go(){
             var content = $("#commentArea").val()
@@ -48,7 +49,7 @@
                 {{article.content|safe}}
         </div>
 
-        <div id="comment">
+        
             <!--<div id="commentPool">
             {% for c in comments %}
                 一级评论
@@ -74,32 +75,12 @@
                 </li>
             {% endfor %}
             </div>-->
-
-            <div id="commentPool">
-                    <li>
-                        <div id="comment-header"><label>asdasd</label></div>
-                        <div id="comment-body"><label>asdasd</label></div>
-                        <ul>
-                            <li>
-                                <hr>    
-                                <div id="comment-header"><label>asdasd</label></div>
-                                <div id="comment-body"><label>asdasd</label></div>
-                                <li>
-                                    <button id="reply" class="btn">回复</button> 
-                                </li>
-                            </li>
-                        </ul>
-                        <li>
-                            <button id="reply" class="btn">回复</button> 
-                        </li>
-                    </li>
-            </div>
-
-            <div id="postComment">
-                <textarea id="commentArea"></textarea>
-                <button id="postButton" onclick="go()" class="btn">评论</button>
-            </div>
-
+            
+        <div id="comment">
+            <button class="btn" id="toggle-comment">
+                <span>查看评论</span>
+                <img class="arrow" src="../static/img/arrow-down.png">
+            </button>
         </div> <!-- /comment -->
 	
 	{% include 'footer.html' %}

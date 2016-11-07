@@ -2,6 +2,17 @@ body {
 	margin: 0;
 }
 
+code {
+	display: inline-block;
+    padding: 8px 8px;
+    margin: 0 5px;
+    background: #eeeeee;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: 'monaco', 'Consolas', "Liberation Mono", Courier, monospace;
+	width: 97%;
+}
+
 .top {
 	background: #000000;
 }
@@ -48,22 +59,28 @@ li {
     color: #6E6E6E;
 }
 
-#commentPool {
+/*#commentPool {
 	background: #EAEAEA;
 	border: 1px solid #DDDDDD;
 	border-radius: 3px;
 	color: #6E6E6E;
+}*/
+
+#comment {
+	margin-top: 100px;
 }
 
-#comment .btn {
-	background: #0080FF;
-}
-
-#comment .btn:hover {
-	background: #379BFF;
-}
-
-#commentArea {
-	height: 50px;
+#toggle-comment {
+	background: #33475F;
+	height: 30px;
 	width: 100%;
+}
+
+#toggle-comment:hover {
+	background: #445E7D;
+}
+
+.arrow {
+	margin-left: 5px;
+	vertical-align: top;
 }
