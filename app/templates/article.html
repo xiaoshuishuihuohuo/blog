@@ -75,13 +75,22 @@
                 </li>
             {% endfor %}
             </div>-->
-            
+        
+        <div id="make-comment">
+            <textarea rows="1" placeholder="写下你的看法"></textarea>
+            <button class="btn">提交评论</button>
+        </div>    
+
         <div id="comment">
             <button class="btn" id="toggle-comment">
                 <span>查看评论</span>
                 <img class="arrow" src="../static/img/arrow-down.png">
             </button>
-        </div> <!-- /comment -->
+
+           <div id="comment-pool">
+               
+            </div>
+        </div>
 	
 	{% include 'footer.html' %}
 </body>

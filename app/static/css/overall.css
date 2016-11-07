@@ -13,13 +13,13 @@ body {
 .top {
 	width: 100%;
 	color: #ffffff;
-	height: 70px;
+	height: 60px;
 	position: fixed;
 }
 
 #login {
 	position: absolute;
-	top: 20px;
+	top: 15px;
 	right: 30px;
 	color: #ffffff;
 	font-size: 20px;

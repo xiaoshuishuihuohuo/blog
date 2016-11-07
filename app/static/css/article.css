@@ -66,18 +66,44 @@ li {
 	color: #6E6E6E;
 }*/
 
+#make-comment {
+	text-align: right;
+}
+
+#make-comment textarea {
+	width: 97%;
+	border: 1px solid #DDDDDD;
+	resize: vertical;
+	word-wrap: break-word;
+	padding: 10px;
+	min-height: 50px;
+    max-height: 200px;
+	overflow-y: auto;
+}
+
+#make-comment .btn {
+	background: #0080FF;
+	font-size: 16px;
+	height: 30px;
+	margin-top: 10px;
+}
+
+#make-comment .btn:hover {
+	background: #379BFF;
+}
+
 #comment {
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 #toggle-comment {
-	background: #33475F;
+	background: #BFBFBF;
 	height: 30px;
 	width: 100%;
 }
 
 #toggle-comment:hover {
-	background: #445E7D;
+	background: #DDDDDD;
 }
 
 .arrow {
