@@ -67,11 +67,11 @@ li {
 }*/
 
 #make-comment {
-	text-align: right;
+	margin-top: 200px;
 }
 
 #make-comment textarea {
-	width: 97%;
+	width: 97.5%;
 	border: 1px solid #DDDDDD;
 	resize: vertical;
 	word-wrap: break-word;
@@ -81,10 +81,14 @@ li {
 	overflow-y: auto;
 }
 
+#make-comment div {
+	text-align: right;
+}
+
 #make-comment .btn {
 	background: #0080FF;
 	font-size: 16px;
-	height: 30px;
+	padding: 8px;
 	margin-top: 10px;
 }
 
@@ -93,20 +97,79 @@ li {
 }
 
 #comment {
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 #toggle-comment {
-	background: #BFBFBF;
+	background: #33475F;
 	height: 30px;
 	width: 100%;
 }
 
 #toggle-comment:hover {
-	background: #DDDDDD;
+	background: #435C7C;
 }
 
 .arrow {
 	margin-left: 5px;
 	vertical-align: top;
+}
+
+#comment-pool {
+	color: #6E6E6E;
+	margin-top: 20px;
+}
+
+#comment-pool hr {
+	border: 1px dashed #BFBFBF;
+	margin: 0;
+}
+
+.comment-header,
+.comment-body {
+	width: 100%;
+}
+
+.comment-body {
+	min-height: 45px;
+}
+
+.comment-content {
+	float: left;
+	width: 97%;
+	padding: 10px 0;
+}
+
+.comment-reply-btn {
+	display: none;
+	float: left;
+	width: 3%;
+	padding: 10px 0;
+	cursor: pointer;
+}
+
+.reply-comment {
+	display: none;
+	margin-bottom: 10px;
+}
+
+.reply-comment textarea {
+	width: 97.5%;
+	border: 1px solid #DDDDDD;
+	resize: vertical;
+	word-wrap: break-word;
+	padding: 10px;
+	overflow-y: auto;
+}
+
+.reply-comment div {
+	text-align: right;
+}
+
+.reply-comment .btn {
+	background: #0080FF;
+}
+
+.reply-comment .btn:hover {
+	background: #379BFF;
 }
