@@ -86,14 +86,16 @@ li {
 }
 
 #make-comment .btn {
-	background: #0080FF;
+	background: #FFFFFF;
+	border: 1px solid #0080FF;
+	color: #0080FF;
 	font-size: 16px;
 	padding: 8px;
 	margin-top: 10px;
 }
 
 #make-comment .btn:hover {
-	background: #379BFF;
+	background: #EEF7FF;
 }
 
 #comment {
@@ -101,13 +103,14 @@ li {
 }
 
 #toggle-comment {
-	background: #33475F;
+	background: #DDDDDD;
+	border-radius: 0;
 	height: 30px;
 	width: 100%;
 }
 
 #toggle-comment:hover {
-	background: #435C7C;
+	background: #E7E7E7;
 }
 
 .arrow {
@@ -167,9 +170,11 @@ li {
 }
 
 .reply-comment .btn {
-	background: #0080FF;
+	background: #FFFFFF;
+	border: 1px solid #0080FF;
+	color: #0080FF;
 }
 
 .reply-comment .btn:hover {
-	background: #379BFF;
+	background: #EEF7FF;
 }

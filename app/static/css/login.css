@@ -6,15 +6,15 @@ html,
 body {
 	margin: 0;
 	width: 100%;
-	background: #F7F7F7;
+	/*background: #F7F7F7;*/
 }
 
 .background {
 	background: url(../img/bg_1.jpg) no-repeat;
 	background-size: cover;
-	background-position: 0px -600px;
+	background-position: 0px -620px;
 	float: left;
-	height: 200px;
+	height: 230px;
 	width: 100%;
 }
 
@@ -89,7 +89,7 @@ body {
 	margin-left: 85px;
 	width: 53px;
 	height: 3px;
-	background: #D6AE8B;
+	background: #0080FF;
 	float: left;
 }
 
@@ -97,7 +97,7 @@ body {
 	margin-left: 77px;
 	width: 0;
 	height: 3px;
-	background: #D6AE8B;
+	background: #0080FF;
 	float: left;
 }
 
@@ -160,7 +160,14 @@ body {
 	width: 180px;
 	height: 30px;
 	margin-top: 20px;
-	background: #666666;
+	background: #FFFFFF;
+	border: 1px solid #0080FF;
+	color: #0080FF;
+}
+
+#login-btn:hover,
+#signup-btn:hover {
+	background: #EEF7FF;
 }
 
 #verify {

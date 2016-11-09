@@ -6,7 +6,8 @@
 }
 
 #back-div img:hover {
-	background: #ffffff;
+	/*background: #ffffff;*/
+	cursor: pointer;
 }
 
 #title-div {
@@ -16,7 +17,7 @@
 #title-div input {
 	border: none;
 	border-left: 4px solid #DDDDDD;
-	background: #F7F7F7;
+	/*background: #F7F7F7;*/
 	height: 20px;
 	width: 98%;
 	padding: 5px;
@@ -64,11 +65,13 @@
 	width: 20%;
 	height: 30px;
 	font-size: 15px;
-	background: #0080FF;
+	background: #FFFFFF;
+	color: #0080FF;
+	border: 1px solid #0080FF;
 }
 
 #submit:hover {
-	background: #379BFF;
+	background: #EEF7FF;
 }
 
 .foot {

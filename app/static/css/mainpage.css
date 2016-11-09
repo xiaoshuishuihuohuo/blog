@@ -118,8 +118,10 @@ a:target {
 #write-btn {
     height: 35px;
     width: 90px;
-    background: #0080FF;
-    border-radius: 1px;
+    background: #FFFFFF;
+    border: 1px solid #0080FF;
+    border-radius: 2px;
+    color: #0080FF;
     font-size: 16px;
     text-align: right;   
 }
@@ -132,7 +134,7 @@ a:target {
 }
 
 #write-btn:hover {
-    background: #379BFF;
+    background: #EEF7FF;
 }
  
 #my-article,

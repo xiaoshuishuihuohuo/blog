@@ -39,7 +39,7 @@ $(document).ready(function () {
 			if ($(this).attr("class") == "active") {
 				return;
 			}
-			$(this).css("color", "#D6AE8B");
+			$(this).css("color", "#0080FF");
 		}, 
 		mouseleave: function () {
 			$(this).css("color", "#606060");
@@ -67,14 +67,14 @@ $(document).ready(function () {
 			if ($(this).attr("class") == "active") {
 				return;
 			}
-			$(this).css("color", "#D6AE8B");
+			$(this).css("color", "#0080FF");
 		}, 
 		mouseleave: function () {
 			$(this).css("color", "#606060");
 		}
 	});
 
-	$("#login-btn").hover(function () {
+	/*$("#login-btn").hover(function () {
 		$("#login-btn-div").css("width", "190px");
 		$(this).css({
 			"background": "#D6AE8B",
@@ -110,7 +110,7 @@ $(document).ready(function () {
 			"width": "180px",
 			"transition": "all .2s"
 		});
-	});
+	});*/
 
 	// 登录
 	$("#login-btn").click(function () {

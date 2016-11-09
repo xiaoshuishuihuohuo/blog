@@ -33,7 +33,7 @@ $(document).ready(function() {
 			tag_value = tag_value.replace($(this).attr("name") + ",", "");
 		}
 		console.log(tag_value);
-		$("#tag-value").val(tag_value);
+		$("#tag-value").val(tag_value.substring(0, (tag_value.length - 1)));
 	});
 
 	$("#back-div img").click(function () {

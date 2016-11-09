@@ -104,7 +104,22 @@
                         <button class="btn" id="reply-to-{{ reply_to }}" onclick="reply(this.id)">回复</button>
                     </div>
                 </div>
-                <hr>
+
+                <div class="comment-header">评论人-时间-头像</div>
+                <div class="comment-body">
+                    <div class="comment-content" id="{{ id }}">评论内容</div>
+                    <div class="comment-reply-btn">
+                        <img src="../static/img/reply.png">
+                    </div>
+                </div>
+
+                <div class="reply-comment">
+                    <textarea rows="1" placeholder="回复： {{ author }} "></textarea>
+                    <div>
+                        <button class="btn" id="reply-to-{{ reply_to }}" onclick="reply(this.id)">回复</button>
+                    </div>
+                </div>
+               
             </div>
         </div>
 	

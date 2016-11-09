@@ -7,7 +7,7 @@ a {
 }
 
 body {
-	background: #F7F7F7;
+	/*background: #F7F7F7;*/
 }
 
 .top {
@@ -35,7 +35,7 @@ body {
 	margin-top: 4px;
 	height: 3px;
 	width: 0;
-	background: #D6AE8B;
+	background: #0080FF;
 	position: absolute;
 }
 
@@ -60,8 +60,8 @@ body {
 
 .btn {
 	border: none;
-	color: #ffffff;
+	color: #FFFFFF;
 	cursor: pointer;
-	border-radius: 1px;
+	border-radius: 2px;
 	outline: none;
 }
