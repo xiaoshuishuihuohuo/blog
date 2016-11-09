@@ -15,8 +15,8 @@ li {
 .jumptarget::before {
   content: "";
   display: block;
-  height: 90px; /* fixed header height*/
-  margin: -90px 0 0; /* negative fixed header height */
+  height: 80px; /* fixed header height*/
+  margin: -80px 0 0; /* negative fixed header height */
 }
 
 /*.top {
@@ -66,6 +66,14 @@ li {
     text-align: left;
 }
 
+.bar {
+    background: #F3F3F3;
+    width: 3px;
+    height: 90px;
+    position: absolute;
+    z-index: -1;
+}
+
 .sidebar ul {
     margin-top: 0;
     padding: 0;
@@ -87,17 +95,12 @@ li {
     text-decoration: underline;
 }
 
-a:target {
-    padding-top: 100px;
-    background: red;
-}
-
 .nav {
 	position: fixed;
 }
 
 .active {
-    background: #EAEAEA;
+    background: #F3F3F3;
     border-left: 3px solid #0080FF;
 }
 
@@ -145,7 +148,7 @@ a:target {
 .title {
     width:100%;
     /*border-left: 3px solid #0080FF;*/
-    background: #EAEAEA;
+    background: #FAFAFA;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-top: 1px solid #DDDDDD;
