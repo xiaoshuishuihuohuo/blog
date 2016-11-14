@@ -2,6 +2,8 @@ from flask_login import UserMixin
 from . import db
 from . import login_manager
 from werkzeug.security import check_password_hash, generate_password_hash
+from sqlalchemy.orm import relationship
+from sqlalchemy.schema import ForeignKey
 
 
 class User(UserMixin, db.Model):
@@ -9,14 +11,28 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
     nickname = db.Column(db.String(50))
+    description = db.Column(db.String(100))
     email_addr = db.Column(db.String(50))
     password = db.Column(db.String(50))
+    avatar = db.Column(db.String(35))
     last_login_time = db.Column(db.DateTime)
     last_login_ip = db.Column(db.String(50))
     reg_time = db.Column(db.DateTime)
 
+    comments = relationship('Article_Comment')
+
     def verify_password(self,password):
         return check_password_hash(self.password, password)
+
+    def to_json(self):
+        json_user = {
+            'id': self.id,
+            'username': self.username,
+            'nickname': self.nickname,
+            'description': self.description,
+            'avatar': self.avatar
+        }
+        return json_user
 
     @property
     def passwd(self):
@@ -55,7 +71,8 @@ class Article_Classification(UserMixin, db.Model):
 class Article_Comment(UserMixin, db.Model):
     __tablename__ = 't_article_comments'
     id = db.Column(db.String(35), primary_key=True)
-    author = db.Column(db.String(50))
+    author_id = db.Column(db.Integer, ForeignKey('t_users.id'))
+    author = relationship("User")
     content = db.Column(db.String(1000))
     article_id = db.Column(db.String(35))
     is_reply = db.Column(db.Integer,server_default='0')
@@ -63,6 +80,19 @@ class Article_Comment(UserMixin, db.Model):
     like_count = db.Column(db.Integer,server_default='0')
     create_time = db.Column(db.DateTime)
     is_del = db.Column(db.Integer,server_default='0')
+
+    def to_json(self):
+        json_comment = {
+            'id': self.id,
+            'author': self.author.to_json(),
+            'content': self.content,
+            'is_reply': self.is_reply,
+            'reply_to': self.reply_to,
+            'like_count': self.like_count,
+            'create_time': self.create_time
+        }
+        return json_comment
+
 
 @login_manager.user_loader
 def load_user(user_id):

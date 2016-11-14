@@ -6,5 +6,5 @@ from wtforms.validators import DataRequired,EqualTo
 class CommentForm(FlaskForm):
     content = StringField('content', validators=[DataRequired()])
     article_id = StringField('article_id', validators=[DataRequired()])
-    is_reply = StringField('is_reply', validators=[DataRequired()])
+    is_reply = BooleanField('is_reply')
     reply_to = StringField('reply_to')
