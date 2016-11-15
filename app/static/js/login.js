@@ -112,6 +112,18 @@ $(document).ready(function () {
 		});
 	});*/
 
+	var remember_me = "off";
+
+	$("#remember-me input").click(function () {
+		if ($(this).attr("checked") == "checked") {
+			$(this).removeAttr("checked");
+			remember_me = "off"; 
+		} else {
+			$(this).attr("checked", "checked");
+			remember_me = "on";
+		}
+	});
+
 	// 登录
 	$("#login-btn").click(function () {
 		if ($("#username input").val() == "") {
@@ -141,7 +153,7 @@ $(document).ready(function () {
 			{
 				username: $("#username input").val(),
 				password: $("#password input").val(),
-				remember_me: $("#remember-me input").val(),
+				remember_me: remember_me,
 				captcha: $("#verify input").val(),
 				csrf_token: csrftoken
 			},
