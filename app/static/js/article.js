@@ -1,4 +1,8 @@
 $(document).ready(function () {
+
+    csrftoken = $('meta[name=csrf-token]').attr('content')
+    articleId = $('#article-id').val()
+
     $("#toggle-comment").click(function () {
         $(this).toggleClass("active");
         var isActive = $(this).attr("class").indexOf("active");
@@ -35,9 +39,12 @@ $(document).ready(function () {
         }
 
         $.post(
-            url,
+            '/article/comment',
             {
-                comment: $("#make-comment textarea").val()
+                content: $("#make-comment textarea").val(),
+                csrf_token: csrftoken,
+                // is_reply: false,
+                article_id : articleId
             },
             function (data) {
                 if (success) {
@@ -49,6 +56,41 @@ $(document).ready(function () {
     });
 });
 
-function reply(id) {
-    
+function reply(comment_id) {
+    $.post(
+            '/article/comment',
+            {
+                comment: $("#make-comment textarea").val(),
+                csrf_token: csrftoken,
+                is_reply: true,
+                reply_to : comment_id,
+                article_id : articleId
+            },
+            function (data) {
+                if (data.success) {
+                    console.log('在评论区添加这条评论');
+                }
+            },
+            'json'
+        );
+          
+}
+
+function getComments(article_id, limit, offset){
+    $.post(
+            '/article/getComments',
+            {
+                article_id: article_id,
+                limit: limit,
+                offset: offset,
+                csrf_token: csrftoken,
+            },
+            function (data) {
+                if (success) {
+                    console.log('在评论区添加这条评论');
+                }
+            },
+            'json'
+        );
+
 }
