@@ -25,13 +25,16 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def to_json(self):
-        json_user = {
-            'id': self.id,
-            'username': self.username,
-            'nickname': self.nickname,
-            'description': self.description,
-            'avatar': self.avatar
-        }
+        if self:
+            json_user = {
+                'id': self.id,
+                'username': self.username,
+                'nickname': self.nickname,
+                'description': self.description,
+                'avatar': self.avatar
+            }
+        else:
+            json_user = ''
         return json_user
 
     @property
@@ -76,11 +79,13 @@ class Article_Comment(UserMixin, db.Model):
     content = db.Column(db.String(1000))
     article_id = db.Column(db.String(35))
     is_reply = db.Column(db.Integer,server_default='0')
-    reply_to = db.Column(db.String(35), , ForeignKey('t_article_comments.id'), server_default='')
-    reply_to_who = relationship('Article_Comment')
+    reply_to = db.Column(db.String(35), server_default='')
     like_count = db.Column(db.Integer,server_default='0')
     create_time = db.Column(db.DateTime)
     is_del = db.Column(db.Integer,server_default='0')
+
+    def get_comment_author(self, comment_id):
+        return db.session.query(User).filter(User.id == db.session.query(Article_Comment.author_id).filter(Article_Comment.id == comment_id)).scalar()
 
     def to_json(self):
         json_comment = {
@@ -88,11 +93,12 @@ class Article_Comment(UserMixin, db.Model):
             'author': self.author.to_json(),
             'content': self.content,
             'is_reply': self.is_reply,
-            'reply_to': self.reply_to,
-            'reply_to_who': self.reply_to_who.to_json(),
             'like_count': self.like_count,
             'create_time': self.create_time
         }
+        if self.is_reply:
+            json_comment['reply_to'] = self.reply_to
+            json_comment['reply_to_who'] = self.get_comment_author(self.reply_to).to_json()
         return json_comment
 
 
