@@ -25,13 +25,16 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def to_json(self):
-        json_user = {
-            'id': self.id,
-            'username': self.username,
-            'nickname': self.nickname,
-            'description': self.description,
-            'avatar': self.avatar
-        }
+        if self:
+            json_user = {
+                'id': self.id,
+                'username': self.username,
+                'nickname': self.nickname,
+                'description': self.description,
+                'avatar': self.avatar
+            }
+        else:
+            json_user = ''
         return json_user
 
     @property
@@ -81,16 +84,21 @@ class Article_Comment(UserMixin, db.Model):
     create_time = db.Column(db.DateTime)
     is_del = db.Column(db.Integer,server_default='0')
 
+    def get_comment_author(self, comment_id):
+        return db.session.query(User).filter(User.id == db.session.query(Article_Comment.author_id).filter(Article_Comment.id == comment_id)).scalar()
+
     def to_json(self):
         json_comment = {
             'id': self.id,
             'author': self.author.to_json(),
             'content': self.content,
             'is_reply': self.is_reply,
-            'reply_to': self.reply_to,
             'like_count': self.like_count,
             'create_time': self.create_time
         }
+        if self.is_reply:
+            json_comment['reply_to'] = self.reply_to
+            json_comment['reply_to_who'] = self.get_comment_author(self.reply_to).to_json()
         return json_comment
 
 
