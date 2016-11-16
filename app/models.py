@@ -76,8 +76,7 @@ class Article_Comment(UserMixin, db.Model):
     content = db.Column(db.String(1000))
     article_id = db.Column(db.String(35))
     is_reply = db.Column(db.Integer,server_default='0')
-    reply_to = db.Column(db.String(35), , ForeignKey('t_article_comments.id'), server_default='')
-    reply_to_who = relationship('Article_Comment')
+    reply_to = db.Column(db.String(35), server_default='')
     like_count = db.Column(db.Integer,server_default='0')
     create_time = db.Column(db.DateTime)
     is_del = db.Column(db.Integer,server_default='0')
@@ -89,7 +88,6 @@ class Article_Comment(UserMixin, db.Model):
             'content': self.content,
             'is_reply': self.is_reply,
             'reply_to': self.reply_to,
-            'reply_to_who': self.reply_to_who.to_json(),
             'like_count': self.like_count,
             'create_time': self.create_time
         }

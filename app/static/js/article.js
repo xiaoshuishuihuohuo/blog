@@ -5,7 +5,8 @@ $(document).ready(function () {
 
     $("#toggle-comment").click(function () {
         if (firstCommentRequest) {
-            getComments(3, 0); // 请求评论
+            $("#comment-pool").empty(); // 清空评论区
+            getComments(10, 0); // 请求评论
             firstCommentRequest = false;
         }
 
@@ -28,33 +29,25 @@ $(document).ready(function () {
             return false;
         }
 
+        var isActive = $("#toggle-comment").attr("class").indexOf("active");
+
         $.post(
             '/article/comment',
             {
                 content: $("#make-comment textarea").val(),
                 csrf_token: csrftoken,
-                // is_reply: false,
                 article_id : articleId
             },
             function (data) {
-                console.log(data);
-                /*if (data.result) {
-                    console.log('在评论区添加这条评论');
-                    var comment = '<div class="comment-header">评论人-时间-头像</div>' +
-                                  '<div class="comment-body">' +
-                                    '<div class="comment-content" id="{{ id }}">评论内容</div>' +
-                                    '<div class="comment-reply-btn">' +
-                                      '<img src="../static/img/reply.png">' +
-                                    '</div>' +
-                                  '</div>' +
-
-                                  '<div class="reply-comment">' +
-                                    '<textarea rows="1" placeholder="回复： {{ author }} "></textarea>' +
-                                    '<div>' +
-                                        '<button class="btn" id="reply-to-{{ reply_to }}" onclick="reply(this.id)">回复</button>' +
-                                    '</div>' +
-                                  '</div>';
-                }*/
+                // console.log(data);
+                if (data.result) {
+                    commentSucceed(); // 提示评论提交成功
+                    firstCommentRequest = true;
+                    if (isActive > 0) {
+                        $("#comment-pool").empty(); // 清空评论区
+                        getComments(20, 0); // 重新请求评论
+                    }
+                }
             },
             'json'
         );
@@ -62,6 +55,11 @@ $(document).ready(function () {
 });
 
 function reply(comment_id) {
+    if ($("#reply-textarea-" + comment_id).val() == "") {
+        $("#reply-textarea-" + comment_id).focus();
+        return false;
+    }
+
     $.post(
         '/article/comment',
         {
@@ -103,32 +101,33 @@ function getComments(limit, offset) {
 
 // 渲染评论区
 function renderComments(commentsObjects) {
-    $.each(commentsObjects, function (n, value) {
-        console.log(value);
-        if (value.is_reply == 1) {
-
-        } else {
-            var comment =
-                '<div id="' + value.id + '">' +
-                    '<div class="comment-header">' + value.author.nickname + '-' + value.create_time + '-' + value.author.avatar + '</div>' +
-                    '<div class="comment-body" onmouseover="showReplyBtn(this.parentNode.id)" onmouseleave="hideReplyBtn(this.parentNode.id)">' +
-                        '<div class="comment-content">' + value.content + '</div>' +
-                        '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
-                            '<img src="../static/img/reply.png">' +
+    if (commentsObjects.length === 0) {
+        $("#comment-pool").html('<span id="message">暂无评论</span>');
+    } else {
+        $.each(commentsObjects, function (n, value) {
+            $("#message").text("");
+            //console.log(value);
+                var comment =
+                    '<div id="' + value.id + '">' +
+                        '<div class="comment-header">' + value.author.nickname + '-' + value.create_time + '-' + value.author.avatar + '</div>' +
+                        '<div class="comment-body" onmouseover="showReplyBtn(this.parentNode.id)" onmouseleave="hideReplyBtn(this.parentNode.id)">' +
+                            '<div class="comment-content">' + value.content + '</div>' +
+                            '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
+                                '<img src="../static/img/reply.png">' +
+                            '</div>' +
                         '</div>' +
-                    '</div>' +
 
-                    '<div class="reply-comment">' +
-                        '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
-                        '<div>' +
-                            '<button class="btn" onclick="reply(this.parentNode.parentNode.parentNode.id)">回复</button>' +
+                        '<div class="reply-comment">' +
+                            '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
+                            '<div>' +
+                                '<button class="btn" onclick="reply(this.parentNode.parentNode.parentNode.id)">回复</button>' +
+                            '</div>' +
                         '</div>' +
-                    '</div>' +
-                '</div>';
-        }
-
-        $("#comment-pool").append(comment);
-    });
+                    '</div>';
+            
+            $("#comment-pool").append(comment);
+        });
+    }
 }
 
 // 显示回复按钮
@@ -144,4 +143,21 @@ function hideReplyBtn(id) {
 // 切换回复区显示状态
 function toggleReplyTextarea(id) {
     $("#" + id + " .reply-comment").toggle();
+}
+
+
+
+var count = 0; // 评论提交按钮提示成功计数
+var countDown = 3; // 评论提交按钮成功倒计时
+
+function commentSucceed() {
+    count++;
+    if (count < countDown) {
+        setTimeout("commentSucceed()", countDown * 1000);
+        $("#make-comment .btn").css("color", "green")
+        $("#make-comment button").text("评论成功");
+    } else {
+        count = 0;
+        $("#make-comment button").text("提交评论");
+    }
 }

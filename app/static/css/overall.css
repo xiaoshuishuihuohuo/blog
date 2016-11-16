@@ -64,4 +64,11 @@ body {
 	cursor: pointer;
 	border-radius: 2px;
 	outline: none;
+	moz-user-select: -moz-none; /*禁止选中*/
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
 }

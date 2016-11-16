@@ -10,26 +10,6 @@
 	<script src="../static/js/jquery.min.js"></script>
 	<script src="../static/js/header.js"></script>
 	<script src="../static/js/article.js"></script>
-    <!--<script>
-        function go(){
-            var content = $("#commentArea").val()
-            var csrftoken = $('meta[name=csrf-token]').attr('content')
-            $.post('/article/comment',
-                {
-                    content : content,
-                    article_id : "test",
-                    is_reply : 0,
-                    reply_to : "test",
-                    csrf_token : csrftoken
-                },
-                function(data){
-                    alert(data.result)
-                },
-                "json")
-            
-        }
-
-    </script>-->
 </head>
 <body>
 	{% include 'header.html' %}
@@ -48,33 +28,6 @@
         <div id="content">
                 {{article.content|safe}}
         </div>
-
-        
-            <!--<div id="commentPool">
-            {% for c in comments %}
-                一级评论
-                <li>
-                    <div id="comment-header">{{ c.name }}</div>
-                    <div id="comment-body">{{ c.comment }}</div>
-                    <ul>
-                        {% for r in reply%}
-                        回复一级评论，二级评论
-                        <li>
-                            <div id="comment-header">{{ r.name }}</div>
-                            <div id="comment-body">{{ r.comment }}</div>
-                            <li>
-                                <button id="all">查看对话</button>
-                                <button id="reply">回复</button> 
-                            </li>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <li>
-                        <button id="reply">回复</button> 
-                    </li>
-                </li>
-            {% endfor %}
-            </div>-->
         
         <div id="make-comment">
             <textarea rows="1" placeholder="写下你的看法"></textarea>
@@ -90,35 +43,6 @@
             </button>
 
             <div id="comment-pool">
-                <!--<div class="comment-header">评论人-时间-头像</div>
-                <div class="comment-body">
-                    <div class="comment-content" id="{{ id }}">评论内容</div>
-                    <div class="comment-reply-btn">
-                        <img src="../static/img/reply.png">
-                    </div>
-                </div>
-
-                <div class="reply-comment">
-                    <textarea rows="1" placeholder="回复： {{ author }} "></textarea>
-                    <div>
-                        <button class="btn" id="reply-to-{{ reply_to }}" onclick="reply(this.id)">回复</button>
-                    </div>
-                </div>
-
-                <div class="comment-header">评论人-时间-头像</div>
-                <div class="comment-body">
-                    <div class="comment-content" id="{{ id }}">评论内容</div>
-                    <div class="comment-reply-btn">
-                        <img src="../static/img/reply.png">
-                    </div>
-                </div>
-
-                <div class="reply-comment">
-                    <textarea rows="1" placeholder="回复： {{ author }} "></textarea>
-                    <div>
-                        <button class="btn" id="reply-to-{{ reply_to }}" onclick="reply(this.id)">回复</button>
-                    </div>
-                </div>-->
                
             </div>
         </div>
