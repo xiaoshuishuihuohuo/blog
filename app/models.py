@@ -11,10 +11,10 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
     nickname = db.Column(db.String(50))
-    description = db.Column(db.String(100))
+    description = db.Column(db.String(100), server_default='')
     email_addr = db.Column(db.String(50))
     password = db.Column(db.String(50))
-    avatar = db.Column(db.String(35))
+    avatar = db.Column(db.String(35), server_default='')
     last_login_time = db.Column(db.DateTime)
     last_login_ip = db.Column(db.String(50))
     reg_time = db.Column(db.DateTime)
@@ -76,7 +76,8 @@ class Article_Comment(UserMixin, db.Model):
     content = db.Column(db.String(1000))
     article_id = db.Column(db.String(35))
     is_reply = db.Column(db.Integer,server_default='0')
-    reply_to = db.Column(db.String(35), server_default='')
+    reply_to = db.Column(db.String(35), , ForeignKey('t_article_comments.id'), server_default='')
+    reply_to_who = relationship('Article_Comment')
     like_count = db.Column(db.Integer,server_default='0')
     create_time = db.Column(db.DateTime)
     is_del = db.Column(db.Integer,server_default='0')
@@ -88,6 +89,7 @@ class Article_Comment(UserMixin, db.Model):
             'content': self.content,
             'is_reply': self.is_reply,
             'reply_to': self.reply_to,
+            'reply_to_who': self.reply_to_who.to_json(),
             'like_count': self.like_count,
             'create_time': self.create_time
         }
