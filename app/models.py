@@ -25,13 +25,16 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def to_json(self):
-        json_user = {
-            'id': self.id,
-            'username': self.username,
-            'nickname': self.nickname,
-            'description': self.description,
-            'avatar': self.avatar
-        }
+        if self:
+            json_user = {
+                'id': self.id,
+                'username': self.username,
+                'nickname': self.nickname,
+                'description': self.description,
+                'avatar': self.avatar
+            }
+        else:
+            json_user = ''
         return json_user
 
     @property
