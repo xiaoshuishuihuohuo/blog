@@ -116,7 +116,7 @@ function renderComments(commentsObjects) {
             if (value.is_reply === 1) { // 如果是回复评论
                 var comment =
                     '<div class="each-comment" id="' + value.id + '">' +
-                        '<div class="comment-header">' + value.reply_to_who.avatar + ' <a href="">' + value.reply_to_who.nickname + '</a> ' + ' 回复 ' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> :</div>' +
+                        '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> ' + ' 回复 ' + value.reply_to_who.avatar + ' <a href="">' + value.reply_to_who.nickname + '</a> :</div>' +
                         '<div class="comment-body" onmouseover="showReplyBtn(this.parentNode.id)" onmouseleave="hideReplyBtn(this.parentNode.id)">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
