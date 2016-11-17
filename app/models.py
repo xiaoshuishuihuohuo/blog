@@ -4,6 +4,7 @@ from . import login_manager
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import relationship
 from sqlalchemy.schema import ForeignKey
+from . import logger
 
 
 class User(UserMixin, db.Model):
@@ -85,7 +86,8 @@ class Article_Comment(UserMixin, db.Model):
     is_del = db.Column(db.Integer,server_default='0')
 
     def get_comment_author(self, comment_id):
-        return db.session.query(User).filter(User.id == db.session.query(Article_Comment.author_id).filter(Article_Comment.id == comment_id)).scalar()
+        return db.session.query(User).filter(User.id == db.session.query(Article_Comment.author_id)\
+        .filter(Article_Comment.id == comment_id)).scalar()
 
     def to_json(self):
         json_comment = {
@@ -94,7 +96,7 @@ class Article_Comment(UserMixin, db.Model):
             'content': self.content,
             'is_reply': self.is_reply,
             'like_count': self.like_count,
-            'create_time': self.create_time
+            'create_time': self.create_time.strftime('%Y-%m-%d %H:%M:%S')
         }
         if self.is_reply:
             json_comment['reply_to'] = self.reply_to
