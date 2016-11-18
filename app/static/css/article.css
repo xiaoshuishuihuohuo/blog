@@ -59,15 +59,15 @@ li {
     color: #6E6E6E;
 }
 
-#comment-pool a {
+#comment-pool .comment-header a {
 	font-size: 20px;
 }
 
-#comment-pool a:visited {
+#comment-pool .comment-header a:visited {
 	color: #000;
 }
 
-#comment-pool a:hover {
+#comment-pool .comment-header a:hover {
 	text-decoration: underline;
 }
 
@@ -156,16 +156,40 @@ li {
 
 .comment-content {
 	float: left;
-	width: 97%;
+	width: 83%;
 	padding: 10px 0;
 }
 
 .comment-reply-btn {
 	display: none;
 	float: left;
-	width: 3%;
+	width: 7%;
 	padding: 10px 0;
 	cursor: pointer;
+}
+
+.conversation-btn {
+	display: none;
+	float: left;
+	width: 10%;
+	padding: 10px 0;
+	cursor: pointer;
+}
+
+.comment-reply-btn img,
+.conversation-btn img {
+	vertical-align: middle;
+}
+
+.comment-reply-btn span,
+.conversation-btn a {
+	color: #0080FF;
+	font-size: 12px;
+}
+
+.conversation-btn a:link,
+.conversation-btn a:visited {
+	color: #0080FF;
 }
 
 .reply-comment {
@@ -194,4 +218,54 @@ li {
 
 .reply-comment .btn:hover {
 	background: #EEF7FF;
+}
+
+.loading{
+	width: 80px;
+	height: 5px;
+	margin: 0 auto;
+	margin-top: -10px;
+}
+
+.loading span{
+	display: inline-block;
+	width: 5px;
+	height: 100%;
+	margin-right: 5px;
+	border-radius: 50%;
+	background: #FFFFFF;
+	-webkit-animation: load 1.04s ease infinite;
+}
+
+.loading span:last-child{
+	margin-right: 0px; 
+}
+
+@-webkit-keyframes load{
+	0%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+
+.loading span:nth-child(1){
+	-webkit-animation-delay:0.13s;
+}
+
+.loading span:nth-child(2){
+	-webkit-animation-delay:0.26s;
+}
+
+.loading span:nth-child(3){
+	-webkit-animation-delay:0.39s;
+}
+
+.loading span:nth-child(4){
+	-webkit-animation-delay:0.52s;
+}
+
+.loading span:nth-child(5){
+	-webkit-animation-delay:0.65s;
 }
