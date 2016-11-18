@@ -26,16 +26,13 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def to_json(self):
-        if self:
-            json_user = {
-                'id': self.id,
-                'username': self.username,
-                'nickname': self.nickname,
-                'description': self.description,
-                'avatar': self.avatar
-            }
-        else:
-            json_user = ''
+        json_user = {
+            'id': self.id,
+            'username': self.username,
+            'nickname': self.nickname,
+            'description': self.description,
+            'avatar': self.avatar
+        }
         return json_user
 
     @property
@@ -100,7 +97,11 @@ class Article_Comment(UserMixin, db.Model):
         }
         if self.is_reply:
             json_comment['reply_to'] = self.reply_to
-            json_comment['reply_to_who'] = self.get_comment_author(self.reply_to).to_json()
+            tmp_author = self.get_comment_author(self.reply_to)
+            if tmp_author:
+                json_comment['reply_to_who'] = tmp_author.to_json()
+            else:
+                json_comment['reply_to_who'] = ''
         return json_comment
 
 

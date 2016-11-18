@@ -62,21 +62,23 @@ function saveDraft() {
 	} else {
 		count = 0;
 		// 保存操作
-
-		$("#submit").val("保存草稿中...");
-		$.post(
-			'/write/autoSave',
-			{
-				id: $('input[name="id"]').val(),
-				title: $('input[name="title"]').val(),
-				classification: $('input[name="classification"]').val(),
-				content: $('#txt-content').val(),
-				csrf_token : csrftoken
-			},
-			function(data,status){
-				$("#submit").val("发　布");
-			}
-		);
+		content = $('#txt-content').val();
+		if(content.trim()!=""){
+			$("#submit").val("保存草稿中...");
+			$.post(
+				'/write/autoSave',
+				{
+					id: $('input[name="id"]').val(),
+					title: $('input[name="title"]').val(),
+					classification: $('input[name="classification"]').val(),
+					content: $('#txt-content').val(),
+					csrf_token : csrftoken
+				},
+				function(data,status){
+					$("#submit").val("发　布");
+				}
+			);
+		}
 		setTimeout("saveDraft()", saveTime*1000);
 	}
 

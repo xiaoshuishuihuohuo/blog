@@ -1,4 +1,4 @@
-from flask import (render_template,request,redirect, url_for,current_app)
+from flask import (render_template,request,redirect, url_for,current_app,abort)
 from flask_login import (login_required, current_user)
 import json
 from .. import logger
@@ -8,6 +8,7 @@ from forms import ArticleForm
 from ..models import Article,Article_Classification
 from .. import db
 from sqlalchemy.sql import exists, func
+from markupsafe import escape
 
 
 @write.route('/')
@@ -16,12 +17,13 @@ def write_page():
     classifications = db.session.query(Article_Classification).all()
     return render_template('write.html', id=str(uuid.uuid1()).replace('-', ''), classifications=classifications)
 
+
 @write.route('/submit', methods=['POST'])
 @login_required
 def write_submit():
     form = ArticleForm()
     if not form.validate_on_submit():
-        return '500'
+        abort(500)
     article = Article()
     article.id = form.id.data
     article.author = current_user.nickname
@@ -35,7 +37,7 @@ def write_submit():
         db.session.merge(article)
         db.session.commit()
     except Exception,e:
-        return '500'
+        abort(500)
     return redirect(url_for('main.main_page'))
 
 
@@ -44,15 +46,17 @@ def write_submit():
 def write_auto_save():
     form = ArticleForm()
     if not form.validate_on_submit():
-        return json.dumps({'result':False})
+        abort(500)
     article = Article()
     article.id = form.id.data
     article.ms_title = form.title.data
     article.manuscript = form.content.data
+    article.author = current_user.nickname
     try:
         db.session.merge(article)
         db.session.commit()
     except Exception,e:
+        logger.debug(e)
         return json.dumps({'result':False})
     return json.dumps({'result':True})
     
