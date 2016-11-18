@@ -88,6 +88,7 @@ function reply(comment_id) {
 }
 
 function getComments(limit, offset) {
+    getTalks(1,2,3)
     $.post(
         '/article/getComments',
         {
@@ -104,6 +105,22 @@ function getComments(limit, offset) {
         'json'
     );
 
+}
+
+function getTalks(comment_id, limit, offset){
+    $.post(
+        '/article/getTalks',
+        {
+            comment_id: comment_id,
+            limit: limit,
+            offset: offset,
+            csrf_token: csrftoken,
+        },
+        function (data,status) {
+            console.log(data)
+        },
+        'json'
+    );
 }
 
 // 渲染评论区

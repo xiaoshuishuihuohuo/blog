@@ -8,16 +8,19 @@ import json, uuid
 from markupsafe import escape
 
 
+
 @article.route('/<article_id>')
 def show_article(article_id):
-    article = db.session.query(Article).filter(Article.id==article_id,Article.visibility == 1).scalar()
+    article = db.session.query(Article).filter(db.and_(Article.id==article_id, Article.visibility==1)).scalar()
     #TODO views +1
     if not article:
         abort(404)
-    return render_template('article.html',article=article)
+    comment_count = db.session.query(db.func.count(Article_Comment.id))\
+        .filter(db.and_(Article_Comment.article_id==article_id, Article_Comment.is_del==0)).scalar()
+    return render_template('article.html',article=article,comment_count=comment_count)
 
 
-@article.route('/comment',methods=['POST'])
+@article.route('/comment', methods=['POST'])
 @login_required
 def comment():
     form = CommentForm()
@@ -33,22 +36,28 @@ def comment():
     try:
         db.session.add(comment)
         db.session.commit()
-    except Exception,e:
+    except Exception, e:
         logger.debug(e)
         return json.dumps({'result':False})
     return json.dumps({'result':True})
 
 
-@article.route('/getComments',methods=['POST'])
+@article.route('/getComments', methods=['POST'])
 def get_comments():
     article_id = request.form.get('article_id')
     limit = int(request.form.get('limit'))
     offset = int(request.form.get('offset'))
-    comments = db.session.query(Article_Comment).filter(Article_Comment.article_id == article_id).order_by(Article_Comment.create_time).slice(offset,offset+limit)
+    comments = db.session.query(Article_Comment).\
+        filter(Article_Comment.article_id == article_id)\
+        .order_by(Article_Comment.create_time).slice(offset, offset+limit)
     return jsonify([c.to_json() for c in comments])
 
 
-# @article.route('/getTalks',methods=['GET'])
-# def get_talks():
-
-    
+@article.route('/getTalks', methods=['POST'])
+def get_talks():
+    comment_id = request.form.get('comment_id')
+    limit = int(request.form.get('limit'))
+    offset = int(request.form.get('offset'))
+    talk_ids = db.session.query(db.func.getTalks(comment_id)).scalar()
+    talks = db.session.query(Article_Comment).filter(Article_Comment.id.in_(talk_ids.split(','))).order_by(Article_Comment.create_time).slice(offset, offset+limit)
+    return jsonify([t.to_json() for t in talks])
