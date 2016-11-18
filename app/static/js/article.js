@@ -1,27 +1,20 @@
 $(document).ready(function () {
     csrftoken = $('meta[name=csrf-token]').attr('content')
     articleId = $('#article-id').val()
-    // var firstCommentRequest = true; // 是否首次请求评论 
 
     $("#toggle-comment").click(function () {
-        /*if (firstCommentRequest) {
-            $("#comment-pool").empty(); // 清空评论区
-            getComments(10, 0); // 请求评论
-            firstCommentRequest = false;
-        }*/
-
         $(this).toggleClass("active");
+
         var isActive = $(this).attr("class").indexOf("active");
+
         if (isActive > 0) { // 如果评论区已展开
+            $("#view-comment").hide();
+            $("#loading").addClass("loading");
             $("#comment-pool").empty(); // 清空评论区
             getComments(10, 0); // 请求评论
-
-            $("#comment-pool").show();
-            $("#toggle-comment span").text("收起评论");
-            $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
         } else {
             $("#comment-pool").hide();
-            $("#toggle-comment span").text("查看评论");
+            $("#view-comment-span").text("查看评论");
             $("#toggle-comment img").attr("src", "../static/img/arrow-down.png");
         }
     });
@@ -47,6 +40,8 @@ $(document).ready(function () {
                     commentSucceed(); // 提示评论提交成功
                     // firstCommentRequest = true;
                     if (isActive > 0) { // 如果评论区已展开
+                        $("#view-comment").hide();
+                        $("#loading").addClass("loading");
                         $("#comment-pool").empty(); // 清空评论区
                         getComments(10, 0); // 重新请求评论
                     }
@@ -77,6 +72,8 @@ function reply(comment_id) {
         function (data) {
             if (data.result) {
                 if (isActive > 0) { // 如果评论区已展开
+                    $("#view-comment").hide();
+                    $("#loading").addClass("loading");
                     $("#comment-pool").empty(); // 清空评论区
                     getComments(10, 0); // 重新请求评论
                 }
@@ -131,12 +128,15 @@ function renderComments(commentsObjects) {
             //console.log(value);
             if (value.is_reply === 1) { // 如果是回复评论
                 var comment =
-                    '<div class="each-comment" id="' + value.id + '">' +
+                    '<div class="each-comment" id="' + value.id + '" onmouseover="showReplyBtn(this.id)" onmouseleave="hideReplyBtn(this.id)">' +
                         '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> ' + ' 回复 ' + value.reply_to_who.avatar + ' <a href="">' + value.reply_to_who.nickname + '</a> :</div>' +
-                        '<div class="comment-body" onmouseover="showReplyBtn(this.parentNode.id)" onmouseleave="hideReplyBtn(this.parentNode.id)">' +
+                        '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
+                            '<div class="conversation-btn">' +
+                                '<a href="#modal"><img src="../static/img/conversation.png"> 查看对话</a>' +
+                            '</div>' +
                             '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
-                                '<img src="../static/img/reply.png">' +
+                                '<img src="../static/img/reply.png"> <span>回复</span>' +
                             '</div>' +
                         '</div>' +
                         '<div><span class="comment-time">' + value.create_time + '</span></div>' +
@@ -150,12 +150,15 @@ function renderComments(commentsObjects) {
                     '</div>';
             } else {
                 var comment =
-                    '<div class="each-comment" id="' + value.id + '">' +
+                    '<div class="each-comment" id="' + value.id + '" onmouseover="showReplyBtn(this.id)" onmouseleave="hideReplyBtn(this.id)">' +
                         '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> :</div>' +
-                        '<div class="comment-body" onmouseover="showReplyBtn(this.parentNode.id)" onmouseleave="hideReplyBtn(this.parentNode.id)">' +
+                        '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
+                            '<div class="conversation-btn">' +
+                                
+                            '</div>' +
                             '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
-                                '<img src="../static/img/reply.png">' +
+                                '<img src="../static/img/reply.png"> <span>回复</span>' +
                             '</div>' +
                         '</div>' +
                         '<div><span class="comment-time">' + value.create_time + '</span></div>' +
@@ -170,6 +173,11 @@ function renderComments(commentsObjects) {
             }
             
             $("#comment-pool").append(comment);
+            $("#loading").removeClass("loading"); // 隐藏加载效果
+            $("#comment-pool").show();
+            $("#view-comment-span").text("收起评论");
+            $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
+            $("#view-comment").show();
         });
     }
 }
@@ -177,11 +185,13 @@ function renderComments(commentsObjects) {
 // 显示回复按钮
 function showReplyBtn(id) {
     $("#" + id + " .comment-reply-btn").show();
+    $("#" + id + " .conversation-btn").show();
 }
 
 // 隐藏回复按钮
 function hideReplyBtn(id) {
     $("#" + id + " .comment-reply-btn").hide();
+    $("#" + id + " .conversation-btn").hide();
 }
 
 // 切换回复区显示状态
