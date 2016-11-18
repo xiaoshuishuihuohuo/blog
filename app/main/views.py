@@ -39,3 +39,9 @@ def main_page():
 def get_images(name):
     img_path = current_app.config['IMG_SAVE_PATH']
     return send_from_directory(img_path, name)
+
+
+@main.app_errorhandler(404)
+def page_not_found(error):
+    logger.debug(error)
+    return render_template('404.html'), 404
