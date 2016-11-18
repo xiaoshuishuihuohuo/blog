@@ -88,7 +88,6 @@ function reply(comment_id) {
 }
 
 function getComments(limit, offset) {
-    getTalks(1,2,3)
     $.post(
         '/article/getComments',
         {
