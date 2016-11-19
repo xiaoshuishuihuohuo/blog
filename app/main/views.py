@@ -4,7 +4,6 @@ from ..auth.forms import SigninForm
 from flask_login import login_required, current_user
 from .. import logger, db
 from ..models import Article
-from sqlalchemy import and_, func
 
 
 @main.route('/')
@@ -29,9 +28,11 @@ def view_user(user):
 def main_page():
     nickname = current_user.nickname
 
-    counts = db.session.query(func.count(Article.id)).filter(and_(Article.author == current_user.nickname, Article.visibility == 1)).scalar()
-    articles = db.session.query(Article.id,Article.title,Article.last_modified_time)\
-        .filter(and_(Article.author == current_user.nickname, Article.visibility == 1)).order_by(Article.last_modified_time.desc()).slice(0,10)
+    counts = db.session.query(db.func.count(Article.id))\
+        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1)).scalar()
+    articles = db.session.query(Article.id, Article.title, Article.last_modified_time)\
+        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1))\
+        .order_by(Article.last_modified_time.desc()).slice(0, 10)
     return render_template('mainpage.html', nickname=nickname, articles=articles, counts=counts)
 
 

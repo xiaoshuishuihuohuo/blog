@@ -103,6 +103,22 @@ function getComments(limit, offset) {
 
 }
 
+function getTalks(comment_id, limit, offset){
+    $.post(
+        '/article/getTalks',
+        {
+            comment_id: comment_id,
+            limit: limit,
+            offset: offset,
+            csrf_token: csrftoken,
+        },
+        function (data,status) {
+            console.log(data)
+        },
+        'json'
+    );
+}
+
 // 渲染评论区
 function renderComments(commentsObjects) {
     if (commentsObjects.length === 0) {
