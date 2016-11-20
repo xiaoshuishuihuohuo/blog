@@ -8,3 +8,6 @@ class CommentForm(FlaskForm):
     article_id = StringField('article_id', validators=[DataRequired()])
     is_reply = BooleanField('is_reply')
     reply_to = StringField('reply_to')
+
+class LikeForm(FlaskForm):
+    like_id = StringField('like_id', validators=[DataRequired()])

@@ -23,7 +23,7 @@ def signin():
     cap_form = CaptchaForm()
     
     if not form.validate_on_submit():
-        abort(500)
+        abort(400)
         
     result={'success':False}
     if (session['need_captcha'] and (not cap_form.validate_on_submit())):
@@ -65,14 +65,18 @@ def signin():
 def regist():
     form = RegForm()
     if not form.validate_on_submit():
-        abort(500)
+        abort(400)
     user = User(passwd=form.signup_password.data)
     user.username = form.signup_username.data
     user.nickname = form.signup_username.data
     user.email_addr = ''
     user.login_name = ''
-    db.session.add(user)
-    db.session.commit()
+    try:
+        db.session.add(user)
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+        abort(500)
     login_user(user)
     return redirect(url_for('main.main_page'))
 

@@ -104,6 +104,13 @@ class Article_Comment(UserMixin, db.Model):
                 json_comment['reply_to_who'] = ''
         return json_comment
 
+class Like(UserMixin, db.Model):
+    __tablename__ = 't_likes'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String(30))
+    like_id = db.Column(db.String(30))
+    like_type = db.Column(db.Integer)
+    create_time = db.Column(db.DateTime)
 
 @login_manager.user_loader
 def load_user(user_id):
