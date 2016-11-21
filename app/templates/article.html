@@ -19,6 +19,8 @@
     <div class="container">
         <input id="article-id" style="display:none" value={{ article.id }}>
         <div id="title">{{article.title}}</div>
+        <div id="pageviews">{{article.pageviews}}</div>
+        <div id="likes">{{article.like_count}}</div>
         {% if article.classification %}
             <div id="article-tag-div">
                 <img src="../static/img/tag.png">

@@ -7,7 +7,6 @@ from . import write
 from forms import ArticleForm
 from ..models import Article,Article_Classification
 from .. import db
-from sqlalchemy.sql import exists, func
 from markupsafe import escape
 
 
@@ -23,7 +22,8 @@ def write_page():
 def write_submit():
     form = ArticleForm()
     if not form.validate_on_submit():
-        abort(500)
+        logger.debug(form.errors)
+        abort(400)
     article = Article()
     article.id = form.id.data
     article.author = current_user.nickname
@@ -33,10 +33,18 @@ def write_submit():
     article.content = form.content.data
     article.manuscript = ''
     article.visibility = 1
+    check_article = db.session.query(Article).filter(Article.id == article.id).scalar()
+    if check_article and (check_article.author != current_user.nickname):
+        #no right to modified
+        logger.debug('you can\'t')
+        abort(400)
     try:
         db.session.merge(article)
+        # db.session.merge(article)
         db.session.commit()
     except Exception,e:
+        logger.debug(e)
+        db.session.rollback()
         abort(500)
     return redirect(url_for('main.main_page'))
 
@@ -46,17 +54,23 @@ def write_submit():
 def write_auto_save():
     form = ArticleForm()
     if not form.validate_on_submit():
-        abort(500)
+        abort(400)
     article = Article()
     article.id = form.id.data
     article.ms_title = form.title.data
     article.manuscript = form.content.data
     article.author = current_user.nickname
+    check_article = db.session.query(Article).filter(Article.id == article.id).scalar()
+    if check_article and (check_article.author != current_user.nickname):
+        #no right to modified
+        abort(400)
     try:
         db.session.merge(article)
+        # db.session.merge(article)
         db.session.commit()
     except Exception,e:
         logger.debug(e)
+        db.session.rollback()
         return json.dumps({'result':False})
     return json.dumps({'result':True})
     
