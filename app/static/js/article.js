@@ -122,7 +122,12 @@ function getTalks(comment_id, limit, offset){
 // 渲染评论区
 function renderComments(commentsObjects) {
     if (commentsObjects.length === 0) {
+        $("#loading").removeClass("loading"); // 隐藏加载效果
         $("#comment-pool").html('<span id="message">暂无评论</span>');
+        $("#comment-pool").show();
+        $("#view-comment-span").text("收起评论");
+        $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
+        $("#view-comment").show();
     } else {
         $.each(commentsObjects, function (n, value) {
             //console.log(value);
