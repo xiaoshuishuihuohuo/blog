@@ -269,3 +269,32 @@ li {
 .loading span:nth-child(5){
 	-webkit-animation-delay:0.65s;
 }
+
+#talk-pool {
+	text-align: left;
+}
+
+#talk-pool a {
+	font-size: 20px;
+	color: #000000;
+}
+
+#talk-pool a:hover {
+	text-decoration: underline;
+}
+
+#talk-pool a:visited {
+	color: #000000;
+}
+
+.each-talk {
+	padding: 0 20px 20px 20px;
+}
+
+.talk-body {
+	padding: 10px 0;
+}
+
+.talk-time {
+	font-size: 12px;
+}

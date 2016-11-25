@@ -113,7 +113,8 @@ function getTalks(comment_id, limit, offset){
             csrf_token: csrftoken,
         },
         function (data,status) {
-            console.log(data)
+            // console.log(data)
+            renderTalks(data);
         },
         'json'
     );
@@ -137,7 +138,7 @@ function renderComments(commentsObjects) {
                         '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> ' + ' 回复 ' + value.reply_to_who.avatar + ' <a href="">' + value.reply_to_who.nickname + '</a> :</div>' +
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
-                            '<div class="conversation-btn">' +
+                            '<div class="conversation-btn" onclick="getTalks(this.parentNode.parentNode.id, 10, 0)">' +
                                 '<a href="#modal"><img src="../static/img/conversation.png"> 查看对话</a>' +
                             '</div>' +
                             '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
@@ -183,6 +184,39 @@ function renderComments(commentsObjects) {
             $("#view-comment-span").text("收起评论");
             $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
             $("#view-comment").show();
+        });
+    }
+}
+
+// 渲染查看对话模态中的内容
+function renderTalks(talksObjects) {
+    if (talksObjects.length === 0) {
+        $("#talk-pool").empty();
+        $("#talk-pool").html("<p>内容获取失败</p>");
+    } else {
+        $("#talk-pool").empty();
+        $.each(talksObjects, function (n, value) {
+            if (value.is_reply === 1) { // 如果是回复评论
+                var talk =
+                    '<div class="each-talk" id="' + value.id + '">' +
+                        '<div class="talk-header"><a href="">' + value.author.nickname + '</a> ' + ' 回复 <a href="">' + value.reply_to_who.nickname + '</a> :</div>' +
+                        '<div class="talk-body">' +
+                            '<div class="talk-content">' + value.content + '</div>' +
+                        '</div>' +
+                        '<div><span class="talk-time">' + value.create_time + '</span></div>' +
+                    '</div>';
+            } else {
+                var talk =
+                    '<div class="each-talk" id="' + value.id + '">' +
+                        '<div class="talk-header"><a href="">' + value.author.nickname + '</a> :</div>' +
+                        '<div class="talk-body">' +
+                            '<div class="talk-content">' + value.content + '</div>' +
+                        '</div>' +
+                        '<div><span class="talk-time">' + value.create_time + '</span></div>' +
+                    '</div>';
+            }
+
+            $("#talk-pool").append(talk);
         });
     }
 }
