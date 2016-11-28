@@ -2,16 +2,40 @@ $(document).ready(function () {
     csrftoken = $('meta[name=csrf-token]').attr('content')
     articleId = $('#article-id').val()
 
+    // 分页对象
+    var pagination = {
+        currentPage : 0, // 当前评论页，初始为0
+        showCount : 2, // 每页显示评论条数
+        offset : 0,
+        commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? $("#comment-count").text() : 0, // 评论数
+        // totalPages : Math.ceil(this.commentCount / this.showCount), // 评论总页数
+        setCurrentPage : function (currentPage) {
+            this.currentPage = currentPage;
+        },
+        getTotalPages : function () {
+            return Math.ceil(this.commentCount / this.showCount);
+        },
+        setOffset : function (currentPage, showCount) {
+            this.offset = currentPage * showCount;
+        },
+        getOffset : function () {
+            return this.offset;
+        }
+    }
+
     $("#toggle-comment").click(function () {
         $(this).toggleClass("active");
+        $("#comment-pagination ul").empty(); // 每次展开评论区，清除分页导航
 
         var isActive = $(this).attr("class").indexOf("active");
 
         if (isActive > 0) { // 如果评论区已展开
             $("#view-comment").hide();
             $("#loading").addClass("loading");
-            $("#comment-pool").empty(); // 清空评论区
-            getComments(10, 0); // 请求评论
+            clearCommentPool(); // 清空评论区
+            pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
+            getComments(pagination.showCount, pagination.getOffset()); // 请求评论
+            renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
         } else {
             $("#comment-pool").hide();
             $("#view-comment-span").text("查看评论");
@@ -42,7 +66,7 @@ $(document).ready(function () {
                     if (isActive > 0) { // 如果评论区已展开
                         $("#view-comment").hide();
                         $("#loading").addClass("loading");
-                        $("#comment-pool").empty(); // 清空评论区
+                        clearCommentPool(); // 清空评论区
                         getComments(10, 0); // 重新请求评论
                     }
                 }
@@ -74,7 +98,7 @@ function reply(comment_id) {
                 if (isActive > 0) { // 如果评论区已展开
                     $("#view-comment").hide();
                     $("#loading").addClass("loading");
-                    $("#comment-pool").empty(); // 清空评论区
+                    clearCommentPool(); // 清空评论区
                     getComments(10, 0); // 重新请求评论
                 }
             }
@@ -186,6 +210,37 @@ function renderComments(commentsObjects) {
             $("#view-comment").show();
         });
     }
+}
+
+// 渲染评论区分页导航
+function renderCommentsPagination(paginationObject) {
+    for (var i = 0; i < paginationObject.getTotalPages(); i++) {
+        paginationObject.setOffset(i, paginationObject.showCount);
+        if (i === 0) {
+            $("#comment-pagination ul").append('<li class="active" onclick="addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')"><span>' + (i + 1) + '</span></li>');    
+        } else {
+            $("#comment-pagination ul").append('<li onclick="addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')">' + (i + 1) + '</li>');
+        }
+    }
+    
+    /*var pagination_li = document.getElementById("comment-pagination").getElementsByTagName("li");
+    pagination_li[0].className = "active";*/
+}
+
+function addActive(li) {
+    var lis = document.getElementById("comment-pagination").getElementsByTagName("li");
+    for (var i = 0; i < lis.length; i++) {
+        if (i == $(li).index()) {
+            lis[i].className = "active";
+        } else {
+            lis[i].className = "";
+        }
+    }
+}
+
+// 清空评论区
+function clearCommentPool() {
+    $("#comment-pool").empty();
 }
 
 // 渲染查看对话模态中的内容
