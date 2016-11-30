@@ -3,7 +3,7 @@ $(document).ready(function () {
     articleId = $('#article-id').val()
 
     // 分页对象
-    var pagination = {
+    pagination = {
         currentPage : 0, // 当前评论页，初始为0
         showCount : 1, // 每页显示评论条数
         offset : 0,
@@ -63,6 +63,7 @@ $(document).ready(function () {
                 // console.log(data);
                 if (data.result) {
                     commentSucceed(); // 提示评论提交成功
+                    pagination.commentCount++;
                     // firstCommentRequest = true;
                     if (isActive > 0) { // 如果评论区已展开
                         $("#view-comment").hide();
@@ -102,8 +103,11 @@ function reply(comment_id) {
                 if (isActive > 0) { // 如果评论区已展开
                     $("#view-comment").hide();
                     $("#loading").addClass("loading");
+                    pagination.commentCount++;
                     clearCommentPool(); // 清空评论区
-                    getComments(10, 0); // 重新请求评论
+                    pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
+                    getComments(pagination.showCount, pagination.getOffset()); // 请求评论
+                    renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
                 }
             }
         },
@@ -169,11 +173,11 @@ function renderComments(commentsObjects) {
                             '<div class="conversation-btn" onclick="getTalks(this.parentNode.parentNode.id, 10, 0)">' +
                                 '<a href="#modal"><img src="../static/img/conversation.png"> 查看对话</a>' +
                             '</div>' +
-                            '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
-                                '<img src="../static/img/reply.png"> <span>回复</span>' +
-                            '</div>' +
                         '</div>' +
-                        '<div><span class="comment-time">' + value.create_time + '</span></div>' +
+                        '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
+                        '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
+                            '<img src="../static/img/reply.png"> <span>回复</span>' +
+                        '</div>' +
 
                         '<div class="reply-comment">' +
                             '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
@@ -189,13 +193,12 @@ function renderComments(commentsObjects) {
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="conversation-btn">' +
-                                
-                            '</div>' +
-                            '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
-                                '<img src="../static/img/reply.png"> <span>回复</span>' +
                             '</div>' +
                         '</div>' +
-                        '<div><span class="comment-time">' + value.create_time + '</span></div>' +
+                        '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
+                        '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
+                            '<img src="../static/img/reply.png"> <span>回复</span>' +
+                        '</div>' +
 
                         '<div class="reply-comment">' +
                             '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
@@ -285,13 +288,13 @@ function renderTalks(talksObjects) {
 // 显示回复按钮
 function showReplyBtn(id) {
     $("#" + id + " .comment-reply-btn").show();
-    $("#" + id + " .conversation-btn").show();
+    // $("#" + id + " .conversation-btn").show();
 }
 
 // 隐藏回复按钮
 function hideReplyBtn(id) {
     $("#" + id + " .comment-reply-btn").hide();
-    $("#" + id + " .conversation-btn").hide();
+    // $("#" + id + " .conversation-btn").hide();
 }
 
 // 切换回复区显示状态
