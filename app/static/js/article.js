@@ -3,11 +3,11 @@ $(document).ready(function () {
     articleId = $('#article-id').val()
 
     // 分页对象
-    var pagination = {
+    pagination = {
         currentPage : 0, // 当前评论页，初始为0
         showCount : 2, // 每页显示评论条数
         offset : 0,
-        commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? $("#comment-count").text() : 0, // 评论数
+        commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? parseInt($("#comment-count").text()) : 0, // 评论数
         // totalPages : Math.ceil(this.commentCount / this.showCount), // 评论总页数
         setCurrentPage : function (currentPage) {
             this.currentPage = currentPage;
@@ -62,12 +62,15 @@ $(document).ready(function () {
                 // console.log(data);
                 if (data.result) {
                     commentSucceed(); // 提示评论提交成功
+                    pagination.commentCount++;
                     // firstCommentRequest = true;
                     if (isActive > 0) { // 如果评论区已展开
                         $("#view-comment").hide();
                         $("#loading").addClass("loading");
                         clearCommentPool(); // 清空评论区
-                        getComments(10, 0); // 重新请求评论
+                        pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
+                        getComments(pagination.showCount, pagination.getOffset()); // 请求评论
+                        renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
                     }
                 }
             },
@@ -98,8 +101,11 @@ function reply(comment_id) {
                 if (isActive > 0) { // 如果评论区已展开
                     $("#view-comment").hide();
                     $("#loading").addClass("loading");
+                    pagination.commentCount++;
                     clearCommentPool(); // 清空评论区
-                    getComments(10, 0); // 重新请求评论
+                    pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
+                    getComments(pagination.showCount, pagination.getOffset()); // 请求评论
+                    renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
                 }
             }
         },
@@ -213,6 +219,7 @@ function renderComments(commentsObjects) {
 
 // 渲染评论区分页导航
 function renderCommentsPagination(paginationObject) {
+    $("#comment-pagination ul").empty();
     for (var i = 0; i < paginationObject.getTotalPages(); i++) {
         paginationObject.setOffset(i, paginationObject.showCount);
         if (i === 0) {
