@@ -165,11 +165,11 @@ function renderComments(commentsObjects) {
                             '<div class="conversation-btn" onclick="getTalks(this.parentNode.parentNode.id, 10, 0)">' +
                                 '<a href="#modal"><img src="../static/img/conversation.png"> 查看对话</a>' +
                             '</div>' +
-                            '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
-                                '<img src="../static/img/reply.png"> <span>回复</span>' +
-                            '</div>' +
                         '</div>' +
-                        '<div><span class="comment-time">' + value.create_time + '</span></div>' +
+                        '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
+                        '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
+                            '<img src="../static/img/reply.png"> <span>回复</span>' +
+                        '</div>' +
 
                         '<div class="reply-comment">' +
                             '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
@@ -185,13 +185,12 @@ function renderComments(commentsObjects) {
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="conversation-btn">' +
-                                
-                            '</div>' +
-                            '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.parentNode.id)">' +
-                                '<img src="../static/img/reply.png"> <span>回复</span>' +
                             '</div>' +
                         '</div>' +
-                        '<div><span class="comment-time">' + value.create_time + '</span></div>' +
+                        '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
+                        '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
+                            '<img src="../static/img/reply.png"> <span>回复</span>' +
+                        '</div>' +
 
                         '<div class="reply-comment">' +
                             '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
@@ -279,13 +278,13 @@ function renderTalks(talksObjects) {
 // 显示回复按钮
 function showReplyBtn(id) {
     $("#" + id + " .comment-reply-btn").show();
-    $("#" + id + " .conversation-btn").show();
+    // $("#" + id + " .conversation-btn").show();
 }
 
 // 隐藏回复按钮
 function hideReplyBtn(id) {
     $("#" + id + " .comment-reply-btn").hide();
-    $("#" + id + " .conversation-btn").hide();
+    // $("#" + id + " .conversation-btn").hide();
 }
 
 // 切换回复区显示状态

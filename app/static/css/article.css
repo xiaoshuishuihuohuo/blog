@@ -72,11 +72,24 @@ li {
 }
 
 .each-comment {
-	margin-top: 20px;
+	margin-bottom: 40px;
 }
 
-.comment-time {
+#comment-time {
+	width: 100%;
+	position: absolute;
+}
+
+#comment-time span {
 	font-size: 12px;
+}
+
+.comment-reply-btn {
+	display: none;
+	margin-top: 0;
+	margin-left: 10%;
+	position: absolute;
+	cursor: pointer;
 }
 
 #make-comment {
@@ -156,20 +169,12 @@ li {
 
 .comment-content {
 	float: left;
-	width: 83%;
+	width: 90%;
 	padding: 10px 0;
-}
-
-.comment-reply-btn {
-	display: none;
-	float: left;
-	width: 7%;
-	padding: 10px 0;
-	cursor: pointer;
 }
 
 .conversation-btn {
-	display: none;
+	/*display: none;*/
 	float: left;
 	width: 10%;
 	padding: 10px 0;
@@ -194,7 +199,7 @@ li {
 
 .reply-comment {
 	display: none;
-	margin-top: 10px;
+	margin-top: 40px;
 }
 
 .reply-comment textarea {
