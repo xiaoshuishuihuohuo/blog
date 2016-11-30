@@ -331,6 +331,7 @@ li {
 	background: #33475F;
 	border-radius: 2px;
 	color: #FFFFFF;
+	pointer-events: none;
 }
 
 .pagination .active:hover {

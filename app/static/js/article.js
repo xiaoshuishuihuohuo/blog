@@ -5,11 +5,12 @@ $(document).ready(function () {
     // 分页对象
     var pagination = {
         currentPage : 0, // 当前评论页，初始为0
-        showCount : 2, // 每页显示评论条数
+        showCount : 1, // 每页显示评论条数
         offset : 0,
-        commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? $("#comment-count").text() : 0, // 评论数
+        commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? parseInt($("#comment-count").text()) : 0, // 评论数
         // totalPages : Math.ceil(this.commentCount / this.showCount), // 评论总页数
         setCurrentPage : function (currentPage) {
+            console.log("fuck");
             this.currentPage = currentPage;
         },
         getTotalPages : function () {
@@ -66,8 +67,11 @@ $(document).ready(function () {
                     if (isActive > 0) { // 如果评论区已展开
                         $("#view-comment").hide();
                         $("#loading").addClass("loading");
+                        pagination.commentCount += 1;
                         clearCommentPool(); // 清空评论区
-                        getComments(10, 0); // 重新请求评论
+                        pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
+                        getComments(pagination.showCount, pagination.getOffset()); // 请求评论
+                        renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
                     }
                 }
             },
@@ -214,17 +218,19 @@ function renderComments(commentsObjects) {
 
 // 渲染评论区分页导航
 function renderCommentsPagination(paginationObject) {
+    $("#comment-pagination ul").empty();
     for (var i = 0; i < paginationObject.getTotalPages(); i++) {
         paginationObject.setOffset(i, paginationObject.showCount);
-        if (i === 0) {
-            $("#comment-pagination ul").append('<li class="active" onclick="addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')"><span>' + (i + 1) + '</span></li>');    
+        if (i == 0) {
+            $("#comment-pagination ul").append('<li class="active" onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')"><span>' + (i + 1) + '</span></li>');    
         } else {
-            $("#comment-pagination ul").append('<li onclick="addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')">' + (i + 1) + '</li>');
+            $("#comment-pagination ul").append('<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')">' + (i + 1) + '</li>');
         }
     }
+}
+
+function changeCurrentPage(currentPage) {
     
-    /*var pagination_li = document.getElementById("comment-pagination").getElementsByTagName("li");
-    pagination_li[0].className = "active";*/
 }
 
 function addActive(li) {
