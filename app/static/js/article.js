@@ -4,24 +4,19 @@ $(document).ready(function () {
 
     // 分页对象
     pagination = {
-        currentPage : 0, // 当前评论页，初始为0
+        currentPage : 1, // 当前评论页，初始为1
         showCount : 1, // 每页显示评论条数
         offset : 0,
         commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? parseInt($("#comment-count").text()) : 0, // 评论数
-        // totalPages : Math.ceil(this.commentCount / this.showCount), // 评论总页数
         setCurrentPage : function (currentPage) {
-            console.log("fuck");
             this.currentPage = currentPage;
         },
         getTotalPages : function () {
             return Math.ceil(this.commentCount / this.showCount);
         },
         setOffset : function (currentPage, showCount) {
-            this.offset = currentPage * showCount;
+            this.offset = (currentPage - 1) * showCount;
         },
-        getOffset : function () {
-            return this.offset;
-        }
     }
 
     $("#toggle-comment").click(function () {
@@ -34,9 +29,12 @@ $(document).ready(function () {
             $("#view-comment").hide();
             $("#loading").addClass("loading");
             clearCommentPool(); // 清空评论区
-            pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
-            getComments(pagination.showCount, pagination.getOffset()); // 请求评论
-            renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
+
+            pagination.currentPage = 1;  // 每次展开评论区，重置pagination属性
+            pagination.setOffset(1, pagination.showCount);
+
+            getComments(pagination.showCount, pagination.offset); // 请求评论
+            // renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
         } else {
             $("#comment-pool").hide();
             $("#view-comment-span").text("查看评论");
@@ -62,17 +60,18 @@ $(document).ready(function () {
             function (data) {
                 // console.log(data);
                 if (data.result) {
-                    commentSucceed(); // 提示评论提交成功
                     pagination.commentCount++;
-                    // firstCommentRequest = true;
+                    commentSucceed(); // 提示评论提交成功
+
                     if (isActive > 0) { // 如果评论区已展开
                         $("#view-comment").hide();
                         $("#loading").addClass("loading");
-                        pagination.commentCount += 1;
                         clearCommentPool(); // 清空评论区
-                        pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
-                        getComments(pagination.showCount, pagination.getOffset()); // 请求评论
-                        renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
+
+                        // pagination.commentCount++;
+                        pagination.currentPage = 1;
+                        pagination.setOffset(1, pagination.showCount); // 每次展开评论区，重新设置offset
+                        getComments(pagination.showCount, pagination.offset); // 请求评论
                     }
                 }
             },
@@ -100,14 +99,16 @@ function reply(comment_id) {
         },
         function (data) {
             if (data.result) {
+                pagination.commentCount++;
+
                 if (isActive > 0) { // 如果评论区已展开
                     $("#view-comment").hide();
                     $("#loading").addClass("loading");
-                    pagination.commentCount++;
                     clearCommentPool(); // 清空评论区
-                    pagination.setOffset(0, pagination.showCount); // 每次展开评论区，重新设置offset
-                    getComments(pagination.showCount, pagination.getOffset()); // 请求评论
-                    renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
+
+                    pagination.currentPage = 1;
+                    pagination.setOffset(1, pagination.showCount); // 每次展开评论区，重新设置offset
+                    getComments(pagination.showCount, pagination.offset); // 请求评论
                 }
             }
         },
@@ -215,6 +216,8 @@ function renderComments(commentsObjects) {
             $("#view-comment-span").text("收起评论");
             $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
             $("#view-comment").show();
+
+            renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
         });
     }
 }
@@ -222,18 +225,130 @@ function renderComments(commentsObjects) {
 // 渲染评论区分页导航
 function renderCommentsPagination(paginationObject) {
     $("#comment-pagination ul").empty();
-    for (var i = 0; i < paginationObject.getTotalPages(); i++) {
+    // for (var i = 0; i < paginationObject.getTotalPages(); i++) {
+    /*for (var i = 0; i < 5; i++) {
         paginationObject.setOffset(i, paginationObject.showCount);
-        if (i == 0) {
-            $("#comment-pagination ul").append('<li class="active" onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')"><span>' + (i + 1) + '</span></li>');    
-        } else {
-            $("#comment-pagination ul").append('<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.getOffset() + ')">' + (i + 1) + '</li>');
+        $("#comment-pagination ul").append('<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')">' + (i + 1) + '</li>');
+
+        if (paginationObject.currentPage == (i + 1)) {
+            $("#comment-pagination ul").find("li").eq(i).addClass("active");
+        }
+    }*/
+
+    /*var num = paginationObject.getTotalPages();
+    var li = "";
+
+    if (num <= 5) { // 如果总页数在5页之内
+        for(var i = 1; i <= num; i++){		
+            paginationObject.setOffset(i, paginationObject.showCount);					
+            if (i != paginationObject.currentPage) {
+                li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + i + '</li>';
+            } else {
+                li += '<li class="active">' + i + '</li>'; // 当前页为active
+            }							
+        }
+
+    } else {
+        if (paginationObject.currentPage <= 3) {
+            for(var i = 1; i <= 5; i++){
+                paginationObject.setOffset(i, paginationObject.showCount);
+                if (i == paginationObject.currentPage) {
+                    li += '<li class="active">' + i + '</li>';
+                } else {
+                    li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + i + '</li>';
+                }
+            }
+        }
+
+        if (paginationObject.currentPage > 3 && paginationObject.currentPage <= (num - 2)) {
+            console.log("fuck");
+            var i = (paginationObject.currentPage - 2);
+            while (i <= (paginationObject.currentPage + 2) && i <= num) {
+                paginationObject.setOffset(i, paginationObject.showCount);
+                if (i == paginationObject.currentPage) {
+                    li += '<li class="active">' + i + '</li>';
+                } else {
+                    li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + i + '</li>';
+                }
+                i++;
+            }
+        }
+
+        if (paginationObject.currentPage > (num - 2)) {
+            console.log("you");
+            var pageLastFive = (num - 4); // 让最后5页分页条一致
+            for(var i = 0; i < 5; i++){		
+                paginationObject.setOffset((pageLastFive + i), paginationObject.showCount);					
+                if ((pageLastFive + i) != paginationObject.currentPage) {
+                    li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + (pageLastFive + i) + '</li>';
+                } else {
+                    li += '<li class="active">' + (pageLastFive + i) + '</li>'; // 当前页为active
+                }							
+            }
+        }
+    }*/
+
+    var totalPages = paginationObject.getTotalPages();
+    var li = "";
+
+    if (paginationObject.currentPage != 1) { // 如果是当前页不是第一页
+        li += '<li class="turning-page" onclick="changePaginationStatus(' + (paginationObject.currentPage - 1) + ')">上一页</li>';
+    }
+
+    if (totalPages <= 5) { // 如果总页数在5页之内
+        for (var i = 1; i <= totalPages; i++) {
+            if (i == paginationObject.currentPage) {
+                li += '<li class="active">' + i + '</li>'; // 当前页为active
+            } else {
+                li += '<li onclick="changePaginationStatus(' + i + ');addActive(this);">' + i + '</li>';
+            }
+        }
+    } else {
+        if (paginationObject.currentPage <= 3) {
+            for (var i = 1; i <= 5; i++) {
+                if (i == paginationObject.currentPage) {
+                    li += '<li class="active">' + i + '</li>'; // 当前页为active
+                } else {
+                    li += '<li onclick="changePaginationStatus(' + i + ');addActive(this);">' + i + '</li>';
+                }
+            }
+        } else if (paginationObject.currentPage > 3 && paginationObject.currentPage <= (totalPages - 2)) {
+            var i = (paginationObject.currentPage - 2);
+            while (i <= (paginationObject.currentPage + 2) && i <= totalPages) {
+                if (i == paginationObject.currentPage) {
+                    li += '<li class="active">' + i + '</li>';
+                } else {
+                    li += '<li onclick="changePaginationStatus(' + i + ');addActive(this);">' + i + '</li>';
+                }
+                i++;
+            }
+        } else if (paginationObject.currentPage > (totalPages - 2)) {
+            var pageLastFive = (totalPages - 4); // 让最后5页分页条一致
+            for(var i = 0; i < 5; i++){		
+                // paginationObject.setOffset((pageLastFive + i), paginationObject.showCount);					
+                if ((pageLastFive + i) != paginationObject.currentPage) {
+                    li += '<li onclick="changePaginationStatus(' + (pageLastFive + i) + ');addActive(this);">' + (pageLastFive + i) + '</li>';
+                } else {
+                    li += '<li class="active">' + (pageLastFive + i) + '</li>'; // 当前页为active
+                }							
+            }
         }
     }
+
+    if (paginationObject.currentPage != totalPages) { // 如果是当前页不是最后一页
+        li += '<li class="turning-page" onclick="changePaginationStatus(' + (paginationObject.currentPage + 1) + ')">下一页</li>';
+    }
+
+    $("#comment-pagination ul").append(li);
 }
 
-function changeCurrentPage(currentPage) {
-    
+function changePaginationStatus(currentPage) {
+    clearCommentPool();
+    pagination.setCurrentPage(currentPage);
+    pagination.setOffset(pagination.currentPage, pagination.showCount);
+    // console.log("currentPage:" + pagination.currentPage);
+    // console.log("offset:" + pagination.offset);
+    getComments(pagination.showCount, pagination.offset)
 }
 
 function addActive(li) {

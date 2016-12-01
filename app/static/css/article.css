@@ -327,6 +327,10 @@ li {
 	margin: 20px 10px 0 0;
 }
 
+.pagination .turning-page {
+	width: 40px;
+}
+
 .pagination li:hover {
 	text-decoration: underline;
 	cursor: pointer;
