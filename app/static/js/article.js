@@ -78,7 +78,51 @@ $(document).ready(function () {
             'json'
         );
     });
+
+    $("#likes img").hover(function () {
+        if ($(this).attr("class") != "active") {
+            $(this).attr("src", "../static/img/like-active.png");
+        }
+    }, function () {
+        if ($(this).attr("class") != "active") {
+            $(this).attr("src", "../static/img/like.png");
+        }
+    });
+
+    var likes = ($("#likes span").text() != "" && !isNaN($("#likes span").text())) ? parseInt($("#likes span").text()) : 0;
+
+    $("#likes img").click(function () {
+        if ($(this).attr("class") == "active") {
+            // switchLike("cancel"); // 取消赞
+            $(this).removeClass("active");
+            $(this).attr("src", "../static/img/like.png");
+            $("#likes span").text(--likes);
+        } else {
+            // switchLike("add"); // 点赞
+            $(this).addClass("active");
+            $(this).attr("src", "../static/img/like-active.png");
+            $("#likes span").text(++likes);
+        }
+    });
 });
+
+// 点赞、取消赞
+function switchLike(status) {
+    $.post(
+        url,
+        {
+            status: status
+        },
+        function (data) {
+            if (data) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        'json'
+    );
+}
 
 function reply(comment_id) {
     if ($("#reply-textarea-" + comment_id).val() == "") {
@@ -225,68 +269,6 @@ function renderComments(commentsObjects) {
 // 渲染评论区分页导航
 function renderCommentsPagination(paginationObject) {
     $("#comment-pagination ul").empty();
-    // for (var i = 0; i < paginationObject.getTotalPages(); i++) {
-    /*for (var i = 0; i < 5; i++) {
-        paginationObject.setOffset(i, paginationObject.showCount);
-        $("#comment-pagination ul").append('<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')">' + (i + 1) + '</li>');
-
-        if (paginationObject.currentPage == (i + 1)) {
-            $("#comment-pagination ul").find("li").eq(i).addClass("active");
-        }
-    }*/
-
-    /*var num = paginationObject.getTotalPages();
-    var li = "";
-
-    if (num <= 5) { // 如果总页数在5页之内
-        for(var i = 1; i <= num; i++){		
-            paginationObject.setOffset(i, paginationObject.showCount);					
-            if (i != paginationObject.currentPage) {
-                li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + i + '</li>';
-            } else {
-                li += '<li class="active">' + i + '</li>'; // 当前页为active
-            }							
-        }
-
-    } else {
-        if (paginationObject.currentPage <= 3) {
-            for(var i = 1; i <= 5; i++){
-                paginationObject.setOffset(i, paginationObject.showCount);
-                if (i == paginationObject.currentPage) {
-                    li += '<li class="active">' + i + '</li>';
-                } else {
-                    li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + i + '</li>';
-                }
-            }
-        }
-
-        if (paginationObject.currentPage > 3 && paginationObject.currentPage <= (num - 2)) {
-            console.log("fuck");
-            var i = (paginationObject.currentPage - 2);
-            while (i <= (paginationObject.currentPage + 2) && i <= num) {
-                paginationObject.setOffset(i, paginationObject.showCount);
-                if (i == paginationObject.currentPage) {
-                    li += '<li class="active">' + i + '</li>';
-                } else {
-                    li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + i + '</li>';
-                }
-                i++;
-            }
-        }
-
-        if (paginationObject.currentPage > (num - 2)) {
-            console.log("you");
-            var pageLastFive = (num - 4); // 让最后5页分页条一致
-            for(var i = 0; i < 5; i++){		
-                paginationObject.setOffset((pageLastFive + i), paginationObject.showCount);					
-                if ((pageLastFive + i) != paginationObject.currentPage) {
-                    li += '<li onclick="changeCurrentPage(' + i + ');addActive(this);clearCommentPool();getComments(' + paginationObject.showCount + ', ' + paginationObject.offset + ')"">' + (pageLastFive + i) + '</li>';
-                } else {
-                    li += '<li class="active">' + (pageLastFive + i) + '</li>'; // 当前页为active
-                }							
-            }
-        }
-    }*/
 
     var totalPages = paginationObject.getTotalPages();
     var li = "";

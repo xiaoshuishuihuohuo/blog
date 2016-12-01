@@ -34,13 +34,19 @@ li {
     padding: 5px;
 }
 
-#article-tag-div {
+#article-info {
+	font-size: 15px;
+	height: 100px;
 	margin-top: 10px;
-	width: 100%;
-	height: 30px;
 }
 
-#article-tag-div img {
+#article-tag {
+	margin-top: 15px;
+	width: 100%;
+	height: 25px;
+}
+
+#article-tag img {
 	height: 20px;
 	vertical-align: bottom;
 }
@@ -51,6 +57,25 @@ li {
 	padding: 3px;
 	color: #ffffff;
 	border-radius: 1px;
+}
+
+#pageviews,
+#likes {
+	color: #6E6E6E;
+	float: left;
+	height: 25px;
+	line-height: 16px;
+	margin-top: 10px;
+	width: 8%;
+}
+
+#pageviews img,
+#likes img {
+	vertical-align: bottom;
+}
+
+#likes img {
+	cursor: pointer;
 }
 
 #content {

@@ -18,17 +18,30 @@
 
     <div class="container">
         <input id="article-id" style="display:none" value={{ article.id }}>
+
         <div id="title">{{article.title}}</div>
-        <div id="pageviews">{{article.pageviews}}</div>
-        <div id="likes">{{article.like_count}}</div>
-        {% if article.classification %}
-            <div id="article-tag-div">
-                <img src="../static/img/tag.png">
-                {% for tag in article.classification %}
-                    <span class="tag">{{tag}}</span>
-                {% endfor %}
+
+        <div id="article-info">
+            {% if article.classification %}
+                <div id="article-tag">
+                    <img src="../static/img/tag.png">
+                    {% for tag in article.classification %}
+                        <span class="tag">{{tag}}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div id="pageviews">
+                <img src="../static/img/view.png">
+                <span>{{article.pageviews}}</span>
             </div>
-        {% endif %}
+
+            <div id="likes">
+                <img src="../static/img/like.png" title="这篇文章还不错？">
+                <span>{{article.like_count}}</span>
+            </div>
+        </div>
+    
         <div id="content">
                 {{article.content|safe}}
         </div>
