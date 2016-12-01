@@ -62,16 +62,17 @@ function saveDraft() {
 	} else {
 		count = 0;
 		// 保存操作
-		content = $('#txt-content').val();
-		if(content.trim()!=""){
+		var content = $('#txt-content').val().trim();
+		var title = $('input[name="title"]').val().trim();
+		if(content!="" && title!=""){
 			$("#submit").val("保存草稿中...");
 			$.post(
 				'/write/autoSave',
 				{
 					id: $('input[name="id"]').val(),
-					title: $('input[name="title"]').val(),
+					title: title,
 					classification: $('input[name="classification"]').val(),
-					content: $('#txt-content').val(),
+					content: content,
 					csrf_token : csrftoken
 				},
 				function(data,status){
