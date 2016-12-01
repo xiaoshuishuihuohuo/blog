@@ -128,6 +128,7 @@ function getComments(limit, offset) {
         },
         function (data,status) {
             if(status == 'success') {
+                clearCommentPool()
                 renderComments(data); // 渲染评论区
             }
         },
@@ -343,7 +344,7 @@ function renderCommentsPagination(paginationObject) {
 }
 
 function changePaginationStatus(currentPage) {
-    clearCommentPool();
+    // clearCommentPool();
     pagination.setCurrentPage(currentPage);
     pagination.setOffset(pagination.currentPage, pagination.showCount);
     // console.log("currentPage:" + pagination.currentPage);
