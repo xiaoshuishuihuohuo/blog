@@ -74,6 +74,7 @@ body {
 #drop-menu li {
 	height: 30px;
 	line-height: 30px;
+	list-style: none;
 }
 
 #logout a:link,
