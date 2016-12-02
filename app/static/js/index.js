@@ -1,8 +1,9 @@
 $(document).ready(function () {
 	$("#q img").hover(
 		function () {
-			$(".pic").slideDown("fast");
-			
+			// $(".pic").slideDown("fast");
+			$(".pic").fadeIn();
+
 			$(".float-div").css({
 				//"background": "#000000",
 				"opacity": "0.9",
@@ -10,7 +11,8 @@ $(document).ready(function () {
 			});
 			//$(".pic").show("normal");
 		}, function () {
-			$(".pic").slideUp("fast");
+			// $(".pic").slideUp("fast");
+			$(".pic").fadeOut();
 			
 			$(".float-div").css({
 				//"background": "#011025",
