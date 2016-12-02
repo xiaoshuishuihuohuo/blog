@@ -17,7 +17,8 @@ body {
 	position: fixed;
 }
 
-#login {
+#login,
+#info {
 	position: absolute;
 	top: 15px;
 	right: 30px;
@@ -28,15 +29,61 @@ body {
 
 #login a:link,
 #login a:visited {
-	color: #ffffff;
+	color: #FFFFFF;
 }
 
-#login-underline {
+#login-underline,
+#info-underline {
 	margin-top: 4px;
 	height: 3px;
 	width: 0;
 	background: #0080FF;
 	position: absolute;
+}
+
+#username a:link,
+#username a:visited {
+	color: #FFFFFF
+}
+
+#arrow {
+	display: none;
+	border-color: rgba(0,0,0,0) rgba(0,0,0,0) #000;
+    border-style: solid;
+    border-width: 4px;
+    height: 0px;
+    width: 0px;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+
+#drop-menu {
+	display: none;
+	margin-top: -13px;
+	background: #000;
+	width: 80px;
+	border-radius: 3px;
+}
+
+#drop-menu ul {
+	font-size: 13px;
+	padding-left: 0;
+	text-align: center;
+}
+
+#drop-menu li {
+	height: 30px;
+	line-height: 30px;
+	list-style: none;
+}
+
+#logout a:link,
+#logout a:visited {
+	color: #E6E6E6;
+}
+
+#logout a:hover {
+	color: #FFFFFF;
 }
 
 .container {

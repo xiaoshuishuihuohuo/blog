@@ -1,11 +1,27 @@
 <div class="top">
+    {% if current_user.is_authenticated %}
+    <div id="info">
+        <div id="username">
+            <a href="/mainpage">你好，{{ current_user.nickname }}</a>
+        </div>
+
+        <div id="info-underline">
+        </div>
+
+        <div id="arrow"></div>
+        <div id="drop-menu">
+            <ul>
+                <li id="logout">
+                    <a href="/logout">退出登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% else %}
     <div id="login">
-        {% if current_user.is_authenticated %}
-        <a href="/mainpage">你好，{{ current_user.nickname }}</a>
-        {% else %}
         <a href="/login">登录&nbsp;/&nbsp;注册</a>
-        {% endif %}
         <div id="login-underline">
         </div>
     </div>
+    {% endif %}
 </div>
