@@ -8,6 +8,7 @@ from forms import ArticleForm
 from ..models import Article,Article_Classification
 from .. import db
 from markupsafe import escape
+from ..utils.xss import xss_clean
 
 
 @write.route('/')
@@ -30,7 +31,7 @@ def write_submit():
     article.title = form.title.data
     article.ms_title = ''
     article.classification = form.classification.data
-    article.content = form.content.data
+    article.content = xss_clean(form.content.data)
     article.manuscript = ''
     article.visibility = 1
     check_article = db.session.query(Article).filter(Article.id == article.id).scalar()
@@ -58,7 +59,7 @@ def write_auto_save():
     article = Article()
     article.id = form.id.data
     article.ms_title = form.title.data
-    article.manuscript = form.content.data
+    article.manuscript = xss_clean(form.content.data)
     article.author = current_user.nickname
     check_article = db.session.query(Article).filter(Article.id == article.id).scalar()
     if check_article and (check_article.author != current_user.nickname):
