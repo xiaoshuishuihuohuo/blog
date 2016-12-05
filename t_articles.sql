@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50552
 File Encoding         : 65001
 
-Date: 2016-10-30 14:51:29
+Date: 2016-12-05 15:35:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `t_articles` (
   `manuscript` text COMMENT '草稿',
   `content` text COMMENT '内容',
   `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `last_modified_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
+  `last_modified_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
   `like_count` int(11) unsigned zerofill NOT NULL DEFAULT '00000000000' COMMENT '点赞数',
   `pageviews` int(11) unsigned zerofill NOT NULL DEFAULT '00000000000' COMMENT '浏览数',
   `key_word` varchar(50) DEFAULT '' COMMENT '关键字',

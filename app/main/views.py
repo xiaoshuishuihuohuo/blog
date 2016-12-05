@@ -30,7 +30,7 @@ def main_page():
 
     counts = db.session.query(db.func.count(Article.id))\
         .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1)).scalar()
-    articles = db.session.query(Article.id, Article.title, Article.last_modified_time)\
+    articles = db.session.query(Article.id, Article.title, Article.last_modified_time, Article.like_count, Article.pageviews)\
         .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1))\
         .order_by(Article.last_modified_time.desc()).slice(0, 10)
     return render_template('mainpage.html', nickname=nickname, articles=articles, counts=counts)
