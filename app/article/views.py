@@ -55,10 +55,12 @@ def get_comments():
     article_id = request.form.get('article_id')
     limit = int(request.form.get('limit'))
     offset = int(request.form.get('offset'))
+    total = db.session.query(Article_Comment).\
+        filter(Article_Comment.article_id == article_id).count()
     comments = db.session.query(Article_Comment).\
         filter(Article_Comment.article_id == article_id)\
         .order_by(Article_Comment.create_time).slice(offset, offset+limit)
-    return jsonify([c.to_json() for c in comments])
+    return jsonify({'comments':[c.to_json() for c in comments], 'total':total})
 
 
 @article.route('/getTalks', methods=['POST'])
