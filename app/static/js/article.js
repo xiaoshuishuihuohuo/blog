@@ -5,7 +5,7 @@ $(document).ready(function () {
     // 分页对象
     pagination = {
         currentPage : 1, // 当前评论页，初始为1
-        showCount : 1, // 每页显示评论条数
+        showCount : 2, // 每页显示评论条数
         offset : 0,
         commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? parseInt($("#comment-count").text()) : 0, // 评论数
         setCurrentPage : function (currentPage) {
@@ -28,7 +28,7 @@ $(document).ready(function () {
         if (isActive > 0) { // 如果评论区已展开
             $("#view-comment").hide();
             $("#loading").addClass("loading");
-            clearCommentPool(); // 清空评论区
+            $("#comment-pool").empty(); // 清空评论区
 
             pagination.currentPage = 1;  // 每次展开评论区，重置pagination属性
             pagination.setOffset(1, pagination.showCount);
@@ -36,8 +36,9 @@ $(document).ready(function () {
             getComments(pagination.showCount, pagination.offset); // 请求评论
             // renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象
         } else {
+            // console.log(pagination.commentCount);
             $("#comment-pool").hide();
-            $("#view-comment-span").text("查看评论");
+            $("#view-comment-span").text("查看评论（" + pagination.commentCount + "条）");
             $("#toggle-comment img").attr("src", "../static/img/arrow-down.png");
         }
     });
@@ -61,12 +62,13 @@ $(document).ready(function () {
                 // console.log(data);
                 if (data.result) {
                     pagination.commentCount++;
+                    $("#view-comment-span").text("查看评论（" + pagination.commentCount + "条）");
                     commentSucceed(); // 提示评论提交成功
 
                     if (isActive > 0) { // 如果评论区已展开
                         $("#view-comment").hide();
                         $("#loading").addClass("loading");
-                        clearCommentPool(); // 清空评论区
+                        $("#comment-pool").empty(); // 清空评论区
 
                         // pagination.commentCount++;
                         pagination.currentPage = 1;
@@ -144,11 +146,12 @@ function reply(comment_id) {
         function (data) {
             if (data.result) {
                 pagination.commentCount++;
+                $("#view-comment-span").text("查看评论（" + pagination.commentCount + "条）");
 
                 if (isActive > 0) { // 如果评论区已展开
                     $("#view-comment").hide();
                     $("#loading").addClass("loading");
-                    clearCommentPool(); // 清空评论区
+                    $("#comment-pool").empty(); // 清空评论区
 
                     pagination.currentPage = 1;
                     pagination.setOffset(1, pagination.showCount); // 每次展开评论区，重新设置offset
@@ -170,10 +173,11 @@ function getComments(limit, offset) {
             offset: offset,
             csrf_token: csrftoken,
         },
-        function (data,status) {
-            if(status == 'success') {
-                clearCommentPool()
-                renderComments(data); // 渲染评论区
+        function (data, status) {
+            pagination.commentCount = data.total; // 获取评论总数
+            if (status == 'success') {
+                $("#comment-pool").empty();
+                renderComments(data.comments); // 渲染评论区
             }
         },
         'json'
@@ -208,52 +212,41 @@ function renderComments(commentsObjects) {
         $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
         $("#view-comment").show();
     } else {
-        $.each(commentsObjects, function (n, value) {
-            //console.log(value);
-            if (value.is_reply === 1) { // 如果是回复评论
-                var comment =
-                    '<div class="each-comment" id="' + value.id + '" onmouseover="showReplyBtn(this.id)" onmouseleave="hideReplyBtn(this.id)">' +
+        $.each(commentsObjects, function (name, value) {
+           var comment =
+                    '<div class="each-comment" id="' + value.id + '" onmouseover="showReplyBtn(this.id)" onmouseleave="hideReplyBtn(this.id)">';
+            if (value.is_reply === 1) { // 如果是回复评论，显示xx回复xx，添加查看对话按钮
+                comment +=
                         '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> ' + ' 回复 ' + value.reply_to_who.avatar + ' <a href="">' + value.reply_to_who.nickname + '</a> :</div>' +
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="conversation-btn" onclick="getTalks(this.parentNode.parentNode.id, 10, 0)">' +
                                 '<a href="#modal"><img src="../static/img/conversation.png"> 查看对话</a>' +
                             '</div>' +
-                        '</div>' +
-                        '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
-                        '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
-                            '<img src="../static/img/reply.png"> <span>回复</span>' +
-                        '</div>' +
-
-                        '<div class="reply-comment">' +
-                            '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
-                            '<div>' +
-                                '<button class="btn" onclick="reply(this.parentNode.parentNode.parentNode.id)">回复</button>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
+                        '</div>';
             } else {
-                var comment =
-                    '<div class="each-comment" id="' + value.id + '" onmouseover="showReplyBtn(this.id)" onmouseleave="hideReplyBtn(this.id)">' +
+                comment +=
                         '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> :</div>' +
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="conversation-btn">' +
                             '</div>' +
-                        '</div>' +
-                        '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
-                        '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
-                            '<img src="../static/img/reply.png"> <span>回复</span>' +
-                        '</div>' +
-
-                        '<div class="reply-comment">' +
-                            '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
-                            '<div>' +
-                                '<button class="btn" onclick="reply(this.parentNode.parentNode.parentNode.id)">回复</button>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
+                        '</div>';
             }
+
+            comment += 
+                    '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
+                    '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
+                        '<img src="../static/img/reply.png"> <span>回复</span>' +
+                    '</div>' +
+
+                    '<div class="reply-comment">' +
+                        '<textarea rows="1" placeholder="回复 ' + value.author.nickname + '：" id="reply-textarea-' + value.id + '"></textarea>' +
+                        '<div>' +
+                            '<button class="btn" onclick="reply(this.parentNode.parentNode.parentNode.id)">回复</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
             
             $("#comment-pool").append(comment);
             $("#loading").removeClass("loading"); // 隐藏加载效果
@@ -326,11 +319,8 @@ function renderCommentsPagination(paginationObject) {
 }
 
 function changePaginationStatus(currentPage) {
-    // clearCommentPool();
     pagination.setCurrentPage(currentPage);
-    pagination.setOffset(pagination.currentPage, pagination.showCount);
-    // console.log("currentPage:" + pagination.currentPage);
-    // console.log("offset:" + pagination.offset);
+    pagination.setOffset(pagination.currentPage, pagination.showCount);;
     getComments(pagination.showCount, pagination.offset)
 }
 
@@ -343,11 +333,6 @@ function addActive(li) {
             lis[i].className = "";
         }
     }
-}
-
-// 清空评论区
-function clearCommentPool() {
-    $("#comment-pool").empty();
 }
 
 // 渲染查看对话模态中的内容
