@@ -51,6 +51,7 @@ class Article(UserMixin, db.Model):
     title = db.Column(db.String(100))
     ms_title = db.Column(db.String(100))
     classification = db.Column(db.String(20))
+    classification_obj = None
     manuscript = db.Column(db.Text)
     content = db.Column(db.Text)
     create_time = db.Column(db.DateTime)
@@ -59,6 +60,9 @@ class Article(UserMixin, db.Model):
     pageviews = db.Column(db.Integer, server_default='0')
     key_word = db.Column(db.String(50))
     visibility = db.Column(db.Integer,server_default='0')
+
+    def set_classification_obj(self):
+        self.classification_obj = db.session.query(Article_Classification).filter(Article_Classification.code.in_(self.classification.split(','))).all()
 
 
 class Article_Classification(UserMixin, db.Model):

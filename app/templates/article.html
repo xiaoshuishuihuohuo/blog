@@ -22,11 +22,11 @@
         <div id="title">{{article.title}}</div>
 
         <div id="article-info">
-            {% if article.classification %}
+            {% if article.classification_obj %}
                 <div id="article-tag">
                     <img src="../static/img/tag.png">
-                    {% for tag in article.classification %}
-                        <span class="tag">{{tag}}</span>
+                    {% for tag in article.classification_obj %}
+                        <span class="tag">{{tag.name}}</span>
                     {% endfor %}
                 </div>
             {% endif %}
