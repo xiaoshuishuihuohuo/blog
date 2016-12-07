@@ -42,11 +42,11 @@ $(document).ready(function () {
 
     $("#info").hover(
         function () {
-            // $("#arrow, #drop-menu").fadeIn();
-            $("#drop-menu").fadeIn();
+            $("#arrow, #drop-menu").fadeIn();
+            // $("#drop-menu").fadeIn();
         }, function () {
-            // $("#arrow, #drop-menu").fadeOut();
-            $("#drop-menu").fadeOut();
+            $("#arrow, #drop-menu").fadeOut();
+            // $("#drop-menu").fadeOut();
         }
     );
 
