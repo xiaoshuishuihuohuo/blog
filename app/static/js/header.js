@@ -1,28 +1,28 @@
 $(document).ready(function () {
     $(window).scroll(function () {
-        $(".top, #drop-menu").css({
+        $(".top").css({
             "z-index": "9999",
             "background": "rgba(0, 0, 0, 0.8)",
             "transition": "background .3s"
         });
 
-        $("#arrow").css({
+        /*$("#arrow").css({
             "z-index": "9999",
             "border-color": "rgba(0,0,0,0) rgba(0,0,0,0) rgba(0,0,0,0.8)",
             "transition": "border-color .3s"
-        });
+        });*/
 
         if ($(window).scrollTop() == 0) {
-            $(".top, #drop-menu").css({
+            $(".top").css({
                 "background": "",
                 "transition": "background .3s"
             });
 
-            $("#arrow").css({
+            /*$("#arrow").css({
                 "z-index": "9999",
                 "border-color": "rgba(0,0,0,0) rgba(0,0,0,0) #000",
                 "transition": "border-color .3s"
-            });
+            });*/
         }
     });
 
@@ -43,12 +43,14 @@ $(document).ready(function () {
     $("#info").hover(
         function () {
             $("#arrow, #drop-menu").fadeIn();
+            // $("#drop-menu").fadeIn();
         }, function () {
             $("#arrow, #drop-menu").fadeOut();
+            // $("#drop-menu").fadeOut();
         }
     );
 
-    $("#username").hover(
+    /*$("#username").hover(
         function () {
             $("#info-underline").css({
                 "width": "80px",
@@ -60,9 +62,9 @@ $(document).ready(function () {
                 "transition": "width .5s"
             });
         }
-    );
+    );*/
 
-    $("#logout").hover(
+    /*$("#logout").hover(
         function () {
             $("#logout-underline").css({
                 "width": "52px",
@@ -74,5 +76,5 @@ $(document).ready(function () {
                     "transition": "width .5s"
             });
         }
-    );
+    );*/
 });

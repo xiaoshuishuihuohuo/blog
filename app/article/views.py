@@ -19,10 +19,9 @@ def show_article(article_id):
         logger.debug(e)
         db.session.rollback()
     article = query.scalar()
-    article.set_classification_obj()
-    logger.debug(article.classification_obj)
     if not article:
         abort(404)
+    article.set_classification_obj()
     comment_count = db.session.query(db.func.count(Article_Comment.id))\
         .filter(db.and_(Article_Comment.article_id==article_id, Article_Comment.is_del==0)).scalar()
     return render_template('article.html',article=article,comment_count=comment_count)

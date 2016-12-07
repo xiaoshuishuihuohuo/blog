@@ -157,8 +157,14 @@ li {
     padding: 10px;
 }
 
-.title span {
+.title span:nth-child(1) {
     font-size: 20px;
+}
+
+.title span:nth-child(2) {
+    color: #6E6E6E;
+    font-size: 15px;
+    margin-left: 15px;
 }
 
 .content {
@@ -170,12 +176,67 @@ li {
     padding-left: 20px;
 }
 
+.content ul {
+    padding-left: 0;
+}
+
+.content li {
+    margin: 15px 0;
+}
+
 .content a {
     color: #6E6E6E;
 }
 
 .content a:hover {
     text-decoration: underline;
+}
+
+.article-info {
+    float: right;
+    height: 21px;
+    line-height: 16px;
+    width: 30%;
+}
+
+.article-info img {
+    vertical-align: bottom;
+}
+
+.article-time {
+    float: left;
+	width: 50%;
+}
+
+.article-pageviews,
+.article-likes {
+    float: left;
+	width: 25%;
+}
+
+.arrow {
+	border-color: rgba(0,0,0,0) rgba(0,0,0,0) #000;
+    border-style: solid;
+    border-width: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    display: none;
+    height: 0px;
+    width: 0px;
+	margin: 0 5px 0;
+}
+
+.article-timestamp {
+    background: #000;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    border-radius: 2px;
+    color: #FFF;
+    display: none;
+    font-size: 12px;
+    height: 20px;
+    padding: 5px 10px;
+    position: absolute;
+    width: 170px;
+    z-index: 9999;
 }
 
 .view-all {
