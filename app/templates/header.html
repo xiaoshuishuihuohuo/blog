@@ -2,7 +2,7 @@
     {% if current_user.is_authenticated %}
     <div id="info">
         <div id="username">
-            <a href="/mainpage">你好，{{ current_user.nickname }}</a>
+            <a href="/mainpage">{{ current_user.nickname }}</a>
         </div>
 
         <div id="arrow"></div>
@@ -13,7 +13,7 @@
                     <a href="/settings">设置</a>
                 </li>
                 <li id="logout">
-                    <a href="/logout">退出登录</a>
+                    <a href="/auth/logout">退出登录</a>
                 </li>
             </ul>
         </div>

@@ -4,7 +4,7 @@ from .forms import SigninForm, RegForm, CheckForm, CaptchaForm
 import json
 from ..models import User
 from .. import db
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 from sqlalchemy import func
 from .. import logger
 from ..utils import captcha
@@ -21,7 +21,7 @@ def signin():
 
     form = SigninForm()
     cap_form = CaptchaForm()
-    
+
     if not form.validate_on_submit():
         abort(400)
         
@@ -38,7 +38,6 @@ def signin():
     user = User.query.filter_by(username=form.username.data).first()
     if user is not None and user.verify_password(form.password.data):
         login_user(user, form.remember_me.data)
-
         if session.has_key('need_captcha'):
             session.pop('need_captcha')
         if session.has_key('error_times'):
@@ -59,6 +58,13 @@ def signin():
                 session['need_captcha'] = True
             result['message'] = 'need'
         return json.dumps(result)
+
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
 
 
 @auth.route('/regist', methods=['POST'])

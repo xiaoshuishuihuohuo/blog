@@ -112,15 +112,15 @@ $(document).ready(function () {
 		});
 	});*/
 
-	var remember_me = "off";
+	var remember_me = null;
 
 	$("#remember-me input").click(function () {
 		if ($(this).attr("checked") == "checked") {
 			$(this).removeAttr("checked");
-			remember_me = "off"; 
+			remember_me = null; 
 		} else {
 			$(this).attr("checked", "checked");
-			remember_me = "on";
+			remember_me = true;
 		}
 	});
 
