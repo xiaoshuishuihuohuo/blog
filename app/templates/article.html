@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="../static/css/article.css">
     <link rel="stylesheet" href="../static/lib/Remodal-1.1.0/dist/remodal.css"> <!-- 引入模态对话框插件样式 --> 
 	<link rel="stylesheet" href="../static/lib/Remodal-1.1.0/dist/remodal-default-theme.css">
-	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/lib/jquery.min.js"></script>
 	<script src="../static/js/header.js"></script>
 	<script src="../static/js/article.js"></script>
 </head>
@@ -37,7 +37,11 @@
             </div>
 
             <div id="likes">
-                <img src="../static/img/like.png" title="这篇文章还不错？">
+                {% if is_like %}
+                    <img class="active" src="../static/img/like-active.png" title="这篇文章还不错？">
+                {% else %}
+                    <img src="../static/img/like.png" title="这篇文章还不错？">
+                {% endif %}
                 <span>{{article.like_count}}</span>
             </div>
         </div>
