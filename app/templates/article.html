@@ -37,7 +37,11 @@
             </div>
 
             <div id="likes">
-                <img src="../static/img/like.png" title="这篇文章还不错？">
+                {% if is_like %}
+                    <img class="active" src="../static/img/like-active.png" title="这篇文章还不错？">
+                {% else %}
+                    <img src="../static/img/like.png" title="这篇文章还不错？">
+                {% endif %}
                 <span>{{article.like_count}}</span>
             </div>
         </div>

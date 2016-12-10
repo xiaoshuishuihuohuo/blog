@@ -24,7 +24,9 @@ def show_article(article_id):
     article.set_classification_obj()
     comment_count = db.session.query(db.func.count(Article_Comment.id))\
         .filter(db.and_(Article_Comment.article_id==article_id, Article_Comment.is_del==0)).scalar()
-    return render_template('article.html',article=article,comment_count=comment_count)
+
+    is_like = db.session.query(Like).filter(Like.like_type==0, Like.like_id==article.id, Like.user_id==current_user.id).scalar()
+    return render_template('article.html',article=article,comment_count=comment_count,is_like=is_like)
 
 
 @article.route('/comment', methods=['POST'])
@@ -104,18 +106,25 @@ def like_article():
     form = LikeForm()
     if not form.validate_on_submit():
         abort(400)
-    is_liked = db.session.query(db.session.query(Like).filter(Like.like_type==0, Like.user_id==current_user.id, Like.like_id==form.like_id.data).exist()).scalar()
-    if is_liked:
-        return jsonify({'result':'liked'})
-    like = Like()
-    like.user_id = current_user.id
-    like.like_id = form.like_id.data 
-    like.like_type = 0
+    like = db.session.query(Like).filter(Like.like_type==0, Like.user_id==current_user.id, Like.like_id==form.like_id.data).scalar()
+    article_query = db.session.query(Article).filter(db.and_(Article.id==form.like_id.data, Article.visibility==1))
     try:
-        db.session.query(Article).filter(db.and_(Article.id==like.like_id, Article.visibility==1)).update({Article.like_count: Article.like_count + 1})
-        db.session.add(like)
-        db.session.commit()
-    except Exception:
+        if not like:
+            like = Like()
+            like.user_id = current_user.id
+            like.like_id = form.like_id.data 
+            like.like_type = 0
+            db.session.add(like)
+            article_query.update({Article.like_count: Article.like_count + 1})
+            db.session.commit()
+            return jsonify({'result':'like'})
+        else:
+            db.session.delete(like)
+            article_query.update({Article.like_count: Article.like_count - 1})
+            db.session.commit()
+            return jsonify({'result':'dislike'})
+    except Exception as e:
+        logger.debug(e)
         db.session.rollback()
         return jsonify({'result':'error'})
-    return jsonify({'result':'success'})
+    

@@ -94,7 +94,29 @@ $(document).ready(function () {
     var likes = ($("#likes span").text() != "" && !isNaN($("#likes span").text())) ? parseInt($("#likes span").text()) : 0;
 
     $("#likes img").click(function () {
-        if ($(this).attr("class") == "active") {
+        $.post(
+            '/article/likeArticle',
+            {
+                csrf_token: csrftoken,
+                like_id: articleId
+            },
+            function (data) {
+                if (data.result == "like") {
+                    // console.log(this);
+                    $("#likes img").addClass("active");
+                    $("#likes img").attr("src", "../static/img/like-active.png");
+                    $("#likes span").text(++likes);
+                } else if (data.result == "dislike") {
+                    // console.log(this);
+                    $("#likes img").removeClass("active");
+                    $("#likes img").attr("src", "../static/img/like.png");
+                    $("#likes span").text(--likes);
+                } else if (data.result == "error") {
+                    return false;
+                }
+            }
+        );
+        /*if ($(this).attr("class") == "active") {
             // switchLike("cancel"); // 取消赞
             $(this).removeClass("active");
             $(this).attr("src", "../static/img/like.png");
@@ -104,12 +126,12 @@ $(document).ready(function () {
             $(this).addClass("active");
             $(this).attr("src", "../static/img/like-active.png");
             $("#likes span").text(++likes);
-        }
+        }*/
     });
 });
 
 // 点赞、取消赞
-function switchLike(status) {
+/*function switchLike(status) {
     $.post(
         url,
         {
@@ -124,7 +146,7 @@ function switchLike(status) {
         },
         'json'
     );
-}
+}*/
 
 function reply(comment_id) {
     if ($("#reply-textarea-" + comment_id).val() == "") {
