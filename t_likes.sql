@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_likes`;
 CREATE TABLE `t_likes` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(35) NOT NULL,
   `like_id` varchar(35) NOT NULL,
   `like_type` tinyint(4) NOT NULL,
