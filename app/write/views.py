@@ -1,6 +1,6 @@
 from flask import (render_template,request,redirect, url_for,current_app,abort)
 from flask_login import (login_required, current_user)
-import json
+import json, datetime
 from .. import logger
 import uuid
 from . import write
@@ -33,6 +33,8 @@ def write_submit():
     article.classification = form.classification.data
     article.content = xss_clean(form.content.data)
     article.manuscript = ''
+    article.last_modified_time = datetime.datetime.now()
+    logger.debug(article.last_modified_time)
     article.visibility = 1
     check_article = db.session.query(Article).filter(Article.id == article.id).scalar()
     if check_article and (check_article.author != current_user.nickname):

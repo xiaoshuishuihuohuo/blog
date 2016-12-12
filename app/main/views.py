@@ -27,13 +27,16 @@ def view_user(user):
 @login_required
 def main_page():
     nickname = current_user.nickname
+    article_query = db.session.query(Article.id, Article.title, Article.last_modified_time, Article.like_count, Article.pageviews)\
+        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1))
+    article_count = article_query.count()
+    articles = article_query.order_by(Article.last_modified_time.desc()).slice(0, 10)
 
-    counts = db.session.query(db.func.count(Article.id))\
-        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1)).scalar()
-    articles = db.session.query(Article.id, Article.title, Article.last_modified_time, Article.like_count, Article.pageviews)\
-        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1))\
-        .order_by(Article.last_modified_time.desc()).slice(0, 10)
-    return render_template('mainpage.html', nickname=nickname, articles=articles, counts=counts)
+    manuscript_query = db.session.query(Article.id, Article.ms_title, Article.last_modified_time, Article.like_count, Article.pageviews)\
+        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 0))
+    manuscript_count = manuscript_query.count()
+    manuscripts = manuscript_query.order_by(Article.last_modified_time.desc()).slice(0, 10)
+    return render_template('mainpage.html', nickname=nickname, articles=articles, article_count=article_count, manuscripts=manuscripts, manuscript_count=manuscript_count)
 
 
 @main.route('/images/<name>')

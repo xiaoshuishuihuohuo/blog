@@ -4,12 +4,12 @@
 	<title></title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="stylesheet" href="../static/css/overall.css">
-	<link rel="stylesheet" href="../static/css/mainpage.css">
-	<script src="../static/lib/jquery.min.js"></script>
-	<script src="../static/js/header.js"></script>
-	<script src="../static/lib/scrollspy.js"></script>
-	<script src="../static/lib/moment-with-locales.min.js"></script>
+	<link rel="stylesheet" href="/static/css/overall.css">
+	<link rel="stylesheet" href="/static/css/mainpage.css">
+	<script src="/static/lib/jquery.min.js"></script>
+	<script src="/static/js/header.js"></script>
+	<script src="/static/lib/scrollspy.js"></script>
+	<script src="/static/lib/moment-with-locales.min.js"></script>
 </head>
 <body>
 	{% include 'header.html' %}
@@ -32,7 +32,7 @@
 	<div id="portrait-div">
 		<div id="portrait-empty"></div>
 		<div id="portrait-pic">
-			<img src="../static/img/default.png">
+			<img src="/static/img/default.png">
 		</div>
 		<div id="portrait-username">
 			<p>{{ nickname }}</p>
@@ -43,7 +43,7 @@
 		<div id="write-btn-div" class="jumptarget">
 			<a href="/write">
 			<button class="btn" id="write-btn">
-				<img src="../static/img/write-btn.png">
+				<img src="/static/img/write-btn.png">
 				写文章
 			</button>
 			</a>
@@ -52,7 +52,7 @@
 		<div id="my-article" class="jumptarget">
 			<div class="title">
 				<span>我的文章</span>
-				<span>共{{ counts }}篇</span>
+				<span>共{{ article_count }}篇</span>
 			</div>
 			<div class="content">
 				<ul>
@@ -62,19 +62,19 @@
 							<a href="/article/{{ article.id }}" target="_blank">{{ article.title }}</a>
 							<div class="article-info">
 								<div class="article-time">
-									<img src="../static/img/time.png">
+									<img src="/static/img/time.png">
 									<span class="flask-moment" data-timestamp="{{article.last_modified_time}}" data-format="fromNow(0)" data-refresh="0" style="display: none">{{article.last_modified_time}}</span>
 									<div class="arrow"></div>
 									<div class="article-timestamp">发布时间&nbsp;{{article.last_modified_time}}</div>
 								</div>
 
 								<div class="article-pageviews">
-									<img src="../static/img/view.png">
+									<img src="/static/img/view.png">
 									<span>{{ article.pageviews }}</span>
 								</div>
 
 								<div class="article-likes">
-									<img src="../static/img/like.png">
+									<img src="/static/img/like.png">
 									<span>{{ article.like_count }}</span>
 								</div>
 							</div>
@@ -83,7 +83,7 @@
 				{% endif %}
 				</ul>
 			</div>
-			{% if counts>10 %}
+			{% if article_count>10 %}
 			<div class="view-all">
 				<a href="">查看全部</a>
 			</div>
@@ -95,40 +95,39 @@
 				<span>草稿</span>
 			</div>
 			<div class="content">
-				<p>
-					<a href=""  target="_blank">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
-				<p>
-					<a href="">you</a>
-				</p>
+				<ul>
+				{% if manuscripts %}
+				  {% for manuscript in manuscripts %}
+						<li>
+							<a href="/article/{{ manuscript.id }}/edit" target="_blank">{{ manuscript.ms_title }}</a>
+							<div class="article-info">
+								<div class="article-time">
+									<img src="/static/img/time.png">
+									<span class="flask-moment" data-timestamp="{{manuscript.last_modified_time}}" data-format="fromNow(0)" data-refresh="0" style="display: none">{{manuscript.last_modified_time}}</span>
+									<div class="arrow"></div>
+									<div class="article-timestamp">发布时间&nbsp;{{manuscript.last_modified_time}}</div>
+								</div>
+
+								<!--<div class="article-pageviews">
+									<img src="/static/img/view.png">
+									<span>{{ manuscript.pageviews }}</span>
+								</div>
+
+								<div class="article-likes">
+									<img src="/static/img/like.png">
+									<span>{{ manuscript.like_count }}</span>
+								</div>-->
+							</div>
+						</li>
+				  {% endfor %}
+				{% endif %}
+				</ul>
 			</div>
+			{% if manuscript_count>10 %}
 			<div class="view-all">
 				<a href="">查看全部</a>
 			</div>
+			{% endif %}
 		</div>
 	</div>
 

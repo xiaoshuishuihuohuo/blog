@@ -7,7 +7,7 @@ body,
 }
 
 .background {
-	background: url(../img/bg_2.jpg) no-repeat;
+	background: url(/static/img/bg_2.jpg) no-repeat;
 	background-size: cover;
 	float: left;
 	height: 100%;
