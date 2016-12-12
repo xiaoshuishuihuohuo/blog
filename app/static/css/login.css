@@ -10,7 +10,7 @@ body {
 }
 
 .background {
-	background: url(../img/bg_1.jpg) no-repeat;
+	background: url(/static/img/bg_1.jpg) no-repeat;
 	background-size: cover;
 	background-position: 0px -620px;
 	float: left;

@@ -5,13 +5,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-	<link rel="stylesheet" href="../static/css/overall.css">
-	<link rel="stylesheet" href="../static/css/article.css">
-    <link rel="stylesheet" href="../static/lib/Remodal-1.1.0/dist/remodal.css"> <!-- 引入模态对话框插件样式 --> 
-	<link rel="stylesheet" href="../static/lib/Remodal-1.1.0/dist/remodal-default-theme.css">
-	<script src="../static/lib/jquery.min.js"></script>
-	<script src="../static/js/header.js"></script>
-	<script src="../static/js/article.js"></script>
+	<link rel="stylesheet" href="/static/css/overall.css">
+	<link rel="stylesheet" href="/static/css/article.css">
+    <link rel="stylesheet" href="/static/lib/Remodal-1.1.0/dist/remodal.css"> <!-- 引入模态对话框插件样式 --> 
+	<link rel="stylesheet" href="/static/lib/Remodal-1.1.0/dist/remodal-default-theme.css">
+	<script src="/static/lib/jquery.min.js"></script>
+	<script src="/static/js/header.js"></script>
+	<script src="/static/js/article.js"></script>
 </head>
 <body>
 	{% include 'header.html' %}
@@ -24,23 +24,25 @@
         <div id="article-info">
             {% if article.classification_obj %}
                 <div id="article-tag">
-                    <img src="../static/img/tag.png">
+                    <img src="/static/img/tag.png">
                     {% for tag in article.classification_obj %}
                         <span class="tag">{{tag.name}}</span>
                     {% endfor %}
                 </div>
             {% endif %}
-
+            {% if current_user.nickname == article.author %}
+                <a href="{{ request.path }}/edit" target="_blank">修改</a>
+            {% endif %}
             <div id="pageviews">
-                <img src="../static/img/view.png">
+                <img src="/static/img/view.png">
                 <span>{{article.pageviews}}</span>
             </div>
 
             <div id="likes">
                 {% if is_like %}
-                    <img class="active" src="../static/img/like-active.png" title="这篇文章还不错？">
+                    <img class="active" src="/static/img/like-active.png" title="这篇文章还不错？">
                 {% else %}
-                    <img src="../static/img/like.png" title="这篇文章还不错？">
+                    <img src="/static/img/like.png" title="这篇文章还不错？">
                 {% endif %}
                 <span>{{article.like_count}}</span>
             </div>
@@ -62,7 +64,7 @@
             <button class="btn" id="toggle-comment">
                 <div id="view-comment">
                     <span id="view-comment-span">查看评论（<span id="comment-count">{{ comment_count }}</span>条）</span>
-                    <img class="arrow" src="../static/img/arrow-down.png">
+                    <img class="arrow" src="/static/img/arrow-down.png">
                 </div>
                 <div id="loading"> 
                     <span></span>
@@ -101,7 +103,7 @@
 	  <button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
 	</div>
 	
-    <script src="../static/lib/Remodal-1.1.0/dist/remodal.min.js"></script> <!-- 引入模态对话框插件js文件 -->
+    <script src="/static/lib/Remodal-1.1.0/dist/remodal.min.js"></script> <!-- 引入模态对话框插件js文件 -->
 
 	{% include 'footer.html' %}
 </body>
