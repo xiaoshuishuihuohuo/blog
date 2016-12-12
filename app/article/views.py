@@ -3,7 +3,7 @@ from . import article
 from ..article.forms import CommentForm, LikeForm
 from flask_login import login_required, current_user
 from .. import logger, db
-from ..models import Article_Comment, Article, Like
+from ..models import Article_Comment, Article, Like, Article_Classification
 import json, uuid
 from markupsafe import escape
 
@@ -27,6 +27,26 @@ def show_article(article_id):
 
     is_like = db.session.query(Like).filter(Like.like_type==0, Like.like_id==article.id, Like.user_id==current_user.id).scalar()
     return render_template('article.html',article=article,comment_count=comment_count,is_like=is_like)
+
+
+@article.route('/<article_id>/edit')
+@login_required
+def edit_article(article_id):
+    article = db.session.query(Article).filter(Article.id==article_id).scalar()
+    #user id not nickname
+    if article.author != current_user.nickname:
+        abort(403)
+    if not article:
+        abort(404)
+    #posted
+    if article.visibility:
+        title = article.title
+        content = article.content
+    else:
+        title = article.ms_title
+        content = article.manuscript
+    classifications = db.session.query(Article_Classification).all()
+    return render_template('write.html',title=title,content=content,id=article_id,classifications=classifications,selected=article.classification.split(','))
 
 
 @article.route('/comment', methods=['POST'])

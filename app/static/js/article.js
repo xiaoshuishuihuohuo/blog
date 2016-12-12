@@ -39,7 +39,7 @@ $(document).ready(function () {
             // console.log(pagination.commentCount);
             $("#comment-pool").hide();
             $("#view-comment-span").text("查看评论（" + pagination.commentCount + "条）");
-            $("#toggle-comment img").attr("src", "../static/img/arrow-down.png");
+            $("#toggle-comment img").attr("src", "/static/img/arrow-down.png");
         }
     });
 
@@ -83,11 +83,11 @@ $(document).ready(function () {
 
     $("#likes img").hover(function () {
         if ($(this).attr("class") != "active") {
-            $(this).attr("src", "../static/img/like-active.png");
+            $(this).attr("src", "/static/img/like-active.png");
         }
     }, function () {
         if ($(this).attr("class") != "active") {
-            $(this).attr("src", "../static/img/like.png");
+            $(this).attr("src", "/static/img/like.png");
         }
     });
 
@@ -104,12 +104,12 @@ $(document).ready(function () {
                 if (data.result == "like") {
                     // console.log(this);
                     $("#likes img").addClass("active");
-                    $("#likes img").attr("src", "../static/img/like-active.png");
+                    $("#likes img").attr("src", "/static/img/like-active.png");
                     $("#likes span").text(++likes);
                 } else if (data.result == "dislike") {
                     // console.log(this);
                     $("#likes img").removeClass("active");
-                    $("#likes img").attr("src", "../static/img/like.png");
+                    $("#likes img").attr("src", "/static/img/like.png");
                     $("#likes span").text(--likes);
                 } else if (data.result == "error") {
                     return false;
@@ -119,12 +119,12 @@ $(document).ready(function () {
         /*if ($(this).attr("class") == "active") {
             // switchLike("cancel"); // 取消赞
             $(this).removeClass("active");
-            $(this).attr("src", "../static/img/like.png");
+            $(this).attr("src", "/static/img/like.png");
             $("#likes span").text(--likes);
         } else {
             // switchLike("add"); // 点赞
             $(this).addClass("active");
-            $(this).attr("src", "../static/img/like-active.png");
+            $(this).attr("src", "/static/img/like-active.png");
             $("#likes span").text(++likes);
         }*/
     });
@@ -231,7 +231,7 @@ function renderComments(commentsObjects) {
         $("#comment-pool").html('<span id="message">暂无评论</span>');
         $("#comment-pool").show();
         $("#view-comment-span").text("收起评论");
-        $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
+        $("#toggle-comment img").attr("src", "/static/img/arrow-up.png");
         $("#view-comment").show();
     } else {
         $.each(commentsObjects, function (name, value) {
@@ -243,7 +243,7 @@ function renderComments(commentsObjects) {
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="conversation-btn" onclick="getTalks(this.parentNode.parentNode.id, 10, 0)">' +
-                                '<a href="#modal"><img src="../static/img/conversation.png"> 查看对话</a>' +
+                                '<a href="#modal"><img src="/static/img/conversation.png"> 查看对话</a>' +
                             '</div>' +
                         '</div>';
             } else {
@@ -259,7 +259,7 @@ function renderComments(commentsObjects) {
             comment += 
                     '<div id="comment-time"><span>' + value.create_time + '</span></div>' +
                     '<div class="comment-reply-btn" onclick="toggleReplyTextarea(this.parentNode.id)">' +
-                        '<img src="../static/img/reply.png"> <span>回复</span>' +
+                        '<img src="/static/img/reply.png"> <span>回复</span>' +
                     '</div>' +
 
                     '<div class="reply-comment">' +
@@ -274,7 +274,7 @@ function renderComments(commentsObjects) {
             $("#loading").removeClass("loading"); // 隐藏加载效果
             $("#comment-pool").show();
             $("#view-comment-span").text("收起评论");
-            $("#toggle-comment img").attr("src", "../static/img/arrow-up.png");
+            $("#toggle-comment img").attr("src", "/static/img/arrow-up.png");
             $("#view-comment").show();
 
             renderCommentsPagination(pagination); // 渲染分页导航，传入分页对象

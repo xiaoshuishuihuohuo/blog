@@ -2,7 +2,7 @@ import random
 import string
 from PIL import Image,ImageDraw,ImageFont,ImageFilter
  
-font_path = '../stitic/font/comic.ttf'
+font_path = '/static/font/comic.ttf'
 size = (100,30)
 bgcolor = (230,230,230)
 
