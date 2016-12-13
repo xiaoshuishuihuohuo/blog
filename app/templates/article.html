@@ -33,6 +33,22 @@
             {% if current_user.nickname == article.author %}
                 <a href="{{ request.path }}/edit" target="_blank">修改</a>
                 <a href="{{ request.path }}/delete" target="_blank">删除</a>
+                <div class="setting">
+                    <span>设置</span>
+                    <div class="menu-arrow"></div>
+
+                    <div class="drop-menu">
+                        <ul>
+                            <li id="modify">
+                                <a href="{{ request.path }}/edit">修改</a>
+                            </li>
+                            <li id="delete">
+                                <a href="/delete">删除</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+>>>>>>> wds/dev
             {% endif %}
             <div id="pageviews">
                 <img src="/static/img/view.png">

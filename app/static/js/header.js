@@ -6,23 +6,11 @@ $(document).ready(function () {
             "transition": "background .3s"
         });
 
-        /*$("#arrow").css({
-            "z-index": "9999",
-            "border-color": "rgba(0,0,0,0) rgba(0,0,0,0) rgba(0,0,0,0.8)",
-            "transition": "border-color .3s"
-        });*/
-
         if ($(window).scrollTop() == 0) {
             $(".top").css({
                 "background": "",
                 "transition": "background .3s"
             });
-
-            /*$("#arrow").css({
-                "z-index": "9999",
-                "border-color": "rgba(0,0,0,0) rgba(0,0,0,0) #000",
-                "transition": "border-color .3s"
-            });*/
         }
     });
 
@@ -42,39 +30,12 @@ $(document).ready(function () {
 
     $("#info").hover(
         function () {
-            $("#arrow, #drop-menu").fadeIn();
-            // $("#drop-menu").fadeIn();
-        }, function () {
-            $("#arrow, #drop-menu").fadeOut();
-            // $("#drop-menu").fadeOut();
+            $("#info .menu-arrow").fadeIn();
+            $("#info .drop-menu").fadeIn();
+        }, 
+        function () {
+            $("#info .menu-arrow").fadeOut();
+            $("#info .drop-menu").fadeOut();
         }
     );
-
-    /*$("#username").hover(
-        function () {
-            $("#info-underline").css({
-                "width": "80px",
-                "transition": "width .5s"
-            });
-        }, function () {
-            $("#info-underline").css({
-                "width": "0",
-                "transition": "width .5s"
-            });
-        }
-    );*/
-
-    /*$("#logout").hover(
-        function () {
-            $("#logout-underline").css({
-                "width": "52px",
-                "transition": "width .5s"
-            });
-        }, function () {
-            $("#logout-underline").css({
-                    "width": "0",
-                    "transition": "width .5s"
-            });
-        }
-    );*/
 });

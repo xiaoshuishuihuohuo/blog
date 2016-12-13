@@ -59,7 +59,7 @@ body {
 	color: #FFFFFF
 }
 
-#arrow {
+.menu-arrow {
 	display: none;
 	border-color: rgba(0,0,0,0) rgba(0,0,0,0) #FFF;
     border-style: solid;
@@ -69,7 +69,7 @@ body {
 	margin: 0 75px 0;
 }
 
-#drop-menu {
+.drop-menu {
 	display: none;
 	background: #FFF;
 	border-radius: 2px;
@@ -78,31 +78,31 @@ body {
 	width: 100%;
 }
 
-#drop-menu ul {
+.drop-menu ul {
 	font-size: 13px;
 	padding-left: 0;
 	text-align: center;
 	margin: 0;
 }
 
-#drop-menu li {
+.drop-menu li {
 	border-radius: 2px;
 	height: 30px;
 	line-height: 30px;
 	list-style: none;
 }
 
-#drop-menu li a {
+.drop-menu li a {
 	display: inline-block; /* 直接对a标签设置长宽无效，需加上此行 */
 	width: 100%;
 }
 
-#drop-menu li:hover {
+.drop-menu li:hover {
 	background: #F3F3F3;
 }
 
-#drop-menu li a:link,
-#drop-menu li a:visited {
+.drop-menu li a:link,
+.drop-menu li a:visited {
 	color: #000;
 }
 
