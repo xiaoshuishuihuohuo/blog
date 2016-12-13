@@ -34,6 +34,8 @@ def write_submit():
     article.content = xss_clean(form.content.data)
     article.manuscript = ''
     article.last_modified_time = datetime.datetime.now()
+    logger.debug(article.last_modified_time)
+    logger.debug(type(article.last_modified_time))
     article.visibility = 1
     check_article = db.session.query(Article).filter(Article.id == article.id).scalar()
     if check_article and (check_article.author != current_user.nickname):

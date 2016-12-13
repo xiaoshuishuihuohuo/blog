@@ -31,7 +31,7 @@
                 </div>
             {% endif %}
             {% if current_user.nickname == article.author %}
-                <a href="{{ request.path }}/edit" target="_blank">修改</a>
+                <a href="{{ request.path }}/edit">修改</a>
             {% endif %}
             <div id="pageviews">
                 <img src="/static/img/view.png">
