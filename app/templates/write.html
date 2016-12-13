@@ -25,7 +25,7 @@
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input type="hidden" name="id" value="{{ id }}" />			
       <div id="title-div">
-        <input type="text" name="title" placeholder="输入标题" value={{ title }} autofocus>
+        <input type="text" name="title" placeholder="输入标题" autofocus value={{ title }}>
       </div>
 			<textarea id="txt-content" name="content" data-autosave=false required>{{content}}</textarea>
       <input type="hidden" id="tag-value" name="classification">

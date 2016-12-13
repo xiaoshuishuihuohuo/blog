@@ -19,6 +19,17 @@ $(document).ready(function () {
         },
     }
 
+    $(".setting").hover(
+        function () {
+            $(".setting .menu-arrow").fadeIn();
+            $(".setting .drop-menu").fadeIn();
+        }, 
+        function () {
+            $(".setting .menu-arrow").fadeOut();
+            $(".setting .drop-menu").fadeOut();
+        }
+    );
+
     $("#toggle-comment").click(function () {
         $(this).toggleClass("active");
         $("#comment-pagination ul").empty(); // 每次展开评论区，清除分页导航
@@ -116,37 +127,8 @@ $(document).ready(function () {
                 }
             }
         );
-        /*if ($(this).attr("class") == "active") {
-            // switchLike("cancel"); // 取消赞
-            $(this).removeClass("active");
-            $(this).attr("src", "/static/img/like.png");
-            $("#likes span").text(--likes);
-        } else {
-            // switchLike("add"); // 点赞
-            $(this).addClass("active");
-            $(this).attr("src", "/static/img/like-active.png");
-            $("#likes span").text(++likes);
-        }*/
     });
 });
-
-// 点赞、取消赞
-/*function switchLike(status) {
-    $.post(
-        url,
-        {
-            status: status
-        },
-        function (data) {
-            if (data) {
-                return true;
-            } else {
-                return false;
-            }
-        },
-        'json'
-    );
-}*/
 
 function reply(comment_id) {
     if ($("#reply-textarea-" + comment_id).val() == "") {
