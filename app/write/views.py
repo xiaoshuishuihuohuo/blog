@@ -23,7 +23,7 @@ def write_page():
 def write_submit():
     form = ArticleForm()
     if not form.validate_on_submit():
-        logger.debug(form.errors)
+        logger.debug(form.referer)
         abort(400)
     article = Article()
     article.id = form.id.data
@@ -48,7 +48,7 @@ def write_submit():
         logger.debug(e)
         db.session.rollback()
         abort(500)
-    return redirect(url_for('main.main_page'))
+    return redirect(url_for('article.show_article',article_id=article.id))
 
 
 @write.route('/autoSave',methods=['POST'])
