@@ -46,11 +46,12 @@ body {
 	right: 30px;
 	top: 15px;
 	position: absolute;
-	width: 120px;
+	width: 100px;
 }
 
 #username {
 	text-align: right;
+	margin-bottom: 10px;
 	width: 100%;
 }
 
@@ -59,23 +60,15 @@ body {
 	color: #FFFFFF
 }
 
-.menu-arrow {
-	display: none;
-	border-color: rgba(0,0,0,0) rgba(0,0,0,0) #FFF;
-    border-style: solid;
-    border-width: 4px;
-    height: 0px;
-    width: 0px;
-	margin: 0 75px 0;
-}
-
 .drop-menu {
 	display: none;
 	background: #FFF;
 	border-radius: 2px;
 	box-shadow: 0 6px 12px rgba(0,0,0,.175);
 	margin-top: 0;
-	width: 100%;
+	position: absolute;
+	width: 100px;
+	z-index: 9999;
 }
 
 .drop-menu ul {
