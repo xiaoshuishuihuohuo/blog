@@ -31,6 +31,8 @@
                 </div>
             {% endif %}
             {% if current_user.nickname == article.author %}
+                <a href="{{ request.path }}/edit" target="_blank">修改</a>
+                <a href="{{ request.path }}/delete" target="_blank">删除</a>
                 <div class="setting">
                     <span>设置</span>
                     <div class="menu-arrow"></div>
@@ -46,6 +48,7 @@
                         </ul>
                     </div>
                 </div>
+>>>>>>> wds/dev
             {% endif %}
             <div id="pageviews">
                 <img src="/static/img/view.png">

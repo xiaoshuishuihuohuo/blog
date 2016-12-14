@@ -49,6 +49,23 @@ def edit_article(article_id):
     return render_template('write.html',title=title,content=content,id=article_id,classifications=classifications,selected=article.classification.split(','))
 
 
+@article.route('/<article_id>/delete')
+@login_required
+def delete_article(article_id):
+    try:
+        is_success = db.session.query(Article).filter(Article.id==article_id, Article.author==current_user.nickname).delete()
+        if is_success:
+            db.session.query(Article_Comment).filter(Article_Comment.article_id==article_id).delete()
+            db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        logger.debug(e)
+        abort(500)
+    if not is_success:
+        abort(403)
+    return redirect(url_for('main.main_page'))
+
+
 @article.route('/comment', methods=['POST'])
 @login_required
 def comment():
