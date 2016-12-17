@@ -14,15 +14,18 @@
 	height: 60px;
 }
 
-#title-div input {
+#title-div textarea {
 	border: none;
 	border-left: 4px solid #DDDDDD;
 	/*background: #F7F7F7;*/
-	height: 20px;
+	height: 30px;
 	width: 98%;
 	padding: 5px;
 	outline: medium;
 	font-size: 23px;
+	resize: none;
+	overflow-x:hidden;
+	overflow-y:hidden;
 }
 
 #title-div hr {

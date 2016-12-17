@@ -47,6 +47,7 @@ $(document).ready(function() {
 		}
 
 		$(".tag-btn").each(function () {
+			tag_value = '';
 			if ($(this).attr("class").indexOf("selected") > 0) {
 				tag_value += "" + $(this).attr("name") + ",";
 			} else {
@@ -72,10 +73,19 @@ function saveDraft() {
 	} else {
 		count = 0;
 		// 保存操作
-		var content = $('#txt-content').val().trim();
-		var title = $('input[name="title"]').val().trim();
-		if(content!="" && title!=""){
+		var content = $('#txt-content').val();
+		var title = $('input[name="title"]').val();
+		
+		if(content.trim()!="" && title.trim()!=""){
 			$("#submit").val("保存草稿中...");
+			$(".tag-btn").each(function () {
+				tag_value = '';
+				if ($(this).attr("class").indexOf("selected") > 0) {
+					tag_value += "" + $(this).attr("name") + ",";
+				} else {
+					tag_value = tag_value.replace($(this).attr("name") + ",", "");
+				}
+			});
 			$.post(
 				'/write/autoSave',
 				{
