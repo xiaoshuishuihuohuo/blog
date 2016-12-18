@@ -16,44 +16,47 @@
 <body>
 	<!--{% include 'header.html' %}-->
 
-    <div class="container">
-        <div id="portrait-div">
-			<div id="portrait-empty"></div>
-			<div id="portrait-pic">
-				<img src="../static/img/default.png">
-			</div>
-			<div id="portrait-username">
-				<p>{{ nickname }}</p>
-			</div>
+	<div id="portrait-div">
+		<div id="portrait-empty"></div>
+		<div id="portrait-pic">
+			<img src="../static/img/default.png">
 		</div>
+		<div id="portrait-username">
+			<p>{{ nickname }}</p>
+		</div>
+	</div>
 
+    <div class="wrapper">
 		<div id="setting">
 			<form action="" method="post">
+				<h1>用户名</h1>
 				<div id="setting-username">
-					<h1>用户名</h1>
 					<input type="text" id="username" name="username" value="{{ username }}">
 					<span class="message" id="username-message"></span>
 				</div>
 
+				<h1>头像</h1>
 				<div id="setting-avatar">
-					<h1>头像</h1>
 					<input type="file" name="avatar">
 				</div>
 				
+				<h1>密码</h1>
 				<div id="setting-pass">
-					<h1>密码</h1>
+					<p>
+						<input type="text" id="origin-pass" name="origin_pass" placeholder="原密码">
+						<span class="message" id="origin-pass-message"></span>
+					</p>
 
-					<input type="text" id="origin-pass" name="origin_pass" placeholder="原密码">
-					<span class="message" id="origin-pass-message"></span>
+					<p>
+						<input type="password" id="new-pass" name="new_pass" placeholder="新密码">
+						<span class="message" id="new-pass-message"></span>
+					</p>
 
-					<input type="password" id="new-pass" name="new_pass" placeholder="新密码">
-					<span class="message" id="new-pass-message"></span>
-
-					<input type="password" id="confirm-new-pass" name="confirm_new_pass" placeholder="确认新密码">
-					<span class="message" id="confirm-new-pass-message"></span>
+					<p>
+						<input type="password" id="confirm-new-pass" name="confirm_new_pass" placeholder="确认新密码">
+						<span class="message" id="confirm-new-pass-message"></span>
+					</p>
 				</div>
-
-				<hr>
 
 				<div id="setting-confirm">
 					<input type="submit" value="修改" id="modify" class="btn">

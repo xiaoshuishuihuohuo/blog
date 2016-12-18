@@ -46,10 +46,36 @@ li {
     color: #fff;
 }
 
+.wrapper {
+    margin: 0 auto;
+    width: 40%;
+}
+
 #setting {
     width: 100%;
 }
 
 .message {
     color: #ff6666;
+}
+
+#setting-username input,
+#setting-pass input {
+    border: 0;
+	border-bottom: 1px solid #666666;
+	height: 30px;
+	outline: medium;
+    width: 100%;
+}
+
+#modify {
+    background: #fff;
+    border: 1px solid #0080FF;
+	color: #0080FF;
+    height: 40px;
+    width: 100px;
+}
+
+#modify:hover {
+    background: #EEF7FF;
 }
