@@ -8,7 +8,9 @@ from ..models import Article
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    articles = db.session.query(Article.id, Article.title, Article.last_modified_time, Article.like_count, Article.pageviews)\
+        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1)).order_by(Article.like_count.desc()).order_by(Article.last_modified_time.desc()).slice(0, 10)
+    return render_template('index.html', articles=articles)
 
 
 @main.route('/login')
@@ -16,11 +18,6 @@ def login():
     form = SigninForm()
     # return redirect('/auth/signin')
     return render_template('login.html' ,form = form)
-
-    
-@main.route('/user/<user>')
-def view_user(user):
-    return user
 
 
 @main.route('/mainpage')
@@ -42,6 +39,12 @@ def main_page():
 @main.route('/images/<name>')
 def get_images(name):
     img_path = current_app.config['IMG_SAVE_PATH']
+    return send_from_directory(img_path, name)
+
+
+@main.route('/avatars/<name>')
+def get_avatars(name):
+    img_path = current_app.config['AVATAR_SAVE_PATH']
     return send_from_directory(img_path, name)
 
 

@@ -2,7 +2,10 @@
     {% if current_user.is_authenticated %}
     <div id="info">
         <div id="username">
-            <a href="/mainpage">{{ current_user.nickname }}</a>
+            <a href="/mainpage">
+                <img height="25" width="25" src={{ current_user.avatar_url() }}/>
+                <span>{{ current_user.nickname }}</span>
+            </a>
         </div>
         
         <div class="drop-menu">

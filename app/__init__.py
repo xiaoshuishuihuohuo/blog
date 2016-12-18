@@ -36,5 +36,8 @@ def create_app():
     from .article import article as article_blueprint
     app.register_blueprint(article_blueprint, url_prefix='/article')
 
+    from .user import user as user_blueprint
+    app.register_blueprint(user_blueprint, url_prefix='/user')
+
     return app
 
