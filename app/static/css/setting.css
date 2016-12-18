@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+}
+
+a:link,
+a:visited {
+	color: #ffffff;
+}
+
+li {
+    list-style: none;
+}
+
+#portrait-div {
+    padding-top: 70px;
+    width: 100%;
+    height: 240px;
+    background: url(../img/52624eca5.jpg) no-repeat;
+    background-size: cover;
+    background-position: 0 -150px;
+}
+
+#portrait-pic {
+    margin: auto;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, .5);
+}
+
+#portrait-empty {
+    height: 20px;
+}
+
+#portrait-pic img {
+    width: 128px;
+    height: 128px;
+}
+
+#portrait-username {
+    height: 50px;
+    margin-top: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+#setting {
+    width: 100%;
+}
+
+.message {
+    color: #ff6666;
+}
