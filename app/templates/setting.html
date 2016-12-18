@@ -20,24 +20,31 @@
         <div id="portrait-div">
 			<div id="portrait-empty"></div>
 			<div id="portrait-pic">
-				<img src="../static/img/default.png">
+				<div class="avatar">
+					<img src={{ current_user.avatar_url() }}>
+				</div>
+				<div class="setting-avatar">
+					<img src="/static/img/camera.png"/>
+					<span>修改头像</span>
+					<!--<input id="avatar" accept="image/png,image/jpeg" type="file" name="avatar">-->
+					<form action="/user/edit" enctype="multipart/form-data" method="post">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+						<input id="avatar_input" accept="image/png,image/jpeg" type="file" name="avatar" onchange="this.form.submit()">
+					</form>
+				</div>
 			</div>
 			<div id="portrait-username">
-				<p>{{ nickname }}</p>
+				<p>{{ current_user.nickname }}</p>
 			</div>
 		</div>
 
 		<div id="setting">
 			<form action="" method="post">
-				<div id="setting-username">
-					<h1>用户名</h1>
-					<input type="text" id="username" name="username" value="{{ username }}">
-					<span class="message" id="username-message"></span>
-				</div>
-
-				<div id="setting-avatar">
-					<h1>头像</h1>
-					<input type="file" name="avatar">
+				<div id="setting-description">
+					<h1>简介</h1>
+					<div class="file">
+						
+					</div>
 				</div>
 				
 				<div id="setting-pass">

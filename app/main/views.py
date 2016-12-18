@@ -9,7 +9,7 @@ from ..models import Article
 @main.route('/')
 def index():
     articles = db.session.query(Article.id, Article.title, Article.last_modified_time, Article.like_count, Article.pageviews)\
-        .filter(db.and_(Article.author == current_user.nickname, Article.visibility == 1)).order_by(Article.like_count.desc()).order_by(Article.last_modified_time.desc()).slice(0, 10)
+        .filter(Article.visibility == 1).order_by(Article.like_count.desc()).order_by(Article.last_modified_time.desc()).slice(0, 10)
     return render_template('index.html', articles=articles)
 
 

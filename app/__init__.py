@@ -17,6 +17,8 @@ def create_app():
 
     if not os.path.exists(app.config['IMG_SAVE_PATH']):
         os.makedirs(app.config['IMG_SAVE_PATH'])
+    if not os.path.exists(app.config['AVATAR_SAVE_PATH']):
+        os.makedirs(app.config['AVATAR_SAVE_PATH'])
 
     logger.init_app(app)
     db.init_app(app)

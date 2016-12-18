@@ -90,7 +90,7 @@ def write_upload():
             if file_end not in current_app.config['ALLOWED_EXTENSIONS']:
                 json_result = {"success": False, "msg": "file type not allowed"}
             else:
-                name = str(uuid.uuid1()) + '.' + file_end
+                name = str(uuid.uuid1()).replace('-','') + '.' + file_end
                 try:
                     f.save(img_path + name)
                     json_result = {"success": True, "file_path": url_for('main.get_images',name=name)}
