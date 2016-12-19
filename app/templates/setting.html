@@ -14,7 +14,7 @@
 	<script src="../static/js/setting.js"></script>
 </head>
 <body>
-	<!--{% include 'header.html' %}-->
+	{% include 'header.html' %}
 
 	<div id="portrait-div">
         <div id="portrait-div">
@@ -61,9 +61,7 @@
 
 				<div id="setting-description">
 					<h1>简介</h1>
-					<div class="file">
-						
-					</div>
+					<input type="text" name="descript" placeholder="用一句话介绍自己">
 				</div>
 				
 				<h1>密码</h1>
@@ -100,6 +98,6 @@
 	
     <script src="../static/lib/Remodal-1.1.0/dist/remodal.min.js"></script> <!-- 引入模态对话框插件js文件 -->
 
-	<!--{% include 'footer.html' %}-->
+	{% include 'footer.html' %}
 </body>
 </html>

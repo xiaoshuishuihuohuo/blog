@@ -50,14 +50,30 @@ body {
 }
 
 #username {
+	font-size: 25px;
 	text-align: right;
 	margin-bottom: 10px;
 	width: 100%;
 }
 
+#username a {
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+}
+
 #username a:link,
 #username a:visited {
 	color: #FFFFFF
+}
+
+#username img {
+	margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+	vertical-align: bottom;
 }
 
 .drop-menu {
