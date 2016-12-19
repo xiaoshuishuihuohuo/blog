@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+from flask import url_for
 from . import db
 from . import login_manager
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -31,9 +32,16 @@ class User(UserMixin, db.Model):
             'username': self.username,
             'nickname': self.nickname,
             'description': self.description,
-            'avatar': self.avatar
+            'avatar': self.avatar_url()
         }
         return json_user
+    
+    def avatar_url(self):
+        if not self.avatar:
+            avatar_url = url_for('static',filename='img/default.png')
+        else:
+            avatar_url = url_for('main.get_avatars', name=self.avatar)
+        return avatar_url
 
     @property
     def passwd(self):

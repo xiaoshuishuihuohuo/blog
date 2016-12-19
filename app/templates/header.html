@@ -2,13 +2,16 @@
     {% if current_user.is_authenticated %}
     <div id="info">
         <div id="username">
-            <a href="/mainpage">{{ current_user.nickname }}</a>
+            <a href="/mainpage">
+                <img height="25" width="25" src={{ current_user.avatar_url() }}>
+                <span>{{ current_user.nickname }}</span>
+            </a>
         </div>
         
         <div class="drop-menu">
             <ul>
                 <li id="settings">
-                    <a href="/settings">设置</a>
+                    <a href="/user/setting">设置</a>
                 </li>
                 <li id="logout">
                     <a href="/auth/logout">退出登录</a>

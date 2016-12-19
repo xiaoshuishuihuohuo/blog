@@ -28,16 +28,17 @@ li {
     overflow: hidden;
     background: #ffffff;
     box-shadow: 0 0 0 5px rgba(255, 255, 255, .5);
+    position:relative;
 }
 
 #portrait-empty {
     height: 20px;
 }
 
-#portrait-pic img {
+/*#portrait-pic img {
     width: 128px;
     height: 128px;
-}
+}*/
 
 #portrait-username {
     height: 50px;
@@ -59,7 +60,7 @@ li {
     color: #ff6666;
 }
 
-#setting-username input,
+/*#setting-username input,
 #setting-pass input {
     border: 0;
 	border-bottom: 1px solid #666666;
@@ -78,4 +79,54 @@ li {
 
 #modify:hover {
     background: #EEF7FF;
+}*/
+
+.avatar {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.setting-avatar {
+    position: absolute;
+    /*display: none;*/
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
+}
+
+.setting-avatar input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.setting-avatar img {
+    position: absolute;
+    height: 50px;
+    width: 65px;
+    top: 15%;
+    left: 25%;
+}
+
+.setting-avatar span {
+    position:absolute;
+    top:65%;
+    left:25%;
+    font-weight:bold;
 }
