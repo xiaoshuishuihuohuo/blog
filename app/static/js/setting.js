@@ -66,4 +66,18 @@ $(document).ready(function () {
 
 		$("#setting form").submit();
 	});
+
+	$("#portrait-pic").mouseover(function(){
+		$(".avatar").stop(true,false); 
+		$(".setting-avatar").stop(true,false);
+		$(".setting-avatar").animate({opacity:1},300);
+		$(".avatar").animate({opacity:0.7},300);
+	});
+  	
+	$("#portrait-pic").mouseleave(function(){
+		$(".avatar").stop(true,false); 
+		$(".setting-avatar").stop(true,false); 
+		$(".setting-avatar").animate({opacity:0},300);
+		$(".avatar").animate({opacity:1},300);
+  	});
 });

@@ -86,11 +86,14 @@ def write_upload():
         f = request.files['picture']
         if f:
             img_path = current_app.config['IMG_SAVE_PATH']
-            get_path = current_app.config['GET_IMG_URL']
-            name = str(uuid.uuid1()) + '.' + f.filename.split(".")[-1]
-            try:
-                f.save(img_path + name)
-                json_result = {"success": True, "msg": "error message", "file_path": get_path + name}
-            except Exception:
-                json_result = {"success": False, "msg": "error"}
+            file_end = f.filename.split(".")[-1]
+            if file_end not in current_app.config['ALLOWED_EXTENSIONS']:
+                json_result = {"success": False, "msg": "file type not allowed"}
+            else:
+                name = str(uuid.uuid1()).replace('-','') + '.' + file_end
+                try:
+                    f.save(img_path + name)
+                    json_result = {"success": True, "file_path": url_for('main.get_images',name=name)}
+                except Exception:
+                    json_result = {"success": False, "msg": "error"}
     return json.dumps(json_result)
