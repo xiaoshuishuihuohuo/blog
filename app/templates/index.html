@@ -46,35 +46,37 @@
 
 	<div class="container">
 		<div class="article-container">
-			<div class="article-list">
-				<ul>
-				{% if articles %}
-					{% for article in articles %}
-						<li>
-							<a href="/article/{{ article.id }}" target="_blank">{{ article.title }}</a>
-							<div class="article-info">
-								<div class="article-time">
-									<img src="/static/img/time.png">
-									<span class="flask-moment" data-timestamp="{{article.last_modified_time}}" data-format="fromNow(0)" data-refresh="0" style="display: none">{{article.last_modified_time}}</span>
-									<div class="arrow"></div>
-									<div class="article-timestamp">发布时间&nbsp;{{article.last_modified_time}}</div>
-								</div>
+			{% if articles %}
+				{% for article in articles %}
+				<div style="margin-bottom: 100px;">
+					<h1><a href="/article/{{ article.id }}" target="_blank">{{ article.title }}</a></h1>
+					<div class="article-info">
+						<div class="article-time">
+							<img src="/static/img/time.png">
+							<span class="flask-moment" data-timestamp="{{article.last_modified_time}}" data-format="fromNow(0)" data-refresh="0" style="display: none">{{article.last_modified_time}}</span>
+							<div class="arrow"></div>
+							<div class="article-timestamp">发布时间&nbsp;{{article.last_modified_time}}</div>
+						</div>
 
-								<div class="article-pageviews">
-									<img src="/static/img/view.png">
-									<span>{{ article.pageviews }}</span>
-								</div>
+						<div class="article-pageviews">
+							<img src="/static/img/view.png">
+							<span>{{ article.pageviews }}</span>
+						</div>
 
-								<div class="article-likes">
-									<img src="/static/img/like.png">
-									<span>{{ article.like_count }}</span>
-								</div>
-							</div>
-						</li>
-					{% endfor %}
-				{% endif %}
-				</ul>
-			</div>
+						<div class="article-likes">
+							<img src="/static/img/like.png">
+							<span>{{ article.like_count }}</span>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+
+		<div class="pagination">
+			<ul>
+				<li class="active">1</li>  
+			</ul>
 		</div>
 	</div>
 	<script>
@@ -93,6 +95,23 @@
 		}
 		$(document).ready(function() {
 			flask_moment_render_all();
+
+			var timer;
+			$(".article-time").on({
+				"mouseenter": function() {
+					clearTimeout(timer);
+					var that = this;
+					timer = setTimeout(function() {
+						$(that).children().eq(2).fadeIn();
+						$(that).children().eq(3).fadeIn();
+					}, 500);
+				},
+				"mouseleave": function() {
+					$(this).children().eq(2).fadeOut();
+					$(this).children().eq(3).fadeOut();
+					clearTimeout(timer);
+				}
+			});
 		});
 	</script>
 	{% include 'footer.html' %}

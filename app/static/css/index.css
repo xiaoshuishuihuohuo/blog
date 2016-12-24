@@ -97,23 +97,19 @@ body,
 }
 
 .article-container {
-	width: 100%;
+	width: 80%;
 	height: 450px;
-	background: #fff;
-	border-top-left-radius: 15px;
-	border-bottom-right-radius: 15px;
-	-webkit-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
-    2px 2px 8px #BDBDBD, /*右边阴影*/  
-    0 0 0 #000, /*顶部阴影 未设置*/  
-    0 0 0 #000; /*底边阴影 未设置*/
-	-moz-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
-    2px 2px 8px #BDBDBD, /*右边阴影*/  
-    0 0 0 #000, /*顶部阴影 未设置*/  
-    0 0 0 #000; /*底边阴影 未设置*/
-	box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
-    2px 2px 8px #BDBDBD, /*右边阴影*/  
-    0 0 0 #000, /*顶部阴影 未设置*/  
-    0 0 0 #000; /*底边阴影 未设置*/
+	margin: 0 auto;
+}
+
+.article-container a,
+.article-container a:link,
+.article-container a:visited {
+	color: #000;
+}
+
+.article-container a:hover {
+	text-decoration: underline;
 }
 
 .article-list {
@@ -144,7 +140,7 @@ body,
     float: right;
     height: 21px;
     line-height: 16px;
-    width: 30%;
+    width: 100%;
 }
 
 .article-info img {
@@ -153,13 +149,13 @@ body,
 
 .article-time {
     float: left;
-	width: 50%;
+	width: 80%;
 }
 
 .article-pageviews,
 .article-likes {
     float: left;
-	width: 25%;
+	width: 10%;
 }
 
 .arrow {
@@ -189,4 +185,9 @@ body,
 
 li {
     list-style: none;
+}
+
+.pagination {
+	width: 80%;
+	margin: 0 auto;
 }
