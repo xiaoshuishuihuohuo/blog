@@ -43,17 +43,20 @@ body {
 	color: #ffffff;
 	font-size: 20px;
 	font-weight: lighter;
-	right: 30px;
+	right: 20px;
 	top: 15px;
 	position: absolute;
-	width: 100px;
+	/*width: 100px;*/
+	width: auto;
 }
 
 #username {
 	font-size: 25px;
 	text-align: right;
+	margin-left: 70px;
 	margin-bottom: 10px;
-	width: 100%;
+	/*width: 100%;*/
+	width: auto;
 }
 
 #username a {
@@ -81,16 +84,21 @@ body {
 	background: #FFF;
 	border-radius: 2px;
 	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	color: #000;
+	font-size: 13px;
 	margin-top: 0;
 	position: absolute;
 	width: 100px;
 	z-index: 9999;
+	text-align: center;
+}
+
+.drop-menu .username {
+	padding: 7px 0;
 }
 
 .drop-menu ul {
-	font-size: 13px;
 	padding-left: 0;
-	text-align: center;
 	margin: 0;
 }
 

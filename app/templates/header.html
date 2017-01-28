@@ -4,11 +4,11 @@
         <div id="username">
             <a href="/mainpage">
                 <img src={{ current_user.avatar_url() }}>
-                <span>{{ current_user.nickname }}</span>
             </a>
         </div>
         
         <div class="drop-menu">
+            <div class="username"><span>{{ current_user.nickname }}</span></div>
             <ul>
                 <li id="settings">
                     <a href="/user/setting">设置</a>
