@@ -5,7 +5,7 @@ $(document).ready(function () {
     // 分页对象
     pagination = {
         currentPage : 1, // 当前评论页，初始为1
-        showCount : 2, // 每页显示评论条数
+        showCount : 10, // 每页显示评论条数
         offset : 0,
         commentCount: ($("#comment-count").text() != "" && !isNaN($("#comment-count").text())) ? parseInt($("#comment-count").text()) : 0, // 评论数
         setCurrentPage : function (currentPage) {
@@ -221,7 +221,7 @@ function renderComments(commentsObjects) {
                     '<div class="each-comment" id="' + value.id + '" onmouseover="showReplyBtn(this.id)" onmouseleave="hideReplyBtn(this.id)">';
             if (value.is_reply === 1) { // 如果是回复评论，显示xx回复xx，添加查看对话按钮
                 comment +=
-                        '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> ' + ' 回复 ' + value.reply_to_who.avatar + ' <a href="">' + value.reply_to_who.nickname + '</a> :</div>' +
+                        '<div class="comment-header"><a href=""><img class="avatar-sm" src="' + value.author.avatar + '">' + value.author.nickname + '</a> 回复 <a href=""><img class="avatar-sm" src="' + value.reply_to_who.avatar + '">' + value.reply_to_who.nickname + '</a> :</div>' +
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="conversation-btn" onclick="getTalks(this.parentNode.parentNode.id, 10, 0)">' +
@@ -230,7 +230,7 @@ function renderComments(commentsObjects) {
                         '</div>';
             } else {
                 comment +=
-                        '<div class="comment-header">' + value.author.avatar + ' <a href="">' + value.author.nickname + '</a> :</div>' +
+                        '<div class="comment-header"><a href=""><img class="avatar-sm" src="' + value.author.avatar + '">' + value.author.nickname + '</a> :</div>' +
                         '<div class="comment-body">' +
                             '<div class="comment-content">' + value.content + '</div>' +
                             '<div class="conversation-btn">' +
@@ -350,7 +350,7 @@ function renderTalks(talksObjects) {
             if (value.is_reply === 1) { // 如果是回复评论
                 var talk =
                     '<div class="each-talk" id="' + value.id + '">' +
-                        '<div class="talk-header"><a href="">' + value.author.nickname + '</a> ' + ' 回复 <a href="">' + value.reply_to_who.nickname + '</a> :</div>' +
+                        '<div class="talk-header"><a href=""><img class="avatar-sm" src="' + value.author.avatar + '">' + value.author.nickname + '</a> 回复 <a href=""><img class="avatar-sm" src="' + value.reply_to_who.avatar + '">' + value.reply_to_who.nickname + '</a> :</div>' +
                         '<div class="talk-body">' +
                             '<div class="talk-content">' + value.content + '</div>' +
                         '</div>' +
@@ -359,7 +359,7 @@ function renderTalks(talksObjects) {
             } else {
                 var talk =
                     '<div class="each-talk" id="' + value.id + '">' +
-                        '<div class="talk-header"><a href="">' + value.author.nickname + '</a> :</div>' +
+                        '<div class="talk-header"><a href=""><img class="avatar-sm" src="' + value.author.avatar + '">' + value.author.nickname + '</a> :</div>' +
                         '<div class="talk-body">' +
                             '<div class="talk-content">' + value.content + '</div>' +
                         '</div>' +

@@ -208,6 +208,11 @@ li {
 	width: 100%;
 }
 
+.comment-header {
+	height: 35px;
+	line-height: 35px;
+}
+
 .comment-body {
 	min-height: 45px;
 }
@@ -339,6 +344,11 @@ li {
 
 .each-talk {
 	padding: 0 20px 20px 20px;
+}
+
+.talk-header {
+	height: 35px;
+	line-height: 35px;
 }
 
 .talk-body {
