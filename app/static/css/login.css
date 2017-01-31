@@ -161,13 +161,24 @@ body {
 	height: 30px;
 	margin-top: 20px;
 	background: #FFFFFF;
-	border: 1px solid #0080FF;
-	color: #0080FF;
 }
 
 #login-btn:hover,
 #signup-btn:hover {
 	background: #EEF7FF;
+}
+
+.login-btn,
+.signup-btn {
+	border: 1px solid #0080FF;
+	color: #0080FF;
+}
+
+.login-btn-disabled,
+.signup-btn-disabled {
+	border: 1px solid #606060;
+	color: #606060;
+	cursor: not-allowed;
 }
 
 #verify {
