@@ -74,44 +74,6 @@ $(document).ready(function () {
 		}
 	});
 
-	/*$("#login-btn").hover(function () {
-		$("#login-btn-div").css("width", "190px");
-		$(this).css({
-			"background": "#D6AE8B",
-			"width": "190px",
-			"transition": "all .3s"
-		});
-	}, function () {
-		$(this).css({
-			"background": "#666666",
-			"width": "180px",
-			"transition": "all .2s"
-		});
-		$("#login-btn-div").css({
-			"width": "180px",
-			"transition": "all .2s"
-		});
-	});
-
-	$("#signup-btn").hover(function () {
-		$("#signup-btn-div").css("width", "190px");
-		$(this).css({
-			"background": "#D6AE8B",
-			"width": "190px",
-			"transition": "all .3s"
-		});
-	}, function () {
-		$(this).css({
-			"background": "#666666",
-			"width": "180px",
-			"transition": "all .2s"
-		});
-		$("#signup-btn-div").css({
-			"width": "180px",
-			"transition": "all .2s"
-		});
-	});*/
-
 	var remember_me = null;
 
 	$("#remember-me input").click(function () {
@@ -142,7 +104,11 @@ $(document).ready(function () {
 			setMessage("", "#ffffff");
 		}
 
-		$("#login-btn").val("正在登录...")
+		var login_btn = this;
+
+		$(login_btn).val("正在登录...");
+		$(login_btn).removeClass('login-btn');
+		$(login_btn).addClass('login-btn-disabled');
 
 		if($("#verify").css("display") == "none"){
 			$("#verify input").val("")
@@ -168,6 +134,10 @@ $(document).ready(function () {
 					setMessage("", "#ffffff");
 					setMessage("账号或密码错误", "#ff6666");
 					$("#username input").focus();
+
+					$(login_btn).val("登　录");
+					$(login_btn).removeClass('login-btn-disabled');
+					$(login_btn).addClass('login-btn');
 					return false;
 				} else if (data.message == 'need') {
 					//失败
@@ -179,6 +149,10 @@ $(document).ready(function () {
 					$("#verify").show();
 					$("#verify input").val("");
 					$("#verify img").attr("src", "/auth/captcha?random=" + Math.random());
+
+					$(login_btn).val("登　录");
+					$(login_btn).removeClass('login-btn-disabled');
+					$(login_btn).addClass('login-btn');
 					return false;
 				} else if (data.message == 'cap') {
 					//失败
@@ -188,6 +162,10 @@ $(document).ready(function () {
 					setMessage("验证码错误", "#ff6666");
 					$("#verify input").val("");
 					$("#verify input").focus();
+
+					$(login_btn).val("登　录");
+					$(login_btn).removeClass('login-btn-disabled');
+					$(login_btn).addClass('login-btn');
 					return false;
 				} else {
 					return false;
@@ -252,7 +230,10 @@ $(document).ready(function () {
 			setMessage("", "#ffffff");
 		}
 
-		$("#signup-btn").val("正在注册...")
+		$(this).val("正在注册...");
+		$(this).removeClass('signup-btn');
+		$(this).addClass('signup-btn-disabled');
+
 		$("#signup-form").submit();
 	});
 
