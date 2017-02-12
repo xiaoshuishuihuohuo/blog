@@ -8,7 +8,7 @@ class WhiteList(object):
         'html', 'head', 'body', 'h1', 'b', 'i', 'u', 'strike',
         'ol', 'li', 'ul', 'blockquote', 'p', 'pre', 'code', 'br',
         'table', 'colgroup', 'col', 'thead', 'tr', 'th', 'tbody',
-        'td', 'a', 'img', 'hr'
+        'td', 'a', 'img', 'hr', 'span'
     ]
 
     attrs = [

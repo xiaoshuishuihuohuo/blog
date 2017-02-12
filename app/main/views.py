@@ -1,16 +1,36 @@
+#coding: utf-8
 from flask import (Flask, request, session, g, redirect, url_for, render_template,Blueprint,send_from_directory,current_app)
 from . import main
 from ..auth.forms import SigninForm
 from flask_login import login_required, current_user
-from .. import logger, db
+from .. import logger, db, redis
 from ..models import Article
+import json
 
 
 @main.route('/')
 def index():
-    articles = db.session.query(Article.id, Article.title, Article.last_modified_time, Article.like_count, Article.pageviews)\
-        .filter(Article.visibility == 1).order_by(Article.like_count.desc()).order_by(Article.last_modified_time.desc()).slice(0, 10)
-    return render_template('index.html', articles=articles)
+    #热门文章redis实现
+    result = []
+    try:
+        top = redis.zrange('pageviews', 0, 10)
+        if top:
+            info_list = redis.hmget('articles', top)
+            for article in info_list:
+                if article:
+                    info_dict = json.loads(article)
+                    tmp = Article()
+                    tmp.id = info_dict['id']
+                    tmp.title = info_dict['title']
+                    tmp.last_modified_time = info_dict['last_modified_time']
+
+                    tmp.pageviews = int(redis.zscore('pageviews', tmp.id))
+                    #TODO like count
+                    tmp.like_count = 0
+                    result.append(tmp)
+    except Exception as e:
+        logger.debug(e)
+    return render_template('index.html', articles=result)
 
 
 @main.route('/login')
