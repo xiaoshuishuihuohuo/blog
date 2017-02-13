@@ -13,7 +13,7 @@ def index():
     #热门文章redis实现
     result = []
     try:
-        top = redis.zrange('pageviews', 0, 10)
+        top = redis.zrange('pageviews', 0, 10, desc=True)
         if top:
             info_list = redis.hmget('articles', top)
             for article in info_list:

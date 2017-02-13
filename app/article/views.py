@@ -61,11 +61,11 @@ def delete_article(article_id):
         if is_success:
             db.session.query(Article_Comment).filter(Article_Comment.article_id==article_id).delete()
             db.session.commit()
-            redis.pipeline()
-            redis.multi()
-            redis.hmdel('articles', article_id)
-            redis.srem('pagevies', article_id)
-            redis.execute()
+            pipe = redis.pipeline()
+            pipe.multi()
+            pipe.hdel('articles', article_id)
+            pipe.srem('pagevies', article_id)
+            pipe.execute()
     except Exception as e:
         db.session.rollback()
         logger.debug(e)

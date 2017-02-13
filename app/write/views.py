@@ -51,7 +51,7 @@ def write_submit():
             'classification':article.classification,
             'classification_obj':article.classification_obj,
             'create_time':str(article.create_time),
-            'last_modified_time':str(article.last_modified_time),
+            'last_modified_time':article.last_modified_time.strftime('%Y-%m-%d %H:%M:%S'),
             'key_word':article.key_word
         }
         redis.hmset('articles', {article.id: json.dumps(article_info)})
