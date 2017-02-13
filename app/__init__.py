@@ -5,11 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from config import Config
 from log import Logger
+from flask_redis import FlaskRedis
+
 db = SQLAlchemy()
 csrf = CsrfProtect()
 login_manager = LoginManager()
 logger = Logger()
-
+redis = FlaskRedis()
 
 def create_app():
     app = Flask(__name__)
@@ -23,8 +25,10 @@ def create_app():
     logger.init_app(app)
     db.init_app(app)
     csrf.init_app(app)
+    redis.init_app(app,socket_timeout=5, socket_connect_timeout=5)
     login_manager.init_app(app)
     login_manager.login_view = '/login'
+
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

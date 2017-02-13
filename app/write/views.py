@@ -6,7 +6,7 @@ import uuid
 from . import write
 from forms import ArticleForm
 from ..models import Article,Article_Classification
-from .. import db
+from .. import db, redis
 from markupsafe import escape
 from ..utils.xss import xss_clean
 
@@ -34,8 +34,6 @@ def write_submit():
     article.content = xss_clean(form.content.data)
     article.manuscript = ''
     article.last_modified_time = datetime.datetime.now()
-    logger.debug(article.last_modified_time)
-    logger.debug(type(article.last_modified_time))
     article.visibility = 1
     check_article = db.session.query(Article).filter(Article.id == article.id).scalar()
     if check_article and (check_article.author != current_user.nickname):
@@ -46,6 +44,17 @@ def write_submit():
         db.session.merge(article)
         # db.session.merge(article)
         db.session.commit()
+        article_info = {
+            'id':article.id,
+            'author':article.author,
+            'title':article.title,
+            'classification':article.classification,
+            'classification_obj':article.classification_obj,
+            'create_time':str(article.create_time),
+            'last_modified_time':str(article.last_modified_time),
+            'key_word':article.key_word
+        }
+        redis.hmset('articles', {article.id: json.dumps(article_info)})
     except Exception,e:
         logger.debug(e)
         db.session.rollback()
