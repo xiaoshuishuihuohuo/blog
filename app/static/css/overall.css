@@ -17,6 +17,15 @@ body {
 	position: fixed;
 }
 
+.homepage {
+	height: 60px;
+	line-height: 53px;
+}
+
+.homepage svg {
+	vertical-align: middle;
+}
+
 #login {
 	position: absolute;
 	top: 15px;

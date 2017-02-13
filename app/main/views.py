@@ -23,7 +23,7 @@ def index():
                     tmp.id = info_dict['id']
                     tmp.title = info_dict['title']
                     tmp.last_modified_time = info_dict['last_modified_time']
-
+                    tmp.author = info_dict['author']
                     tmp.pageviews = int(redis.zscore('pageviews', tmp.id))
                     #TODO like count
                     tmp.like_count = 0

@@ -22,6 +22,12 @@
         <div id="title">{{article.title}}</div>
 
         <div id="article-info">
+            <div class="article-author">
+                <a href="">{{ article.author }}</a>
+                 发布于 
+                <span>{{article.last_modified_time}}</span>
+            </div>
+
             <div id="pageviews">
                 <img src="/static/img/view.png">
                 <span>{{article.pageviews}}</span>

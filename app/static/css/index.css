@@ -149,11 +149,18 @@ body,
 
 .article-time {
     float: left;
-	width: 80%;
+	width: 20%;
+}
+
+.article-author {
+	float: left;
+	width: 60%;
+	text-align: right;
 }
 
 .article-pageviews,
 .article-likes {
+	text-align: right;
     float: left;
 	width: 10%;
 }
