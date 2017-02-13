@@ -13,7 +13,7 @@ def index():
     #热门文章redis实现
     result = []
     try:
-        top = redis.zrange('pageviews', 0, 10)
+        top = redis.zrange('pageviews', 0, 10, desc=True)
         if top:
             info_list = redis.hmget('articles', top)
             for article in info_list:
@@ -23,7 +23,7 @@ def index():
                     tmp.id = info_dict['id']
                     tmp.title = info_dict['title']
                     tmp.last_modified_time = info_dict['last_modified_time']
-
+                    tmp.author = info_dict['author']
                     tmp.pageviews = int(redis.zscore('pageviews', tmp.id))
                     #TODO like count
                     tmp.like_count = 0
