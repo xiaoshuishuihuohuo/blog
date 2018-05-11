@@ -1,0 +1,197 @@
+* {
+	font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	/*background: #F7F7F7;*/
+}
+
+.top {
+	width: 100%;
+	color: #ffffff;
+	height: 60px;
+	position: fixed;
+}
+
+#login {
+	position: absolute;
+	top: 15px;
+	right: 30px;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: lighter;
+}
+
+#login a:link,
+#login a:visited {
+	color: #FFFFFF;
+}
+
+#login-underline {
+	margin-top: 4px;
+	height: 3px;
+	width: 0;
+	background: #0080FF;
+	position: absolute;
+}
+
+#info {
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: lighter;
+	right: 20px;
+	top: 15px;
+	position: absolute;
+	/*width: 100px;*/
+	width: auto;
+}
+
+#username {
+	font-size: 25px;
+	text-align: right;
+	margin-left: 70px;
+	margin-bottom: 10px;
+	/*width: 100%;*/
+	width: auto;
+}
+
+#username a {
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+}
+
+#username a:link,
+#username a:visited {
+	color: #FFFFFF
+}
+
+.avatar-sm {
+	margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+	vertical-align: bottom;
+}
+
+.drop-menu {
+	display: none;
+	background: #FFF;
+	border-radius: 2px;
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	color: #000;
+	font-size: 13px;
+	margin-top: 0;
+	position: absolute;
+	width: 100px;
+	z-index: 9999;
+	text-align: center;
+}
+
+.drop-menu .username {
+	padding: 7px 0;
+}
+
+.drop-menu ul {
+	padding-left: 0;
+	margin: 0;
+}
+
+.drop-menu li {
+	border-radius: 2px;
+	height: 30px;
+	line-height: 30px;
+	list-style: none;
+}
+
+.drop-menu li a {
+	display: inline-block; /* 直接对a标签设置长宽无效，需加上此行 */
+	width: 100%;
+}
+
+.drop-menu li:hover {
+	background: #F3F3F3;
+}
+
+.drop-menu li a:link,
+.drop-menu li a:visited {
+	color: #000;
+}
+
+.container {
+	margin: 0 auto;
+	margin-top: 30px;
+	width: 60%;
+}
+
+.foot {
+	width: 50%;
+	margin-top: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #C3C3C3;
+}
+
+.foot hr {
+	border: 1px solid #C3C3C3;
+}
+
+
+.btn {
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
+	border-radius: 2px;
+	outline: none;
+	moz-user-select: -moz-none; /*禁止选中*/
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+
+.pagination ul {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 50px;
+}
+
+.pagination li {
+	color: #6E6E6E;
+	float: left;
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	margin: 20px 10px 0 0;
+}
+
+.pagination .turning-page {
+	width: 40px;
+}
+
+.pagination li:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.pagination .active {
+	background: #33475F;
+	border-radius: 2px;
+	color: #FFFFFF;
+	pointer-events: none;
+}
+
+.pagination .active:hover {
+	text-decoration: none;
+	cursor: default;
+}

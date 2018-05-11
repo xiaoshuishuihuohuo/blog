@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="/static/css/overall.css">
+	<link rel="stylesheet" href="/static/css/mainpage.css">
+	<script src="/static/lib/jquery.min.js"></script>
+	<script src="/static/js/header.js"></script>
+	<script src="/static/lib/scrollspy.js"></script>
+	<script src="/static/lib/moment-with-locales.min.js"></script>
+</head>
+<body>
+	{% include 'header.html' %}
+
+	<div class="sidebar" id="sidebar">
+		<div class="bar"></div>
+		<ul class="nav">
+			<li class="active">
+				<a href="#write-btn-div">写文章</a>
+			</li>
+			<li>
+				<a href="#my-article">我的文章</a>
+			</li>
+			<li>
+				<a href="#draft">草稿</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="portrait-div">
+		<div id="portrait-empty"></div>
+		<div id="portrait-pic">
+			<img src={{ current_user.avatar_url() }}>
+		</div>
+		<div id="portrait-username">
+			<p>{{ nickname }}</p>
+		</div>
+	</div>
+
+	<div class="wrapper">
+		<div id="write-btn-div" class="jumptarget">
+			<a href="/write" target="_blank">
+			<button class="btn" id="write-btn">
+				<img src="/static/img/write-btn.png">
+				写文章
+			</button>
+			</a>
+		</div>
+
+		<div id="my-article" class="jumptarget">
+			<div class="title">
+				<span>我的文章</span>
+				<span>共{{ article_count }}篇</span>
+			</div>
+			<div class="content">
+				<ul>
+				{% if articles %}
+				  {% for article in articles %}
+						<li>
+							<a href="/article/{{ article.id }}" target="_blank">{{ article.title }}</a>
+							<div class="article-info">
+								<div class="article-time">
+									<img src="/static/img/time.png">
+									<span class="flask-moment" data-timestamp="{{article.last_modified_time}}" data-format="fromNow(0)" data-refresh="0" style="display: none">{{article.last_modified_time}}</span>
+									<div class="arrow"></div>
+									<div class="article-timestamp">发布时间&nbsp;{{article.last_modified_time}}</div>
+								</div>
+
+								<div class="article-pageviews">
+									<img src="/static/img/view.png">
+									<span>{{ article.pageviews }}</span>
+								</div>
+
+								<div class="article-likes">
+									<img src="/static/img/like.png">
+									<span>{{ article.like_count }}</span>
+								</div>
+							</div>
+						</li>
+				  {% endfor %}
+				{% endif %}
+				</ul>
+			</div>
+			{% if article_count>10 %}
+			<div class="view-all">
+				<a href="">查看全部</a>
+			</div>
+			{% endif %}
+		</div>
+
+		<div id="draft" class="jumptarget">
+			<div class="title">
+				<span>草稿</span>
+			</div>
+			<div class="content">
+				<ul>
+				{% if manuscripts %}
+				  {% for manuscript in manuscripts %}
+						<li>
+							<a href="/article/{{ manuscript.id }}/edit" target="_blank">{{ manuscript.ms_title }}</a>
+							<div class="article-info">
+								<div class="article-time">
+									<img src="/static/img/time.png">
+									<span class="flask-moment" data-timestamp="{{manuscript.last_modified_time}}" data-format="fromNow(0)" data-refresh="0" style="display: none">{{manuscript.last_modified_time}}</span>
+									<div class="arrow"></div>
+									<div class="article-timestamp">发布时间&nbsp;{{manuscript.last_modified_time}}</div>
+								</div>
+
+								<!--<div class="article-pageviews">
+									<img src="/static/img/view.png">
+									<span>{{ manuscript.pageviews }}</span>
+								</div>
+
+								<div class="article-likes">
+									<img src="/static/img/like.png">
+									<span>{{ manuscript.like_count }}</span>
+								</div>-->
+							</div>
+						</li>
+				  {% endfor %}
+				{% endif %}
+				</ul>
+			</div>
+			{% if manuscript_count>10 %}
+			<div class="view-all">
+				<a href="">查看全部</a>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<script class="anchor">
+		$('body').scrollspy({ target: '#sidebar', offset: 10 });
+	</script>
+	<script>
+		moment.locale("zh_CN");
+		function flask_moment_render(elem) {
+    		$(elem).text(eval('moment("' + $(elem).data('timestamp') + '").' + $(elem).data('format') + ';'));
+    		$(elem).removeClass('flask-moment').show();
+		}
+		function flask_moment_render_all() {
+		    $('.flask-moment').each(function() {
+        	flask_moment_render(this);
+        	if ($(this).data('refresh')) {
+	            (function(elem, interval) { setInterval(function() { flask_moment_render(elem) }, interval); })(this, $(this).data('refresh'));
+    	    }
+    	})
+		}
+		$(document).ready(function() {
+			flask_moment_render_all();
+
+			var timer;
+			$(".article-time").on({
+				"mouseenter": function() {
+					clearTimeout(timer);
+					var that = this;
+					timer = setTimeout(function() {
+						$(that).children().eq(2).fadeIn();
+						$(that).children().eq(3).fadeIn();
+					}, 500);
+				},
+				"mouseleave": function() {
+					$(this).children().eq(2).fadeOut();
+					$(this).children().eq(3).fadeOut();
+					clearTimeout(timer);
+				}
+			});
+		});
+	</script>
+
+	{% include 'footer.html' %}
+</body>
+</html>

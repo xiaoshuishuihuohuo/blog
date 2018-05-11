@@ -1,0 +1,259 @@
+body {
+    margin: 0;
+}
+
+a:link,
+a:visited {
+	color: #ffffff;
+}
+
+li {
+    list-style: none;
+}
+
+/* 设置锚点距页顶距离 http://stackoverflow.com/questions/4086107/html-positionfixed-page-header-and-in-page-anchors */
+.jumptarget::before {
+  content: "";
+  display: block;
+  height: 80px; /* fixed header height*/
+  margin: -80px 0 0; /* negative fixed header height */
+}
+
+/*.top {
+    background: #000000;
+}*/
+
+#portrait-div {
+    padding-top: 70px;
+    width: 100%;
+    height: 240px;
+    background: url(/static/img/52624eca5.jpg) no-repeat;
+    background-size: cover;
+    background-position: 0 -150px;
+}
+
+#portrait-pic {
+    margin: auto;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, .5);
+}
+
+#portrait-empty {
+    height: 20px;
+}
+
+#portrait-pic img {
+    width: 128px;
+    height: 128px;
+}
+
+#portrait-username {
+    height: 50px;
+    margin-top: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.sidebar {
+    width: 150px;
+    position: fixed;
+    margin-top: 330px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.bar {
+    background: #F3F3F3;
+    width: 3px;
+    height: 90px;
+    position: absolute;
+    z-index: -1;
+}
+
+.sidebar ul {
+    margin-top: 0;
+    padding: 0;
+    z-index: -1;
+}
+
+.sidebar li {
+    padding-left: 38px;
+    height: 30px;
+    width: 100%;
+    line-height: 30px;
+}
+
+.sidebar a {
+    color: #000000;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.nav {
+	position: fixed;
+}
+
+.active {
+    background: #F3F3F3;
+    border-left: 3px solid #0080FF;
+}
+
+.wrapper {
+	position: relative;
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 20px 10px 20px;
+}
+
+#write-btn-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#write-btn {
+    height: 35px;
+    width: 90px;
+    background: #FFFFFF;
+    border: 1px solid #0080FF;
+    border-radius: 2px;
+    color: #0080FF;
+    font-size: 16px;
+    text-align: right;   
+}
+
+#write-btn img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: -29px;
+}
+
+#write-btn:hover {
+    background: #EEF7FF;
+}
+ 
+#my-article,
+#draft {
+    height: 600px;
+}
+
+.title {
+    width:100%;
+    /*border-left: 3px solid #0080FF;*/
+    background: #FAFAFA;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top: 1px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    padding: 10px;
+}
+
+.title span:nth-child(1) {
+    font-size: 20px;
+}
+
+.title span:nth-child(2) {
+    color: #6E6E6E;
+    font-size: 15px;
+    margin-left: 15px;
+}
+
+.content {
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    margin-top: 0;
+    width: 100%;
+    height: 380px;
+    padding-left: 20px;
+}
+
+.content ul {
+    padding-left: 0;
+}
+
+.content li {
+    margin: 15px 0;
+}
+
+.content a {
+    color: #6E6E6E;
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
+
+.article-info {
+    float: right;
+    height: 21px;
+    line-height: 16px;
+    width: 30%;
+}
+
+.article-info img {
+    vertical-align: bottom;
+}
+
+.article-time {
+    float: left;
+	width: 50%;
+}
+
+.article-pageviews,
+.article-likes {
+    float: left;
+	width: 25%;
+}
+
+.arrow {
+	border-color: rgba(0,0,0,0) rgba(0,0,0,0) #000;
+    border-style: solid;
+    border-width: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    display: none;
+    height: 0px;
+    width: 0px;
+	margin: 0 5px 0;
+}
+
+.article-timestamp {
+    background: #000;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    border-radius: 2px;
+    color: #FFF;
+    display: none;
+    font-size: 12px;
+    height: 20px;
+    padding: 5px 10px;
+    position: absolute;
+    width: 170px;
+    z-index: 9999;
+}
+
+.view-all {
+    background: #FFFFFF;
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    font-size: 12px;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.view-all a {
+    color: #0080FF;
+}
+
+.view-all a:hover {
+    text-decoration: underline;
+}

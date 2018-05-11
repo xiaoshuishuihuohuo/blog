@@ -6,22 +6,22 @@ html,
 body {
 	margin: 0;
 	width: 100%;
-	background: #F7F7F7;
+	/*background: #F7F7F7;*/
 }
 
 .background {
-	background: url(../img/bg_1.jpg) no-repeat;
+	background: url(/static/img/bg_1.jpg) no-repeat;
 	background-size: cover;
-	background-position: 0px -600px;
+	background-position: 0px -620px;
 	float: left;
-	height: 200px;
+	height: 230px;
 	width: 100%;
 }
 
 .float-div {
 	background: #000000;
 	height: 200px;
-	opacity: 0.7; /* 背景透明 */
+	opacity: 0.5; /* 背景透明 */
 	width: 100%;
 	float: left;
 	position: absolute; /* 与.background重合 */
@@ -37,66 +37,163 @@ body {
 	margin-top: 8%;
 	background: #ffffff;
 	width: 300px;
-	height: 300px;
+	height: 340px;
 	position: absolute;
 	text-align: center;
 	border-radius: 4px;
 	-webkit-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
-    2px 2px 8px #666, /*右边阴影*/  
+    2px 2px 8px #BDBDBD, /*右边阴影*/  
     0 0 0 #000, /*顶部阴影 未设置*/  
     0 0 0 #000; /*底边阴影 未设置*/
-    -moz-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
-    2px 2px 8px #666, /*右边阴影*/  
+	-moz-box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #BDBDBD, /*右边阴影*/  
     0 0 0 #000, /*顶部阴影 未设置*/  
-    0 0 0 #000; /*底边阴影 未设置*/ 
-    box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
-    2px 2px 8px #666, /*右边阴影*/  
+    0 0 0 #000; /*底边阴影 未设置*/
+	box-shadow:0 0 0 #000, /*左边阴影 未设置*/  
+    2px 2px 8px #BDBDBD, /*右边阴影*/  
     0 0 0 #000, /*顶部阴影 未设置*/  
-    0 0 0 #000; /*底边阴影 未设置*/   
+    0 0 0 #000; /*底边阴影 未设置*/
 }
 
-.title {
+#title {
 	color: #606060;
 	font-size: 25px;
 	font-weight: lighter;
 	height: 30px;
-	padding: 20px;
+	margin-top: 20px;
 }
 
-.title span {
-	/* width: 100px; */
+#title span {
 	margin: 10px;
 }
 
-.login {
-	margin-top: 20px;
+.login,
+.signup {
+	margin-top: 5px;
+	font-size: 15px;
+}
+
+#login-tag,
+#signup-tag {
+	cursor: pointer;
+}
+
+.underline {
+	width: 100%;
+	height: 3px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+#ul-1 {
+	margin-left: 85px;
+	width: 53px;
+	height: 3px;
+	background: #0080FF;
+	float: left;
+}
+
+#ul-2 {
+	margin-left: 77px;
+	width: 0;
+	height: 3px;
+	background: #0080FF;
+	float: left;
+}
+
+.message {
+	margin: auto;
+	padding: 5px;
+	width: 170px;
+	height: 15px;
+	line-height: 15px;
+	text-align: left;
+	background: #ffffff;
+	color: #ffffff;
+	font-size: 12px;
+	border-radius: 1px;
 }
 
 #username,
 #password,
-#login-btn {
+#login-btn-div,
+#signup-username,
+#signup-password,
+#signup-confirm,
+#signup-btn-div {
 	margin: auto;
-	height: 50px;
+	height: 40px;
 	width: 180px;
 }
 
-.login input[type="text"] {
+
+
+.login input[type="text"],
+.login input[type="password"],
+.signup input[type="text"],
+.signup input[type="password"] {
 	border: 0;
+	border-bottom: 1px solid #666666;
 	outline: medium;
+	height: 30px;
 }
 
 .login input[name="username"],
-.login input[name="password"] {
+.login input[name="password"],
+.signup input[name="signup_username"],
+.signup input[name="signup_password"],
+.signup input[name="signup_confirm"] {
 	width: 180px;
 }
 
-.btn {
+#remember-me {
+	text-align: left;
+	margin-top: 11px;
+	margin-bottom: 10px;
+	margin-left: 56px;
+	font-size: 12px;
+	width: 180px;
+}
+
+#login-btn,
+#signup-btn {
 	width: 180px;
 	height: 30px;
 	margin-top: 20px;
-	background: #75C658;
-	border: none;
-	color: #ffffff;
-	cursor: pointer;
-	border-radius: 1px;
+	background: #FFFFFF;
+}
+
+#login-btn:hover,
+#signup-btn:hover {
+	background: #EEF7FF;
+}
+
+.login-btn,
+.signup-btn {
+	border: 1px solid #0080FF;
+	color: #0080FF;
+}
+
+.login-btn-disabled,
+.signup-btn-disabled {
+	border: 1px solid #606060;
+	color: #606060;
+	cursor: not-allowed;
+}
+
+#verify {
+	display: none;
+	width: 180px;
+	height: 40px;
+	margin: auto;
+}
+
+#verify input {
+	width: 75px;
+}
+
+#verify img {
+	width: 100px;
+	height: 30px;
+	vertical-align: bottom;
 }

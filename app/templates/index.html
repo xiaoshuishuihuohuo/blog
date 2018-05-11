@@ -4,27 +4,31 @@
 	<title></title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="stylesheet" href="../static/css/index.css">
-	<script src="../static/js/jquery.min.js"></script>
-	<script src="../static/js/index.js"></script>
+	<link rel="stylesheet" href="/static/css/overall.css">
+	<link rel="stylesheet" href="/static/css/index.css">
+	<script src="/static/lib/jquery.min.js"></script>
+	<script src="/static/js/header.js"></script>
+	<script src="/static/js/index.js"></script>
+	<script src="/static/lib/moment-with-locales.min.js"></script>
 </head>
 <body>
 	<div class="head">
 		<div class="background">
-		<p id="q"><img src="../static/img/q.png"></p>
+		<p id="q"><img src="/static/img/q.png"></p>
 		</div>
 
 		<div class="float-div">
 		</div>
 
 		<div class="top-div">
-			<div class="top">
+			<!--<div class="top">
 				<div id="login">
 					<a href="/login">登录&nbsp;/&nbsp;注册</a>
 					<div id="login-underline">
 					</div>
 				</div>
-			</div>
+			</div>-->
+			{% include 'header.html' %}
 
 			<div class="slogan">
 				<header id="slogan-1">I know</header>
@@ -34,18 +38,82 @@
 			</div>
 
 			<div class="pic">
-				<img src="../static/img/iknowhtml.jpg">
+				<img src="/static/img/iknowhtml.jpg">
 			</div>
 				
 		</div>
 	</div>
 
 	<div class="container">
-		文章列表
-	</div>
+		<div class="article-container">
+			{% if articles %}
+				{% for article in articles %}
+				<div style="margin-bottom: 100px;">
+					<h1><a href="/article/{{ article.id }}" target="_blank">{{ article.title }}</a></h1>
+					<div class="article-info">
+						<div class="article-time">
+							<img src="/static/img/time.png">
+							<span class="flask-moment" data-timestamp="{{article.last_modified_time}}" data-format="fromNow(0)" data-refresh="0" style="display: none">{{article.last_modified_time}}</span>
+							<div class="arrow"></div>
+							<div class="article-timestamp">发布时间&nbsp;{{article.last_modified_time}}</div>
+						</div>
 
-	<div class="foot">
-		页脚
+						<div class="article-pageviews">
+							<img src="/static/img/view.png">
+							<span>{{ article.pageviews }}</span>
+						</div>
+
+						<div class="article-likes">
+							<img src="/static/img/like.png">
+							<span>{{ article.like_count }}</span>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+
+		<div class="pagination">
+			<ul>
+				<li class="active">1</li>  
+			</ul>
+		</div>
 	</div>
+	<script>
+		moment.locale("zh_CN");
+		function flask_moment_render(elem) {
+    		$(elem).text(eval('moment("' + $(elem).data('timestamp') + '").' + $(elem).data('format') + ';'));
+    		$(elem).removeClass('flask-moment').show();
+		}
+		function flask_moment_render_all() {
+		    $('.flask-moment').each(function() {
+        	flask_moment_render(this);
+        	if ($(this).data('refresh')) {
+	            (function(elem, interval) { setInterval(function() { flask_moment_render(elem) }, interval); })(this, $(this).data('refresh'));
+    	    }
+    	})
+		}
+		$(document).ready(function() {
+			flask_moment_render_all();
+
+			var timer;
+			$(".article-time").on({
+				"mouseenter": function() {
+					clearTimeout(timer);
+					var that = this;
+					timer = setTimeout(function() {
+						$(that).children().eq(2).fadeIn();
+						$(that).children().eq(3).fadeIn();
+					}, 500);
+				},
+				"mouseleave": function() {
+					$(this).children().eq(2).fadeOut();
+					$(this).children().eq(3).fadeOut();
+					clearTimeout(timer);
+				}
+			});
+		});
+	</script>
+	{% include 'footer.html' %}
 </body>
 </html>

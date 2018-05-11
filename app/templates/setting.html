@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<link rel="stylesheet" href="../static/css/overall.css">
+	<link rel="stylesheet" href="../static/css/setting.css">
+    <link rel="stylesheet" href="../static/lib/Remodal-1.1.0/dist/remodal.css"> <!-- 引入模态对话框插件样式 --> 
+	<link rel="stylesheet" href="../static/lib/Remodal-1.1.0/dist/remodal-default-theme.css">
+	<script src="../static/lib/jquery.min.js"></script>
+	<script src="../static/js/header.js"></script>
+	<script src="../static/js/setting.js"></script>
+</head>
+<body>
+	{% include 'header.html' %}
+
+	<div id="portrait-div">
+		<div id="portrait-empty"></div>
+
+		<div id="portrait-pic">
+			<div class="avatar">
+				<img src={{ current_user.avatar_url() }}>
+			</div>
+			<div class="setting-avatar">
+				<img src="/static/img/camera.png"/>
+				<span>修改头像</span>
+				<!--<input id="avatar" accept="image/png,image/jpeg" type="file" name="avatar">-->
+				<form action="/user/edit" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input id="avatar_input" accept="image/png,image/jpeg" type="file" name="avatar" onchange="this.form.submit()">
+				</form>
+			</div>
+		</div>
+
+		<div id="portrait-username">
+			<p>{{ current_user.nickname }}</p>
+		</div>
+	</div>
+
+    <div class="wrapper">
+		<div id="setting">
+			<form action="" method="post">
+				<h1>用户名</h1>
+				<div id="setting-username">
+					<input type="text" id="username" name="username" value="{{ username }}">
+					<span class="message" id="username-message"></span>
+				</div>
+
+				<div id="setting-description">
+					<h1>简介</h1>
+					<input type="text" name="descript" placeholder="用一句话介绍自己">
+				</div>
+				
+				<h1>密码</h1>
+				<div id="setting-pass">
+					<p>
+						<input type="text" id="origin-pass" name="origin_pass" placeholder="原密码">
+						<span class="message" id="origin-pass-message"></span>
+					</p>
+
+					<p>
+						<input type="password" id="new-pass" name="new_pass" placeholder="新密码">
+						<span class="message" id="new-pass-message"></span>
+					</p>
+
+					<p>
+						<input type="password" id="confirm-new-pass" name="confirm_new_pass" placeholder="确认新密码">
+						<span class="message" id="confirm-new-pass-message"></span>
+					</p>
+				</div>
+
+				<div id="setting-confirm">
+					<input type="submit" value="修改" id="modify" class="btn">
+				</div>
+			</form>
+		</div>
+    </div>
+
+    <div class="remodal" data-remodal-id="confirm">
+        <button data-remodal-action="close" class="remodal-close"></button>
+        
+        <button data-remodal-action="cancel" class="remodal-cancel" onclick="window.location.href='{{ request.path }}/delete'">确定</button>
+        <button data-remodal-action="confirm" class="remodal-confirm">取消</button>
+	</div>
+	
+    <script src="../static/lib/Remodal-1.1.0/dist/remodal.min.js"></script> <!-- 引入模态对话框插件js文件 -->
+
+	{% include 'footer.html' %}
+</body>
+</html>

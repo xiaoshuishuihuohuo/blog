@@ -1,7 +1,3 @@
-* {
-	font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif;
-}
-
 html,
 body,
 .head {
@@ -10,12 +6,8 @@ body,
 	width: 100%;
 }
 
-a {
-	text-decoration: none;
-}
-
 .background {
-	background: url(../img/bg_2.jpg) no-repeat;
+	background: url(/static/img/bg_2.jpg) no-repeat;
 	background-size: cover;
 	float: left;
 	height: 100%;
@@ -31,7 +23,7 @@ a {
 	position: absolute; /* 与.background重合 */
 }
 
-.top {
+/*.top {
 	width: 100%;
 	position: absolute;
 	color: #ffffff;
@@ -59,7 +51,7 @@ a {
 	width: 0;
 	background: #D6AE8B;
 	position: absolute;
-}
+}*/
 
 .slogan {
 	margin-top: 15%;
@@ -76,7 +68,7 @@ a {
 }
 
 #slogan-2 {
-	color: #D6AE8B;
+	color: #0080FF;
 	font-size: 80px;
 	font-family: Courier;
 	margin: 10px;
@@ -104,10 +96,98 @@ a {
 	bottom: 0;
 }
 
-.container {
+.article-container {
+	width: 80%;
+	height: 450px;
 	margin: 0 auto;
+}
+
+.article-container a,
+.article-container a:link,
+.article-container a:visited {
+	color: #000;
+}
+
+.article-container a:hover {
+	text-decoration: underline;
+}
+
+.article-list {
+	margin: auto;
 	margin-top: 30px;
-	height: 1000px;
-	width: 800px;
-	background: blue;
+	width: 80%;
+	height: 80%;
+	/*background: red;*/
+}
+
+.article-list ul {
+    padding-left: 0;
+}
+
+.article-list li {
+    margin: 15px 0;
+}
+
+.article-list a {
+    color: #6E6E6E;
+}
+
+.article-list a:hover {
+    text-decoration: underline;
+}
+
+.article-info {
+    float: right;
+    height: 21px;
+    line-height: 16px;
+    width: 100%;
+}
+
+.article-info img {
+    vertical-align: bottom;
+}
+
+.article-time {
+    float: left;
+	width: 80%;
+}
+
+.article-pageviews,
+.article-likes {
+    float: left;
+	width: 10%;
+}
+
+.arrow {
+	border-color: rgba(0,0,0,0) rgba(0,0,0,0) #000;
+    border-style: solid;
+    border-width: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    display: none;
+    height: 0px;
+    width: 0px;
+	margin: 0 5px 0;
+}
+
+.article-timestamp {
+    background: #000;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    border-radius: 2px;
+    color: #FFF;
+    display: none;
+    font-size: 12px;
+    height: 20px;
+    padding: 5px 10px;
+    position: absolute;
+    width: 170px;
+    z-index: 9999;
+}
+
+li {
+    list-style: none;
+}
+
+.pagination {
+	width: 80%;
+	margin: 0 auto;
 }

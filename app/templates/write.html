@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<link rel="stylesheet" href="/static/css/overall.css">
+	<link rel="stylesheet" href="/static/css/write.css">
+	<link rel="stylesheet" href="/static/lib/simditor-2.3.6/styles/simditor.css">
+	<script src="/static/lib/jquery.min.js"></script>
+	<script src="/static/js/write.js"></script>
+	<script src="/static/lib/simditor-2.3.6/scripts/module.js"></script>
+	<script src="/static/lib/simditor-2.3.6/scripts/hotkeys.js"></script>
+	<script src="/static/lib/simditor-2.3.6/scripts/uploader.js"></script>
+	<script src="/static/lib/simditor-2.3.6/scripts/simditor.js"></script>
+</head>
+<body>
+  <div id="back-div">
+    <img src="/static/img/back.png">
+  </div>
+    
+	<div class="container">
+		<form action="/write/submit" method="post">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input type="hidden" name="id" value="{{ id }}" />			
+      <div id="title-div">
+        <textarea type="text" name="title" placeholder="输入标题" autofocus >{{ title }}</textarea>
+      </div>
+			<textarea id="txt-content" name="content" data-autosave=false required>{{content}}</textarea>
+      <input type="hidden" id="tag-value" name="classification">
+			<div id="article-tag-div">
+				<img src="/static/img/tag.png">
+        {% if classifications %}
+					{% for tag in classifications %}
+        		<span class="tag-btn{% if tag.code in selected %} selected{% endif %}" name="{{ tag.code }}" onselectstart="return false;">{{ tag.name }}</span>
+					{% endfor %}
+        {% endif %}
+			</div>
+			<div id="submit-div">
+				<input class="btn" id="submit" type="submit" value="发　布">
+			</div>
+		</form>
+	</div>
+	
+	{% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<div class="top">
+    {% if current_user.is_authenticated %}
+    <div id="info">
+        <div id="username">
+            <a href="/mainpage">
+                <img class="avatar-sm" src={{ current_user.avatar_url() }}>
+            </a>
+        </div>
+        
+        <div class="drop-menu">
+            <div class="username"><span>{{ current_user.nickname }}</span></div>
+            <ul>
+                <li id="settings">
+                    <a href="/user/setting">设置</a>
+                </li>
+                <li id="logout">
+                    <a href="/auth/logout">退出登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% else %}
+    <div id="login">
+        <a href="/login">登录&nbsp;/&nbsp;注册</a>
+        <div id="login-underline">
+        </div>
+    </div>
+    {% endif %}
+</div>
